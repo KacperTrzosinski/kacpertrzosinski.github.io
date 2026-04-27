@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Wizualizacja Algorytmów Pathfinding</title>
+        <style>
+            body {
+                font-family: sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: #222;
+                color: #fff;
+                margin: 0;
+                padding-top: 20px;
+                user-select: none; /* Zapobiega zaznaczaniu tekstu przy rysowaniu */
+            }
+
+            #top-bar {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+
+            #controls {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                flex-wrap: wrap;
+                justify-content: center;
+                background-color: #333;
+                padding: 15px;
+                border-radius: 8px;
+                border: 1px solid #444;
+            }
+
+            select,
+            button {
+                padding: 8px 15px;
+                font-size: 15px;
+                border-radius: 5px;
+                border: 1px solid #555;
+                background-color: #444;
+                color: white;
+                cursor: pointer;
+            }
+
+            button {
+                background-color: #4caf50;
+                border: none;
+                transition: background-color 0.2s;
+            }
+
+            button.secondary {
+                background-color: #e67e22;
+            }
+
+            button.danger {
+                background-color: #e74c3c;
+            }
+
+            button:hover:not(:disabled) {
+                filter: brightness(1.1);
+            }
+
+            button:disabled,
+            select:disabled {
+                background-color: #333;
+                color: #777;
+                cursor: not-allowed;
+            }
+
+            #info-panel {
+                font-size: 16px;
+                background-color: #333;
+                padding: 10px 20px;
+                border-radius: 5px;
+                border: 1px solid #444;
+                display: flex;
+                gap: 20px;
+            }
+
+            #grid-container {
+                display: grid;
+                gap: 1px;
+                background-color: #555;
+                border: 2px solid #444;
+                padding: 1px;
+                box-sizing: border-box;
+            }
+
+            .node {
+                width: 25px;
+                height: 25px;
+                background-color: #fff;
+                box-sizing: border-box;
+                transition: background-color 0.3s ease;
+            }
+
+            .wall {
+                background-color: #2c3e50;
+                animation: wallAnimation 0.3s ease-in-out;
+            }
+
+            .start {
+                background-color: #2ecc71 !important;
+            }
+
+            .end {
+                background-color: #e74c3c !important;
+            }
+
+            .visited {
+                animation: visitedAnimation 1.5s ease-out forwards;
+            }
+
+            .path {
+                animation: pathAnimation 0.5s ease-out forwards;
+            }
+
+            @keyframes wallAnimation {
+                0% {
+                    transform: scale(0.3);
+                    border-radius: 100%;
+                }
+                50% {
+                    transform: scale(1.2);
+                }
+                100% {
+                    transform: scale(1);
+                    border-radius: 0;
+                }
+            }
+
+            @keyframes visitedAnimation {
+                0% {
+                    transform: scale(0.3);
+                    background-color: #9b59b6;
+                    border-radius: 100%;
+                }
+                50% {
+                    background-color: #3498db;
+                }
+                100% {
+                    transform: scale(1);
+                    background-color: #1abc9c;
+                    border-radius: 0;
+                }
+            }
+
+            @keyframes pathAnimation {
+                0% {
+                    transform: scale(0.6);
+                    background-color: #f1c40f;
+                    border-radius: 100%;
+                }
+                100% {
+                    transform: scale(1);
+                    background-color: #f39c12;
+                    border-radius: 0;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="top-bar">
+            <div id="controls">
+                <select id="algo-select">
+                    <option value="dijkstra">
+                        Dijkstra (Gwarantuje najkrótszą)
+                    </option>
+                    <option value="astar">
+                        A* Search (Szybki, najkrótsza)
+                    </option>
+                    <option value="bfs">
+                        Breadth-First Search (Najkrótsza)
+                    </option>
+                    <option value="greedy">
+                        Greedy Best-First (Szybki, NIE gwarantuje)
+                    </option>
+                    <option value="dfs">
+                        Depth-First Search (Zły, NIE gwarantuje)
+                    </option>
+                </select>
+                <button id="start-btn" onclick="startSearch()">
+                    Szukaj drogi
+                </button>
+                <button
+                    class="secondary"
+                    id="maze-btn"
+                    onclick="generateRandomMaze()"
+                >
+                    Losowe ściany
+                </button>
+                <button
+                    class="danger"
+                    id="clear-path-btn"
+                    onclick="clearPath()"
+                >
+                    Wyczyść trasę
+                </button>
+                <button
+                    class="danger"
+                    id="clear-board-btn"
+                    onclick="initGrid()"
+                >
+                    Reset planszy
+                </button>
+            </div>
+
+            <div id="info-panel">
+                <span>Odwiedzone węzły: <b id="nodes-count">0</b></span>
+                <span>Długość trasy: <b id="path-length">0</b></span>
+                <span>Czas: <b id="time-display">0.00</b> s</span>
+            </div>
+            <div style="font-size: 13px; color: #aaa">
+                Możesz rysować ściany klikając i przeciągając myszką po białych
+                polach.
+            </div>
+        </div>
+
+        <div id="grid-container"></div>
+
+        <script>
+            const gridContainer = document.getElementById("grid-container");
+            const timeDisplay = document.getElementById("time-display");
+            const nodesCountDisplay = document.getElementById("nodes-count");
+            const pathLengthDisplay = document.getElementById("path-length");
+            const algoSelect = document.getElementById("algo-select");
+
+            const controls = document.querySelectorAll("button, select");
+
+            let grid = [];
+            let rows = 0;
+            let cols = 0;
+            let startNode = { r: 0, c: 0 };
+            let endNode = { r: 0, c: 0 };
+
+            let isSearching = false;
+            let isDrawing = false;
+            let timerInterval;
+            let startTime;
+
+            const sleep = (ms) =>
+                new Promise((resolve) => setTimeout(resolve, ms));
+
+            // --- ZEGAR ---
+            function startTimer() {
+                startTime = performance.now();
+                timerInterval = setInterval(() => {
+                    timeDisplay.textContent = (
+                        (performance.now() - startTime) /
+                        1000
+                    ).toFixed(2);
+                }, 10);
+            }
+
+            function stopTimer() {
+                clearInterval(timerInterval);
+            }
+
+            function toggleControls(disabled) {
+                controls.forEach((ctrl) => (ctrl.disabled = disabled));
+            }
+
+            // --- INICJALIZACJA PLANSZY ---
+            function initGrid() {
+                if (isSearching) return;
+                gridContainer.innerHTML = "";
+                grid = [];
+                timeDisplay.textContent = "0.00";
+                nodesCountDisplay.textContent = "0";
+                pathLengthDisplay.textContent = "0";
+
+                // Obliczanie ilości wierszy i kolumn
+                const nodeSize = 26; // 25px + 1px gap
+                const screenWidth = window.innerWidth * 0.95;
+                const screenHeight = window.innerHeight - 250; // miejsce na UI
+
+                cols = Math.floor(screenWidth / nodeSize);
+                rows = Math.floor(screenHeight / nodeSize);
+
+                // Wymuszenie minimalnego rozmiaru
+                if (cols < 10) cols = 10;
+                if (rows < 10) rows = 10;
+
+                gridContainer.style.gridTemplateColumns = `repeat(${cols}, 25px)`;
+
+                startNode = {
+                    r: Math.floor(rows / 2),
+                    c: Math.floor(cols * 0.1),
+                };
+                endNode = {
+                    r: Math.floor(rows / 2),
+                    c: Math.floor(cols * 0.9),
+                };
+
+                for (let r = 0; r < rows; r++) {
+                    let currentRow = [];
+                    for (let c = 0; c < cols; c++) {
+                        const nodeEl = document.createElement("div");
+                        nodeEl.classList.add("node");
+                        nodeEl.id = `node-${r}-${c}`;
+
+                        if (r === startNode.r && c === startNode.c)
+                            nodeEl.classList.add("start");
+                        if (r === endNode.r && c === endNode.c)
+                            nodeEl.classList.add("end");
+
+                        // Eventy do rysowania ścian
+                        nodeEl.addEventListener("mousedown", () => {
+                            if (isSearching) return;
+                            isDrawing = true;
+                            toggleWall(r, c);
+                        });
+                        nodeEl.addEventListener("mouseenter", () => {
+                            if (isDrawing && !isSearching) toggleWall(r, c);
+                        });
+                        nodeEl.addEventListener(
+                            "mouseup",
+                            () => (isDrawing = false),
+                        );
+
+                        gridContainer.appendChild(nodeEl);
+                        currentRow.push({
+                            r,
+                            c,
+                            isWall: false,
+                            element: nodeEl,
+                            distance: Infinity,
+                            heuristic: 0,
+                            f: Infinity,
+                            isVisited: false,
+                            previousNode: null,
+                        });
+                    }
+                    grid.push(currentRow);
+                }
+                gridContainer.addEventListener(
+                    "mouseleave",
+                    () => (isDrawing = false),
+                );
+            }
+
+            function toggleWall(r, c) {
+                if (
+                    (r === startNode.r && c === startNode.c) ||
+                    (r === endNode.r && c === endNode.c)
+                )
+                    return;
+                const node = grid[r][c];
+                node.isWall = !node.isWall;
+                node.element.classList.toggle("wall");
+            }
+
+            function generateRandomMaze() {
+                clearPath();
+                for (let r = 0; r < rows; r++) {
+                    for (let c = 0; c < cols; c++) {
+                        if (
+                            (r === startNode.r && c === startNode.c) ||
+                            (r === endNode.r && c === endNode.c)
+                        )
+                            continue;
+                        // Ok. 30% szans na ścianę
+                        if (Math.random() < 0.3) {
+                            grid[r][c].isWall = true;
+                            grid[r][c].element.classList.add("wall");
+                        } else {
+                            grid[r][c].isWall = false;
+                            grid[r][c].element.classList.remove("wall");
+                        }
+                    }
+                }
+            }
+
+            function clearPath() {
+                if (isSearching) return;
+                timeDisplay.textContent = "0.00";
+                nodesCountDisplay.textContent = "0";
+                pathLengthDisplay.textContent = "0";
+                for (let r = 0; r < rows; r++) {
+                    for (let c = 0; c < cols; c++) {
+                        let node = grid[r][c];
+                        node.distance = Infinity;
+                        node.heuristic = 0;
+                        node.f = Infinity;
+                        node.isVisited = false;
+                        node.previousNode = null;
+                        node.element.classList.remove("visited", "path");
+                    }
+                }
+            }
+
+            // --- ALGORYTMY ---
+
+            // Heurystyka (Manhattan Distance) - odległość w linii prostej na siatce
+            function getHeuristic(nodeA, nodeB) {
+                return (
+                    Math.abs(nodeA.r - nodeB.r) + Math.abs(nodeA.c - nodeB.c)
+                );
+            }
+
+            function getNeighbors(node) {
+                const neighbors = [];
+                const { r, c } = node;
+                if (r > 0) neighbors.push(grid[r - 1][c]); // Góra
+                if (c < cols - 1) neighbors.push(grid[r][c + 1]); // Prawo
+                if (r < rows - 1) neighbors.push(grid[r + 1][c]); // Dół
+                if (c > 0) neighbors.push(grid[r][c - 1]); // Lewo
+                return neighbors.filter((n) => !n.isWall);
+            }
+
+            async function aStar() {
+                let openSet = [grid[startNode.r][startNode.c]];
+                grid[startNode.r][startNode.c].distance = 0;
+                grid[startNode.r][startNode.c].f = getHeuristic(
+                    startNode,
+                    endNode,
+                );
+                let visitedCount = 0;
+
+                while (openSet.length > 0) {
+                    openSet.sort((a, b) => a.f - b.f);
+                    let current = openSet.shift();
+
+                    if (current.isVisited) continue;
+                    current.isVisited = true;
+
+                    if (
+                        current.r !== startNode.r ||
+                        current.c !== startNode.c
+                    ) {
+                        current.element.classList.add("visited");
+                        visitedCount++;
+                        nodesCountDisplay.textContent = visitedCount;
+                        await sleep(5);
+                    }
+
+                    if (current.r === endNode.r && current.c === endNode.c)
+                        return true;
+
+                    let neighbors = getNeighbors(current);
+                    for (let neighbor of neighbors) {
+                        if (neighbor.isVisited) continue;
+                        let tentativeDistance = current.distance + 1;
+
+                        if (tentativeDistance < neighbor.distance) {
+                            neighbor.previousNode = current;
+                            neighbor.distance = tentativeDistance;
+                            neighbor.heuristic = getHeuristic(
+                                neighbor,
+                                endNode,
+                            );
+                            neighbor.f = neighbor.distance + neighbor.heuristic;
+
+                            if (!openSet.includes(neighbor)) {
+                                openSet.push(neighbor);
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+
+            async function dijkstra() {
+                let unvisitedNodes = [];
+                for (let row of grid)
+                    for (let node of row) unvisitedNodes.push(node);
+                grid[startNode.r][startNode.c].distance = 0;
+                let visitedCount = 0;
+
+                while (unvisitedNodes.length > 0) {
+                    unvisitedNodes.sort((a, b) => a.distance - b.distance);
+                    let current = unvisitedNodes.shift();
+
+                    if (current.isWall) continue;
+                    if (current.distance === Infinity) return false; // Brak trasy
+
+                    current.isVisited = true;
+
+                    if (
+                        current.r !== startNode.r ||
+                        current.c !== startNode.c
+                    ) {
+                        current.element.classList.add("visited");
+                        visitedCount++;
+                        nodesCountDisplay.textContent = visitedCount;
+                        await sleep(5);
+                    }
+
+                    if (current.r === endNode.r && current.c === endNode.c)
+                        return true;
+
+                    let neighbors = getNeighbors(current);
+                    for (let neighbor of neighbors) {
+                        let tentativeDistance = current.distance + 1;
+                        if (tentativeDistance < neighbor.distance) {
+                            neighbor.distance = tentativeDistance;
+                            neighbor.previousNode = current;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            async function bfs() {
+                let queue = [grid[startNode.r][startNode.c]];
+                grid[startNode.r][startNode.c].isVisited = true;
+                let visitedCount = 0;
+
+                while (queue.length > 0) {
+                    let current = queue.shift();
+
+                    if (
+                        current.r !== startNode.r ||
+                        current.c !== startNode.c
+                    ) {
+                        current.element.classList.add("visited");
+                        visitedCount++;
+                        nodesCountDisplay.textContent = visitedCount;
+                        await sleep(5);
+                    }
+
+                    if (current.r === endNode.r && current.c === endNode.c)
+                        return true;
+
+                    let neighbors = getNeighbors(current);
+                    for (let neighbor of neighbors) {
+                        if (!neighbor.isVisited) {
+                            neighbor.isVisited = true;
+                            neighbor.previousNode = current;
+                            queue.push(neighbor);
+                        }
+                    }
+                }
+                return false;
+            }
+
+            async function greedyBFS() {
+                let openSet = [grid[startNode.r][startNode.c]];
+                let visitedCount = 0;
+
+                while (openSet.length > 0) {
+                    // Greedy szuka tylko na podstawie heurystyki, ignorując dotychczasową odległość
+                    openSet.sort((a, b) => a.heuristic - b.heuristic);
+                    let current = openSet.shift();
+
+                    if (current.isVisited) continue;
+                    current.isVisited = true;
+
+                    if (
+                        current.r !== startNode.r ||
+                        current.c !== startNode.c
+                    ) {
+                        current.element.classList.add("visited");
+                        visitedCount++;
+                        nodesCountDisplay.textContent = visitedCount;
+                        await sleep(5);
+                    }
+
+                    if (current.r === endNode.r && current.c === endNode.c)
+                        return true;
+
+                    let neighbors = getNeighbors(current);
+                    for (let neighbor of neighbors) {
+                        if (
+                            !neighbor.isVisited &&
+                            !openSet.includes(neighbor)
+                        ) {
+                            neighbor.previousNode = current;
+                            neighbor.heuristic = getHeuristic(
+                                neighbor,
+                                endNode,
+                            );
+                            openSet.push(neighbor);
+                        }
+                    }
+                }
+                return false;
+            }
+
+            async function dfs() {
+                let stack = [grid[startNode.r][startNode.c]];
+                let visitedCount = 0;
+
+                while (stack.length > 0) {
+                    let current = stack.pop();
+
+                    if (current.isVisited) continue;
+                    current.isVisited = true;
+
+                    if (
+                        current.r !== startNode.r ||
+                        current.c !== startNode.c
+                    ) {
+                        current.element.classList.add("visited");
+                        visitedCount++;
+                        nodesCountDisplay.textContent = visitedCount;
+                        await sleep(15); // DFS jest gubiący, zwolnijmy by to zobaczyć
+                    }
+
+                    if (current.r === endNode.r && current.c === endNode.c)
+                        return true;
+
+                    let neighbors = getNeighbors(current);
+                    // W DFS kolejność wkładania na stos ma znaczenie.
+                    for (let neighbor of neighbors) {
+                        if (!neighbor.isVisited) {
+                            neighbor.previousNode = current; // Pamiętaj, to nadpisuje path, co daje dzikie trasy
+                            stack.push(neighbor);
+                        }
+                    }
+                }
+                return false;
+            }
+
+            // --- RYSOWANIE WYNIKU ---
+            async function drawPath() {
+                let current = grid[endNode.r][endNode.c];
+                let path = [];
+                while (current.previousNode !== null) {
+                    path.push(current);
+                    current = current.previousNode;
+                }
+
+                pathLengthDisplay.textContent = path.length;
+
+                // Rysujemy od początku (czyli tablica od tyłu)
+                for (let i = path.length - 1; i >= 0; i--) {
+                    if (path[i].r !== endNode.r || path[i].c !== endNode.c) {
+                        path[i].element.classList.add("path");
+                    }
+                    await sleep(20);
+                }
+            }
+
+            // --- GŁÓWNA KONTROLA ---
+            async function startSearch() {
+                clearPath(); // Zawsze czyścimy starą trasę przed nowym szukaniem
+                isSearching = true;
+                toggleControls(true);
+                startTimer();
+
+                let found = false;
+                const algo = algoSelect.value;
+
+                if (algo === "astar") found = await aStar();
+                else if (algo === "dijkstra") found = await dijkstra();
+                else if (algo === "bfs") found = await bfs();
+                else if (algo === "greedy") found = await greedyBFS();
+                else if (algo === "dfs") found = await dfs();
+
+                stopTimer();
+
+                if (found) {
+                    await drawPath();
+                } else {
+                    alert("Brak drogi! Uwięziono punkt końcowy.");
+                }
+
+                toggleControls(false);
+                isSearching = false;
+            }
+
+            // Inicjalizacja
+            window.onload = initGrid;
+            window.addEventListener("resize", initGrid);
+        </script>
+    </body>
+</html>

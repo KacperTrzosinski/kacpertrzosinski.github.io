@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Wizualizacja 10 Algorytmów Sortowania</title>
+        <style>
+            body {
+                font-family: sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: #222;
+                color: #fff;
+                margin: 0;
+                padding-top: 30px;
+                overflow-x: hidden;
+            }
+
+            #top-bar {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+
+            #controls {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                flex-wrap: wrap;
+                justify-content: center;
+                background-color: #333;
+                padding: 15px;
+                border-radius: 8px;
+                border: 1px solid #444;
+            }
+
+            label {
+                font-size: 16px;
+            }
+
+            input[type="number"],
+            select {
+                padding: 8px;
+                font-size: 16px;
+                border-radius: 5px;
+                border: 1px solid #555;
+                background-color: #444;
+                color: white;
+                text-align: center;
+            }
+
+            input[type="number"] {
+                width: 80px;
+            }
+
+            input:disabled,
+            select:disabled {
+                background-color: #333;
+                color: #777;
+                cursor: not-allowed;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                border: none;
+                border-radius: 5px;
+                background-color: #4caf50;
+                color: white;
+                transition: background-color 0.2s;
+            }
+
+            button:hover:not(:disabled) {
+                background-color: #45a049;
+            }
+
+            button:disabled {
+                background-color: #555;
+                color: #888;
+                cursor: not-allowed;
+            }
+
+            #info-panel {
+                font-size: 18px;
+                background-color: #333;
+                padding: 10px 15px;
+                border-radius: 5px;
+                border: 1px solid #444;
+                display: flex;
+                gap: 20px;
+            }
+
+            #container {
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                width: 95vw;
+                height: 520px;
+                padding: 10px;
+                background-color: #333;
+                border-radius: 8px;
+                gap: 2px;
+                box-sizing: border-box;
+            }
+
+            .bar {
+                border-radius: 3px 3px 0 0;
+                transition:
+                    height 0.05s ease-in-out,
+                    background-color 0.05s ease-in-out;
+                box-sizing: border-box;
+            }
+
+            .comparing {
+                border: 2px solid #ff4757;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="top-bar">
+            <div id="controls">
+                <label for="algo-select">Algorytm:</label>
+                <select id="algo-select">
+                    <option value="bubble">Bubble Sort</option>
+                    <option value="selection">Selection Sort</option>
+                    <option value="insertion">Insertion Sort</option>
+                    <option value="quick">Quick Sort</option>
+                    <option value="merge">Merge Sort</option>
+                    <option value="heap">Heap Sort</option>
+                    <option value="shell">Shell Sort</option>
+                    <option value="cocktail">Cocktail Shaker Sort</option>
+                    <option value="comb">Comb Sort</option>
+                    <option value="gnome">Gnome Sort</option>
+                </select>
+
+                <label for="bar-count-input">Ilość:</label>
+                <input
+                    type="number"
+                    id="bar-count-input"
+                    min="5"
+                    max="300"
+                    value="60"
+                />
+
+                <button id="generate-btn" onclick="generateBars()">
+                    Nowe słupki
+                </button>
+                <button id="start-btn" onclick="startSort()">
+                    Rozpocznij sortowanie
+                </button>
+            </div>
+
+            <div id="info-panel">
+                <span>Widoczne: <b id="bars-count">0</b></span>
+                <span>Czas: <b id="time-display">0.00</b> s</span>
+            </div>
+        </div>
+
+        <div id="container"></div>
+
+        <script>
+            const container = document.getElementById("container");
+            const startBtn = document.getElementById("start-btn");
+            const generateBtn = document.getElementById("generate-btn");
+            const barCountInput = document.getElementById("bar-count-input");
+            const algoSelect = document.getElementById("algo-select");
+            const timeDisplay = document.getElementById("time-display");
+            const barsCountDisplay = document.getElementById("bars-count");
+
+            let isSorting = false;
+            let delay = 10;
+            let timerInterval;
+            let startTime;
+
+            const sleep = (ms) =>
+                new Promise((resolve) => setTimeout(resolve, ms));
+
+            function getLightness(height) {
+                return 10 + ((height - 10) / (500 - 10)) * 80;
+            }
+
+            // --- ZEGAR ---
+            function startTimer() {
+                startTime = performance.now();
+                timerInterval = setInterval(() => {
+                    timeDisplay.textContent = (
+                        (performance.now() - startTime) /
+                        1000
+                    ).toFixed(2);
+                }, 10);
+            }
+
+            function stopTimer() {
+                clearInterval(timerInterval);
+            }
+
+            // --- GENEROWANIE SŁUPKÓW ---
+            function generateBars() {
+                if (isSorting) return;
+
+                container.innerHTML = "";
+                timeDisplay.textContent = "0.00";
+
+                const containerWidth = container.clientWidth - 20;
+                const minBarWidth = 20;
+                const gap = 2;
+                const widthPerBar = minBarWidth + gap;
+
+                const maxPossibleBars = Math.floor(
+                    containerWidth / widthPerBar,
+                );
+                let targetBars = parseInt(barCountInput.value, 10);
+
+                if (isNaN(targetBars) || targetBars < 5) {
+                    targetBars = 5;
+                    barCountInput.value = 5;
+                }
+
+                const numBars =
+                    maxPossibleBars < targetBars ? maxPossibleBars : targetBars;
+                let finalBarWidth = minBarWidth;
+                if (maxPossibleBars >= targetBars) {
+                    finalBarWidth =
+                        Math.floor(containerWidth / targetBars) - gap;
+                }
+
+                barsCountDisplay.textContent = numBars;
+
+                for (let i = 0; i < numBars; i++) {
+                    const height = Math.floor(Math.random() * 491) + 10;
+                    const bar = document.createElement("div");
+                    bar.classList.add("bar");
+                    bar.style.height = `${height}px`;
+                    bar.style.width = `${finalBarWidth}px`;
+                    bar.style.backgroundColor = `hsl(210, 100%, ${getLightness(height)}%)`;
+                    bar.dataset.value = height;
+                    container.appendChild(bar);
+                }
+            }
+
+            // --- FUNKCJE WIZUALNE I POMOCNICZE (SWAP / OVERWRITE) ---
+            async function swap(i, j) {
+                let elements = document.querySelectorAll(".bar");
+                elements[i].classList.add("comparing");
+                elements[j].classList.add("comparing");
+                await sleep(delay);
+
+                let val1 = parseInt(elements[i].dataset.value);
+                let val2 = parseInt(elements[j].dataset.value);
+
+                elements[i].dataset.value = val2;
+                elements[j].dataset.value = val1;
+                elements[i].style.height = `${val2}px`;
+                elements[j].style.height = `${val1}px`;
+                elements[i].style.backgroundColor =
+                    `hsl(210, 100%, ${getLightness(val2)}%)`;
+                elements[j].style.backgroundColor =
+                    `hsl(210, 100%, ${getLightness(val1)}%)`;
+
+                await sleep(delay);
+                elements[i].classList.remove("comparing");
+                elements[j].classList.remove("comparing");
+            }
+
+            // Funkcja do nadpisywania wartości (przydatne np. dla Merge Sort, Insertion Sort)
+            async function overwrite(i, val) {
+                let elements = document.querySelectorAll(".bar");
+                elements[i].classList.add("comparing");
+                await sleep(delay);
+
+                elements[i].dataset.value = val;
+                elements[i].style.height = `${val}px`;
+                elements[i].style.backgroundColor =
+                    `hsl(210, 100%, ${getLightness(val)}%)`;
+
+                await sleep(delay);
+                elements[i].classList.remove("comparing");
+            }
+
+            // --- 10 ALGORYTMÓW SORTOWANIA ---
+
+            // 1. Bubble Sort
+            async function bubbleSort(n) {
+                for (let i = 0; i < n - 1; i++) {
+                    for (let j = 0; j < n - i - 1; j++) {
+                        let elements = document.querySelectorAll(".bar");
+                        if (
+                            parseInt(elements[j].dataset.value) >
+                            parseInt(elements[j + 1].dataset.value)
+                        ) {
+                            await swap(j, j + 1);
+                        }
+                    }
+                }
+            }
+
+            // 2. Selection Sort
+            async function selectionSort(n) {
+                for (let i = 0; i < n - 1; i++) {
+                    let min_idx = i;
+                    for (let j = i + 1; j < n; j++) {
+                        let elements = document.querySelectorAll(".bar");
+                        if (
+                            parseInt(elements[j].dataset.value) <
+                            parseInt(elements[min_idx].dataset.value)
+                        ) {
+                            min_idx = j;
+                        }
+                    }
+                    if (min_idx !== i) await swap(i, min_idx);
+                }
+            }
+
+            // 3. Insertion Sort
+            async function insertionSort(n) {
+                for (let i = 1; i < n; i++) {
+                    let elements = document.querySelectorAll(".bar");
+                    let key = parseInt(elements[i].dataset.value);
+                    let j = i - 1;
+                    while (
+                        j >= 0 &&
+                        parseInt(elements[j].dataset.value) > key
+                    ) {
+                        await overwrite(
+                            j + 1,
+                            parseInt(elements[j].dataset.value),
+                        );
+                        j = j - 1;
+                        elements = document.querySelectorAll(".bar"); // Odświeżenie NodeList
+                    }
+                    await overwrite(j + 1, key);
+                }
+            }
+
+            // 4. Quick Sort
+            async function partition(low, high) {
+                let elements = document.querySelectorAll(".bar");
+                let pivot = parseInt(elements[high].dataset.value);
+                let i = low - 1;
+                for (let j = low; j <= high - 1; j++) {
+                    elements = document.querySelectorAll(".bar");
+                    if (parseInt(elements[j].dataset.value) < pivot) {
+                        i++;
+                        await swap(i, j);
+                    }
+                }
+                await swap(i + 1, high);
+                return i + 1;
+            }
+
+            async function quickSort(low, high) {
+                if (low < high) {
+                    let pi = await partition(low, high);
+                    await quickSort(low, pi - 1);
+                    await quickSort(pi + 1, high);
+                }
+            }
+
+            // 5. Merge Sort
+            async function merge(l, m, r) {
+                let elements = document.querySelectorAll(".bar");
+                let n1 = m - l + 1;
+                let n2 = r - m;
+                let L = new Array(n1),
+                    R = new Array(n2);
+                for (let i = 0; i < n1; i++)
+                    L[i] = parseInt(elements[l + i].dataset.value);
+                for (let j = 0; j < n2; j++)
+                    R[j] = parseInt(elements[m + 1 + j].dataset.value);
+
+                let i = 0,
+                    j = 0,
+                    k = l;
+                while (i < n1 && j < n2) {
+                    if (L[i] <= R[j]) {
+                        await overwrite(k, L[i]);
+                        i++;
+                    } else {
+                        await overwrite(k, R[j]);
+                        j++;
+                    }
+                    k++;
+                }
+                while (i < n1) {
+                    await overwrite(k, L[i]);
+                    i++;
+                    k++;
+                }
+                while (j < n2) {
+                    await overwrite(k, R[j]);
+                    j++;
+                    k++;
+                }
+            }
+
+            async function mergeSort(l, r) {
+                if (l >= r) return;
+                let m = l + Math.floor((r - l) / 2);
+                await mergeSort(l, m);
+                await mergeSort(m + 1, r);
+                await merge(l, m, r);
+            }
+
+            // 6. Heap Sort
+            async function heapify(n, i) {
+                let elements = document.querySelectorAll(".bar");
+                let largest = i;
+                let left = 2 * i + 1;
+                let right = 2 * i + 2;
+
+                if (
+                    left < n &&
+                    parseInt(elements[left].dataset.value) >
+                        parseInt(elements[largest].dataset.value)
+                )
+                    largest = left;
+                if (
+                    right < n &&
+                    parseInt(elements[right].dataset.value) >
+                        parseInt(elements[largest].dataset.value)
+                )
+                    largest = right;
+
+                if (largest != i) {
+                    await swap(i, largest);
+                    await heapify(n, largest);
+                }
+            }
+
+            async function heapSort(n) {
+                for (let i = Math.floor(n / 2) - 1; i >= 0; i--)
+                    await heapify(n, i);
+                for (let i = n - 1; i > 0; i--) {
+                    await swap(0, i);
+                    await heapify(i, 0);
+                }
+            }
+
+            // 7. Shell Sort
+            async function shellSort(n) {
+                for (
+                    let gap = Math.floor(n / 2);
+                    gap > 0;
+                    gap = Math.floor(gap / 2)
+                ) {
+                    for (let i = gap; i < n; i += 1) {
+                        let elements = document.querySelectorAll(".bar");
+                        let temp = parseInt(elements[i].dataset.value);
+                        let j;
+                        for (
+                            j = i;
+                            j >= gap &&
+                            parseInt(elements[j - gap].dataset.value) > temp;
+                            j -= gap
+                        ) {
+                            await overwrite(
+                                j,
+                                parseInt(elements[j - gap].dataset.value),
+                            );
+                            elements = document.querySelectorAll(".bar");
+                        }
+                        await overwrite(j, temp);
+                    }
+                }
+            }
+
+            // 8. Cocktail Shaker Sort
+            async function cocktailSort(n) {
+                let swapped = true;
+                let start = 0;
+                let end = n - 1;
+
+                while (swapped) {
+                    swapped = false;
+                    for (let i = start; i < end; ++i) {
+                        let elements = document.querySelectorAll(".bar");
+                        if (
+                            parseInt(elements[i].dataset.value) >
+                            parseInt(elements[i + 1].dataset.value)
+                        ) {
+                            await swap(i, i + 1);
+                            swapped = true;
+                        }
+                    }
+                    if (!swapped) break;
+                    swapped = false;
+                    end = end - 1;
+                    for (let i = end - 1; i >= start; --i) {
+                        let elements = document.querySelectorAll(".bar");
+                        if (
+                            parseInt(elements[i].dataset.value) >
+                            parseInt(elements[i + 1].dataset.value)
+                        ) {
+                            await swap(i, i + 1);
+                            swapped = true;
+                        }
+                    }
+                    start = start + 1;
+                }
+            }
+
+            // 9. Comb Sort
+            async function combSort(n) {
+                let gap = n;
+                let swapped = true;
+                while (gap != 1 || swapped == true) {
+                    gap = Math.floor((gap * 10) / 13);
+                    if (gap < 1) gap = 1;
+                    swapped = false;
+                    for (let i = 0; i < n - gap; i++) {
+                        let elements = document.querySelectorAll(".bar");
+                        if (
+                            parseInt(elements[i].dataset.value) >
+                            parseInt(elements[i + gap].dataset.value)
+                        ) {
+                            await swap(i, i + gap);
+                            swapped = true;
+                        }
+                    }
+                }
+            }
+
+            // 10. Gnome Sort
+            async function gnomeSort(n) {
+                let index = 0;
+                while (index < n) {
+                    let elements = document.querySelectorAll(".bar");
+                    if (index == 0) index++;
+                    if (
+                        parseInt(elements[index].dataset.value) >=
+                        parseInt(elements[index - 1].dataset.value)
+                    ) {
+                        index++;
+                    } else {
+                        await swap(index, index - 1);
+                        index--;
+                    }
+                }
+            }
+
+            // --- GŁÓWNA FUNKCJA KONTROLNA ---
+            async function startSort() {
+                isSorting = true;
+                startBtn.disabled = true;
+                generateBtn.disabled = true;
+                barCountInput.disabled = true;
+                algoSelect.disabled = true;
+
+                let elements = document.querySelectorAll(".bar");
+                let n = elements.length;
+
+                // Dynamiczne skalowanie szybkości animacji
+                delay = n > 100 ? 1 : n > 40 ? 3 : 10;
+
+                let selectedAlgo = algoSelect.value;
+                startTimer();
+
+                // Uruchomienie wybranego algorytmu
+                switch (selectedAlgo) {
+                    case "bubble":
+                        await bubbleSort(n);
+                        break;
+                    case "selection":
+                        await selectionSort(n);
+                        break;
+                    case "insertion":
+                        await insertionSort(n);
+                        break;
+                    case "quick":
+                        await quickSort(0, n - 1);
+                        break;
+                    case "merge":
+                        await mergeSort(0, n - 1);
+                        break;
+                    case "heap":
+                        await heapSort(n);
+                        break;
+                    case "shell":
+                        await shellSort(n);
+                        break;
+                    case "cocktail":
+                        await cocktailSort(n);
+                        break;
+                    case "comb":
+                        await combSort(n);
+                        break;
+                    case "gnome":
+                        await gnomeSort(n);
+                        break;
+                }
+
+                stopTimer();
+                startBtn.disabled = false;
+                generateBtn.disabled = false;
+                barCountInput.disabled = false;
+                algoSelect.disabled = false;
+                isSorting = false;
+            }
+
+            // --- NASŁUCHIWANIE ZDARZEŃ ---
+            barCountInput.addEventListener("change", () => {
+                if (!isSorting) generateBars();
+            });
+            window.onload = generateBars;
+            window.addEventListener("resize", () => {
+                if (!isSorting) generateBars();
+            });
+        </script>
+    </body>
+</html>
