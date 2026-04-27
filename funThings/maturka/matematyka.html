@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matura Matematyka – Losowanie Zadań</title>
+  <meta name="description" content="Aplikacja do losowania zadań maturalnych z matematyki. Wylosuj losowe zadanie lub wybierz konkretny dział." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0b1120;
+      --bg2: #0f172a;
+      --surface: #1e293b;
+      --surface2: #334155;
+      --border: rgba(56, 189, 248, 0.15);
+      --accent: #2563eb;
+      --accent2: #06b6d4;
+      --accent3: #10b981;
+      --gold: #fbbf24;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --radius: 18px;
+      --glow: 0 0 40px rgba(37, 99, 235, 0.25);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Animated background ── */
+    .bg-orbs {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    }
+    .orb {
+      position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.25;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    .orb1 { width: 500px; height: 500px; background: radial-gradient(circle, var(--accent) 0%, transparent 70%); top: -150px; left: -150px; animation-delay: 0s; }
+    .orb2 { width: 400px; height: 400px; background: radial-gradient(circle, var(--accent2) 0%, transparent 70%); bottom: -100px; right: -100px; animation-delay: -5s; }
+    .orb3 { width: 300px; height: 300px; background: radial-gradient(circle, var(--accent3) 0%, transparent 70%); top: 40%; left: 50%; animation-delay: -3s; }
+    @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(30px,20px) scale(1.08); } }
+
+    /* ── Layout ── */
+    .container {
+      position: relative; z-index: 1;
+      max-width: 900px; margin: 0 auto; padding: 40px 20px 80px;
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center; margin-bottom: 48px;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(37, 99, 235, 0.15); border: 1px solid rgba(37, 99, 235, 0.4);
+      border-radius: 999px; padding: 6px 16px; font-size: 12px;
+      font-weight: 600; letter-spacing: 0.08em; color: var(--accent2);
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .badge span { font-size: 16px; }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900; line-height: 1.1;
+      background: linear-gradient(135deg, #fff 20%, var(--accent2) 60%, var(--accent3) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 14px;
+    }
+    .subtitle {
+      color: var(--text-muted); font-size: 1rem; font-weight: 400; line-height: 1.6;
+    }
+
+    /* ── Mode tabs ── */
+    .tabs {
+      display: flex; gap: 10px; margin-bottom: 36px;
+      background: var(--surface); border-radius: 14px; padding: 6px; border: 1px solid var(--border);
+    }
+    .tab-btn {
+      flex: 1; padding: 14px 10px; border: none; border-radius: 10px; cursor: pointer;
+      font-family: inherit; font-size: 0.9rem; font-weight: 600;
+      background: transparent; color: var(--text-muted);
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+    }
+    .tab-btn:hover:not(.active) { color: var(--text); background: var(--surface2); }
+
+    /* ── Panels ── */
+    .panel { display: none; animation: fadeUp 0.4s ease; }
+    .panel.active { display: block; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ── Card ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+
+    /* ── Big roll button ── */
+    .roll-btn {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      width: 100%; padding: 20px 32px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      border: none; border-radius: var(--radius); cursor: pointer;
+      font-family: inherit; font-size: 1.1rem; font-weight: 700; color: #fff;
+      box-shadow: var(--glow), 0 4px 30px rgba(37, 99, 235, 0.4);
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      position: relative; overflow: hidden;
+    }
+    .roll-btn::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .roll-btn:hover { transform: translateY(-3px); box-shadow: var(--glow), 0 8px 40px rgba(37, 99, 235, 0.55); }
+    .roll-btn:hover::before { opacity: 1; }
+    .roll-btn:active { transform: translateY(-1px); }
+    .roll-btn .dice { font-size: 1.6rem; animation: spin-pause 3s ease-in-out infinite; }
+    @keyframes spin-pause {
+      0%,80%,100% { transform: rotate(0deg); }
+      40% { transform: rotate(20deg); }
+      60% { transform: rotate(-15deg); }
+    }
+
+    /* ── Result card ── */
+    .result-card {
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(37, 99, 235, 0.08) 100%);
+      border: 1px solid rgba(37, 99, 235, 0.35);
+      border-radius: var(--radius); padding: 28px 32px;
+      display: none; animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: var(--glow);
+    }
+    .result-card.show { display: block; }
+    @keyframes popIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+
+    .result-number {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--accent2); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+    }
+    .result-cat {
+      font-size: 0.85rem; font-weight: 600; color: var(--accent3);
+      margin-bottom: 14px;
+    }
+    .result-question {
+      font-size: 1.15rem; font-weight: 500; line-height: 1.6; color: var(--text);
+    }
+    .result-hint {
+      margin-top: 20px; font-size: 0.82rem; color: var(--text-muted);
+      font-style: italic; border-top: 1px solid var(--border); padding-top: 12px;
+    }
+
+    /* ── Stats row ── */
+    .stats-row {
+      display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;
+    }
+    .stat-pill {
+      flex: 1; min-width: 120px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 14px 16px; text-align: center;
+    }
+    .stat-pill .num { font-size: 1.8rem; font-weight: 800; background: linear-gradient(135deg, var(--accent2), var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-pill .lbl { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+
+    /* ── Category selector ── */
+    .search-box {
+      position: relative; margin-bottom: 16px;
+    }
+    .search-box input {
+      width: 100%; padding: 14px 16px 14px 44px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; color: var(--text); font-family: inherit; font-size: 0.95rem;
+      outline: none; transition: border-color 0.3s;
+    }
+    .search-box input:focus { border-color: var(--accent); }
+    .search-box input::placeholder { color: var(--text-muted); }
+    .search-icon {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      font-size: 1.1rem; pointer-events: none;
+    }
+
+    .cat-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px;
+      max-height: 380px; overflow-y: auto; padding-right: 4px;
+    }
+    .cat-grid::-webkit-scrollbar { width: 6px; }
+    .cat-grid::-webkit-scrollbar-track { background: transparent; }
+    .cat-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+    .cat-btn {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 16px; cursor: pointer; text-align: left;
+      font-family: inherit; color: var(--text); font-size: 0.85rem; font-weight: 500;
+      transition: all 0.25s ease; line-height: 1.4;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .cat-btn:hover { border-color: var(--accent); background: rgba(37, 99, 235, 0.1); transform: translateY(-2px); }
+    .cat-btn.selected { border-color: var(--accent); background: rgba(37, 99, 235, 0.18); box-shadow: 0 0 20px rgba(37, 99, 235, 0.2); }
+    .cat-btn .bk-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px; }
+    .cat-btn .bk-count {
+      display: inline-block; background: rgba(37, 99, 235, 0.25); border-radius: 99px;
+      padding: 2px 8px; font-size: 0.7rem; font-weight: 700; color: var(--accent2);
+      margin-top: 5px;
+    }
+
+    .pick-btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; margin-top: 16px; padding: 16px;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      border: 1px solid var(--accent); border-radius: var(--radius); cursor: pointer;
+      font-family: inherit; font-size: 1rem; font-weight: 700; color: var(--accent2);
+      transition: all 0.3s ease;
+    }
+    .pick-btn:hover { background: rgba(37, 99, 235, 0.2); box-shadow: 0 0 30px rgba(37, 99, 235, 0.3); transform: translateY(-2px); }
+    .pick-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    /* ── Confetti bits ── */
+    .confetti-wrapper { position: fixed; inset: 0; pointer-events: none; z-index: 100; overflow: hidden; }
+    .conf { position: absolute; width: 10px; height: 10px; border-radius: 2px; animation: confFall 1.5s ease-in forwards; }
+    @keyframes confFall { from { transform: translateY(-20px) rotate(0deg); opacity: 1; } to { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+
+    /* ── Footer ── */
+    footer { text-align: center; color: var(--text-muted); font-size: 0.78rem; margin-top: 60px; }
+    footer strong { color: var(--accent2); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .card { padding: 20px; }
+      .tabs { flex-direction: column; }
+      .cat-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-orbs">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+
+<div class="confetti-wrapper" id="confettiWrapper"></div>
+
+<div class="container">
+  <header>
+    <div class="badge"><span>📐</span> Matura 2024-2026</div>
+    <h1>Losowanie Zadań<br/>Matematyka</h1>
+    <p class="subtitle">Wylosuj zadanie maturalne z matematyki ze wszystkich działów lub wybierz konkretny temat do powtórki.</p>
+  </header>
+
+  <div class="stats-row">
+    <div class="stat-pill">
+      <div class="num" id="totalTasks">0</div>
+      <div class="lbl">Wszystkich zadań</div>
+    </div>
+    <div class="stat-pill">
+      <div class="num" id="totalCats">0</div>
+      <div class="lbl">Działów</div>
+    </div>
+    <div class="stat-pill">
+      <div class="num" id="seenCount">0</div>
+      <div class="lbl">Wylosowanych</div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" id="tabRandom" onclick="switchTab('random')">🎲 Losowe zadanie</button>
+    <button class="tab-btn" id="tabCat" onclick="switchTab('cat')">📚 Wybierz dział</button>
+  </div>
+
+  <div class="panel active" id="panelRandom">
+    <div class="card">
+      <button class="roll-btn" id="rollBtn" onclick="rollRandom()">
+        <span class="dice">🎲</span>
+        Wylosuj losowe zadanie
+      </button>
+    </div>
+    <div class="result-card" id="randomResult">
+      <div class="result-number" id="randomNum"></div>
+      <div class="result-cat" id="randomCat"></div>
+      <div class="result-question" id="randomQ"></div>
+      <div class="result-hint">Wykonaj stosowne obliczenia i podaj odpowiedź. Jeśli potrzebujesz, użyj tablic maturalnych.</div>
+    </div>
+  </div>
+
+  <div class="panel" id="panelCat">
+    <div class="card">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Szukaj działu..." oninput="filterCats()" />
+      </div>
+      <div class="cat-grid" id="catGrid"></div>
+      <button class="pick-btn" id="pickBtn" onclick="pickQuestion()" disabled>
+        ✨ Wylosuj zadanie z wybranego działu
+      </button>
+    </div>
+    <div class="result-card" id="catResult">
+      <div class="result-number" id="catNum"></div>
+      <div class="result-cat" id="catResultTitle"></div>
+      <div class="result-question" id="catQ"></div>
+      <div class="result-hint">Wykonaj stosowne obliczenia i podaj odpowiedź. Jeśli potrzebujesz, użyj tablic maturalnych.</div>
+    </div>
+  </div>
+
+  <footer>Baza: <strong>Wybrane zadania CKE (Matury i Próbne 2024-2026)</strong> · Matematyka P. Podstawowy</footer>
+</div>
+
+<script>
+  // ───────────────────────────────────────────
+  // DATA (Matura Matematyka CKE)
+  // Używamy podwójnych ukośników \\ do escapowania dla MathJax.
+  // ───────────────────────────────────────────
+  const CATEGORIES = [
+    {
+      title: "Liczby rzeczywiste i wyrażenia algebraiczne",
+      icon: "🔢",
+      questions: [
+        { num: 1, q: "Oblicz wartość wyrażenia \\( \\log_3 27 - \\log_2 8 \\)." },
+        { num: 2, q: "Wykaż, że dla każdej liczby rzeczywistej dodatniej \\( x \\) zachodzi nierówność \\( x + \\frac{1}{x} \\ge 2 \\)." },
+        { num: 3, q: "Rozwiąż nierówność \\( |x - 3| \\le 5 \\)." },
+        { num: 4, q: "Liczba \\( \\sqrt[3]{54} - \\sqrt[3]{2} \\) jest równa... Oblicz i uprość wynik." },
+        { num: 5, q: "Dla jakich \\( x \\) wyrażenie \\( \\frac{x^2 - 4}{x^2 - 4x + 4} \\) traci sens liczbowy?" },
+        { num: 6, q: "Wartość wyrażenia \\( \\frac{3^5 \\cdot 9^2}{27^2} \\) jest równa... Wykonaj obliczenia na potęgach." },
+        { num: 7, q: "Wykaż, że liczba \\( 4^{12} + 4^{13} + 4^{14} \\) jest podzielna przez 21." },
+        { num: 8, q: "Oblicz logarytm korzystając z jego własności: \\( \\log_2 12 - \\log_2 3 \\)." },
+        { num: 9, q: "Uprość wyrażenie algebraiczne korzystając ze wzorów skróconego mnożenia: \\( (2x-y)^2 - (2x+y)^2 \\)." },
+        { num: 64, q: "Cena pewnego towaru została najpierw obniżona o 20%, a następnie nową cenę podwyższono o 20%. Oblicz, czy końcowa cena jest wyższa, niższa czy taka sama jak cena początkowa, i podaj różnicę w procentach." },
+        { num: 65, q: "Liczba 15 jest przybliżeniem z nadmiarem liczby \\( x \\). Błąd bezwzględny tego przybliżenia jest równy 0,24. Oblicz błąd względny tego przybliżenia i wyraź go w procentach." },
+        { num: 66, q: "Oblicz wartość wyrażenia: \\( 27^{\\frac{2}{3}} + 16^{\\frac{3}{4}} \\)." },
+        { num: 67, q: "Wykaż, że dla dowolnych liczb rzeczywistych \\( a \\) i \\( b \\) zachodzi nierówność: \\( a^2 + b^2 \\ge 2ab \\)." }
+      ]
+    },
+    {
+      title: "Równania i nierówności",
+      icon: "⚖️",
+      questions: [
+        { num: 10, q: "Rozwiąż równanie wielomianowe \\( 2x^3 - 4x^2 + x - 2 = 0 \\)." },
+        { num: 11, q: "Rozwiąż nierówność kwadratową \\( -x^2 + 4x - 3 > 0 \\)." },
+        { num: 12, q: "Rozwiąż równanie wymierne \\( \\frac{2x - 1}{x + 3} = 3 \\). Pamiętaj o wyznaczeniu dziedziny." },
+        { num: 13, q: "Wykaż, że równanie \\( x^2 + (m+1)x + m = 0 \\) ma rozwiązanie dla każdej liczby rzeczywistej \\( m \\)." },
+        { num: 14, q: "Rozwiąż układ równań: \\( \\begin{cases} 2x - y = 5 \\\\ x + 3y = -1 \\end{cases} \\)." },
+        { num: 15, q: "Rozwiąż równanie wielomianowe trzeciego stopnia: \\( x^3 - 3x^2 - 4x + 12 = 0 \\)." },
+        { num: 16, q: "Rozwiąż nierówność liniową i zaznacz jej zbiór rozwiązań na osi liczbowej: \\( 2(x - 3) \\ge 5x + 6 \\)." },
+        { num: 68, q: "Dziadek i babcia mają razem 140 lat. Dziadek ma dwa razy tyle lat, ile babcia miała wtedy, gdy dziadek miał tyle, ile babcia ma teraz. Ile lat ma obecnie dziadek, a ile babcia? Zapisz układ równań." },
+        { num: 69, q: "Rozwiąż równanie wielomianowe stosując metodę grupowania wyrazów: \\( x^3 + 2x^2 - 9x - 18 = 0 \\)." },
+        { num: 70, q: "Znajdź wszystkie liczby całkowite spełniające jednocześnie nierówności: \\( 2x - 5 < 3 \\) oraz \\( -x + 4 \\le 6 \\)." }
+      ]
+    },
+    {
+      title: "Funkcje",
+      icon: "📈",
+      questions: [
+        { num: 17, q: "Wyznacz dziedzinę funkcji \\( f(x) = \\frac{1}{\\sqrt{x-2}} \\)." },
+        { num: 18, q: "Funkcja kwadratowa \\( f \\) ma dwa miejsca zerowe: \\( x_1 = -2 \\) i \\( x_2 = 4 \\), a jej wykres przechodzi przez punkt \\( A=(1, 9) \\). Wyznacz wzór tej funkcji w postaci ogólnej." },
+        { num: 19, q: "Punkt \\( P=(2, a) \\) należy do wykresu funkcji \\( f(x) = 3^x - 5 \\). Oblicz wartość \\( a \\)." },
+        { num: 20, q: "Zbadaj dla jakich argumentów funkcja \\( f(x) = -2x + 6 \\) przyjmuje wartości nieujemne." },
+        { num: 21, q: "Wyznacz najmniejszą i największą wartość funkcji kwadratowej \\( f(x) = -x^2 + 4x + 1 \\) w przedziale domkniętym \\( \\langle 0, 3 \\rangle \\)." },
+        { num: 22, q: "Wykres funkcji wykładniczej \\( f(x) = a^x \\) przechodzi przez punkt \\( A=(3, 8) \\). Wyznacz podstawę potęgi \\( a \\)." },
+        { num: 23, q: "Wyznacz punkty przecięcia wykresu funkcji liniowej \\( f(x) = 2x - 8 \\) z osiami układu współrzędnych." },
+        { num: 71, q: "Wykres funkcji \\( g \\) otrzymano przez przesunięcie wykresu funkcji \\( f(x) = x^2 \\) o wektor \\( \\vec{v} = [-3, 2] \\). Podaj wzór funkcji \\( g(x) \\) w postaci kanonicznej." },
+        { num: 72, q: "Podaj równania asymptot pionowej i poziomej wykresu funkcji homograficznej: \\( f(x) = \\frac{2x - 1}{x + 4} \\)." },
+        { num: 73, q: "Funkcja kwadratowa opisana jest wzorem \\( f(x) = -2(x - 3)^2 + 5 \\). Podaj współrzędne wierzchołka paraboli będącej wykresem tej funkcji oraz przedziały monotoniczności." }
+      ]
+    },
+    {
+      title: "Ciągi",
+      icon: "🔗",
+      questions: [
+        { num: 24, q: "W ciągu arytmetycznym \\( (a_n) \\) dane są \\( a_2 = 5 \\) i \\( a_4 = 11 \\). Wyznacz wzór ogólny tego ciągu." },
+        { num: 25, q: "Oblicz sumę dziesięciu początkowych wyrazów ciągu geometrycznego \\( (b_n) \\), w którym \\( b_1 = 3 \\) i \\( q = 2 \\)." },
+        { num: 26, q: "Dany jest ciąg o wyrazie ogólnym \\( a_n = \\frac{2n-1}{n+2} \\). Który wyraz tego ciągu jest równy \\( \\frac{5}{4} \\)?" },
+        { num: 27, q: "Liczby \\( x-2, 6, 12 \\) w podanej kolejności tworzą rosnący ciąg geometryczny. Wyznacz liczbę \\( x \\)." },
+        { num: 28, q: "Korzystając z własności ciągu arytmetycznego, oblicz sumę wszystkich liczb naturalnych dwucyfrowych." },
+        { num: 29, q: "Ciąg \\( (a_n) \\) jest określony wzorem \\( a_n = n^2 - 4n \\) dla \\( n \\ge 1 \\). Ile wyrazów tego ciągu jest mniejszych od zera?" },
+        { num: 30, q: "W ciągu geometrycznym rosnącym dane są \\( a_2 = 6 \\) i \\( a_4 = 24 \\). Wyznacz wyraz pierwszy oraz iloraz tego ciągu." },
+        { num: 74, q: "Pan Jan wpłacił 10 000 zł na lokatę dwuletnią, której oprocentowanie wynosi 4% w skali roku, a kapitalizacja odsetek następuje po każdym roku. Oblicz, jaką kwotę będzie miał po 2 latach (pomiń podatek Belki)." },
+        { num: 75, q: "Dany jest ciąg określony wzorem \\( a_n = (-1)^n \\cdot (n - 5) \\) dla \\( n \\ge 1 \\). Oblicz piąty i szósty wyraz tego ciągu." },
+        { num: 76, q: "W ciągu arytmetycznym suma wyrazu pierwszego i piątego jest równa 24. Oblicz trzeci wyraz tego ciągu." }
+      ]
+    },
+    {
+      title: "Trygonometria",
+      icon: "📐",
+      questions: [
+        { num: 31, q: "Kąt \\( \\alpha \\) jest ostry i \\( \\sin \\alpha = \\frac{3}{5} \\). Oblicz wartość wyrażenia \\( 2 \\cos^2 \\alpha - 1 \\)." },
+        { num: 32, q: "Wykaż, że dla każdego kąta ostrego \\( \\alpha \\) prawdziwa jest tożsamość: \\( \\frac{1}{\\cos \\alpha} - \\cos \\alpha = \\sin \\alpha \\cdot \\operatorname{tg} \\alpha \\)." },
+        { num: 33, q: "Oblicz dokładną wartość wyrażenia: \\( \\sin^2 30^\\circ + \\cos^2 60^\\circ \\)." },
+        { num: 34, q: "Kąt \\( \\alpha \\) jest ostry i \\( \\cos \\alpha = \\frac{12}{13} \\). Oblicz wartości \\( \\sin \\alpha \\) oraz \\( \\operatorname{tg} \\alpha \\)." },
+        { num: 35, q: "Oblicz pole trójkąta o bokach długości 6 i 10, wiedząc, że kąt między nimi ma miarę \\( 150^\\circ \\)." },
+        { num: 77, q: "Oblicz dokładną wartość wyrażenia: \\( \\sin 150^\\circ + \\cos 120^\\circ - \\operatorname{tg} 135^\\circ \\)." },
+        { num: 78, q: "Drzewo rzuca cień o długości 15 m. Kąt padania promieni słonecznych (kąt między promieniem słonecznym a ziemią) wynosi \\( 60^\\circ \\). Oblicz wysokość drzewa." },
+        { num: 79, q: "Wiedząc, że \\( \\operatorname{tg} \\alpha = 2 \\) oraz \\( \\alpha \\) jest kątem ostrym, oblicz wartość wyrażenia: \\( \\frac{\\sin \\alpha - \\cos \\alpha}{\\sin \\alpha + \\cos \\alpha} \\)." }
+      ]
+    },
+    {
+      title: "Geometria płaska (Planimetria)",
+      icon: "🟢",
+      questions: [
+        { num: 36, q: "W trójkącie prostokątnym przyprostokątne mają długości 6 i 8. Oblicz długość promienia okręgu wpisanego w ten trójkąt." },
+        { num: 37, q: "Dany jest trójkąt o bokach długości 5, 6, 7. Oblicz pole tego trójkąta." },
+        { num: 38, q: "W okręgu o promieniu 5 poprowadzono cięciwę o długości 8. Oblicz odległość tej cięciwy od środka okręgu." },
+        { num: 39, q: "Długość przekątnej rombu wynosi 10, a jego bok ma długość 13. Oblicz długość drugiej przekątnej oraz pole tego rombu." },
+        { num: 40, q: "Kąt środkowy oparty na łuku AB ma miarę \\( 140^\\circ \\). Oblicz miarę kąta wpisanego opartego na tym samym łuku." },
+        { num: 41, q: "W trójkącie równoramiennym podstawa ma długość 12, a ramię 10. Oblicz długość wysokości opuszczonej na podstawę." },
+        { num: 42, q: "Dane są dwa trójkąty podobne. Pole pierwszego z nich wynosi 20, a drugiego 180. Oblicz skalę podobieństwa pierwszego trójkąta do drugiego." },
+        { num: 80, q: "W trapezie równoramiennym podstawy mają długości 12 i 6, a kąt ostry ma miarę \\( 45^\\circ \\). Oblicz pole i obwód tego trapezu." },
+        { num: 81, q: "Przez punkt \\( P \\) leżący na zewnątrz okręgu poprowadzono dwie proste styczne do okręgu w punktach \\( A \\) i \\( B \\). Kąt między stycznymi wynosi \\( 50^\\circ \\). Oblicz miarę kąta środkowego \\( AOB \\)." },
+        { num: 82, q: "Boki trójkąta mają długości 3, 4 i 5. Wykaż, powołując się na odpowiednie twierdzenie, że ten trójkąt jest prostokątny." }
+      ]
+    },
+    {
+      title: "Geometria analityczna",
+      icon: "📍",
+      questions: [
+        { num: 43, q: "Napisz równanie prostej przechodzącej przez punkty \\( A=(1, -2) \\) i \\( B=(3, 6) \\)." },
+        { num: 44, q: "Wyznacz równanie prostej prostopadłej do prostej \\( y = 2x - 5 \\) i przechodzącej przez punkt \\( P=(-4, 1) \\)." },
+        { num: 45, q: "Oblicz odległość punktu \\( P=(-2, 3) \\) od prostej o równaniu \\( 3x - 4y + 5 = 0 \\)." },
+        { num: 46, q: "Wyznacz współrzędne środka odcinka \\( AB \\), jeśli \\( A=(-3, 7) \\) i \\( B=(5, -1) \\)." },
+        { num: 47, q: "Wyznacz równanie prostej równoległej do prostej \\( y = -\\frac{1}{2}x + 4 \\) i przechodzącej przez punkt \\( A=(-4, 5) \\)." },
+        { num: 48, q: "Dany jest okrąg o równaniu \\( (x - 3)^2 + (y + 1)^2 = 25 \\). Wyznacz współrzędne jego środka oraz długość promienia." },
+        { num: 49, q: "Oblicz pole trójkąta o wierzchołkach: \\( A=(0,0) \\), \\( B=(6,0) \\), \\( C=(4,5) \\)." },
+        { num: 83, q: "Punkt \\( A'=(4, -2) \\) jest obrazem punktu \\( A \\) w symetrii względem osi OY. Podaj współrzędne punktu \\( A \\)." },
+        { num: 84, q: "Sprawdź, wykonując odpowiednie obliczenia, czy punkt \\( P=(6, 3) \\) leży na okręgu o równaniu \\( (x - 2)^2 + (y - 1)^2 = 20 \\)." },
+        { num: 85, q: "Napisz równanie symetralnej odcinka \\( AB \\), gdzie \\( A=(2, -4) \\) i \\( B=(8, 2) \\)." }
+      ]
+    },
+    {
+      title: "Geometria przestrzenna (Stereometria)",
+      icon: "🧊",
+      questions: [
+        { num: 50, q: "Oblicz objętość sześcianu, którego przekątna ma długość \\( 6\\sqrt{3} \\)." },
+        { num: 51, q: "W ostrosłupie prawidłowym czworokątnym krawędź podstawy ma długość 4, a wysokość ostrosłupa wynosi 6. Oblicz pole powierzchni całkowitej." },
+        { num: 52, q: "Przekrój osiowy walca jest kwadratem o boku długości 8. Oblicz objętość tego walca." },
+        { num: 53, q: "Stożek ma tworzącą o długości 10 i promień podstawy 6. Oblicz kąt rozwarcia stożka oraz jego objętość." },
+        { num: 54, q: "Przekątna sześcianu ma długość \\( 9 \\). Oblicz długość pojedynczej krawędzi tego sześcianu." },
+        { num: 55, q: "W ostrosłupie prawidłowym trójkątnym krawędź podstawy ma długość 6. Kąt nachylenia krawędzi bocznej do płaszczyzny podstawy wynosi \\( 60^\\circ \\). Oblicz wysokość tego ostrosłupa." },
+        { num: 56, q: "Pole powierzchni całkowitej kuli wynosi \\( 36\\pi \\). Oblicz objętość tej kuli." },
+        { num: 86, q: "Oblicz sinus kąta nachylenia przekątnej sześcianu do płaszczyzny jego podstawy." },
+        { num: 87, q: "Dwa stożki są podobne. Stosunek ich objętości wynosi \\( 8:27 \\). Podaj w jakim stosunku pozostają ich pola powierzchni całkowitej." },
+        { num: 88, q: "Przekrój kuli płaszczyzną przechodzącą przez jej środek (koło wielkie) ma pole równe \\( 16\\pi \\). Oblicz promień oraz objętość kuli." }
+      ]
+    },
+    {
+      title: "Kombinatoryka, prawdopodobieństwo i statystyka",
+      icon: "🎲",
+      questions: [
+        { num: 57, q: "Rzucamy dwukrotnie symetryczną sześcienną kostką do gry. Oblicz prawdopodobieństwo, że suma wyrzuconych oczek wynosi dokładnie 8." },
+        { num: 58, q: "Ze zbioru cyfr \\( \\{1, 2, 3, 4, 5\\} \\) losujemy kolejno bez zwracania dwie cyfry. Oblicz prawdopodobieństwo, że powstała tak liczba dwucyfrowa jest parzysta." },
+        { num: 59, q: "Ile jest liczb naturalnych czterocyfrowych o różnych cyfrach, utworzonych z cyfr \\( \\{1, 2, 3, 4, 5, 6, 7\\} \\)?" },
+        { num: 60, q: "W urnie jest 5 kul białych i 3 czarne. Losujemy dwie kule. Jakie jest prawdopodobieństwo wylosowania kul o tym samym kolorze?" },
+        { num: 61, q: "Rzucamy trzykrotnie symetryczną monetą. Oblicz prawdopodobieństwo wyrzucenia co najmniej dwóch orłów." },
+        { num: 62, q: "Średnia arytmetyczna zestawu danych: 3, 5, 7, 9, x wynosi 8. Oblicz x oraz medianę tego zestawu danych." },
+        { num: 63, q: "Ile jest wszystkich liczb całkowitych dodatnich trzycyfrowych, w których zapisie dziesiętnym występują wyłącznie cyfry nieparzyste?" },
+        { num: 89, q: "Rzucamy dwiema sześciennymi kostkami do gry. Oblicz prawdopodobieństwo zdarzenia polegającego na tym, że co najmniej na jednej kostce wypadnie szóstka (wskazówka: skorzystaj ze zdarzenia przeciwnego)." },
+        { num: 90, q: "Z talii 52 kart losujemy jedną kartę. Oblicz prawdopodobieństwo wylosowania asa lub pika." },
+        { num: 91, q: "Oblicz wariancję i odchylenie standardowe dla zestawu danych: 2, 4, 6, 8, 10." },
+        { num: 92, q: "Ile istnieje różnych numerów rejestracyjnych, które składają się z dwóch wielkich liter alfabetu łacińskiego (26 liter), po których następują 4 cyfry (0-9)?" }
+      ]
+    }
+  ];
+
+  // build flat list of all questions
+  const ALL_QUESTIONS = [];
+  CATEGORIES.forEach(c => c.questions.forEach(q => ALL_QUESTIONS.push({ cat: c.title, icon: c.icon, ...q })));
+
+  // ── State ──
+  let seenSet = new Set();
+  let selectedCat = null;
+  let filteredCats = [...CATEGORIES];
+
+  // ── Init ──
+  document.getElementById('totalTasks').textContent = ALL_QUESTIONS.length;
+  document.getElementById('totalCats').textContent = CATEGORIES.length;
+  renderCats();
+
+  function switchTab(tab) {
+    document.getElementById('tabRandom').classList.toggle('active', tab === 'random');
+    document.getElementById('tabCat').classList.toggle('active', tab === 'cat');
+    document.getElementById('panelRandom').classList.toggle('active', tab === 'random');
+    document.getElementById('panelCat').classList.toggle('active', tab === 'cat');
+  }
+
+  function rollRandom() {
+    const q = ALL_QUESTIONS[Math.floor(Math.random() * ALL_QUESTIONS.length)];
+    seenSet.add(q.num);
+    document.getElementById('seenCount').textContent = seenSet.size;
+
+    const res = document.getElementById('randomResult');
+    res.classList.remove('show');
+    void res.offsetWidth; // reflow to restart animation
+    res.classList.add('show');
+
+    document.getElementById('randomNum').innerHTML = `${q.icon} Zadanie nr <strong>${q.num}</strong>`;
+    document.getElementById('randomCat').textContent = q.cat;
+    document.getElementById('randomQ').innerHTML = q.q;
+
+    // Ponowne wywołanie MathJax do przerenderowania równań matematycznych (LaTeX)
+    if (window.MathJax) {
+      MathJax.typesetPromise([document.getElementById('randomQ')]);
+    }
+
+    launchConfetti();
+  }
+
+  function renderCats() {
+    const grid = document.getElementById('catGrid');
+    grid.innerHTML = filteredCats.map((c, i) => `
+      <button class="cat-btn ${selectedCat === c.title ? 'selected' : ''}" id="catbtn-${i}" onclick="selectCat('${escHtml(c.title)}')">
+        <span class="bk-icon">${c.icon}</span>
+        <span>
+          ${c.title}
+          <br/><span class="bk-count">${c.questions.length} zada${c.questions.length === 1 ? 'nie' : (c.questions.length < 5 ? 'nia' : 'ń')}</span>
+        </span>
+      </button>
+    `).join('');
+  }
+
+  function escHtml(s) { return s.replace(/'/g, "\\'"); }
+
+  function selectCat(title) {
+    selectedCat = title;
+    document.getElementById('pickBtn').disabled = false;
+    renderCats();
+    document.getElementById('catResult').classList.remove('show');
+  }
+
+  function filterCats() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    filteredCats = q ? CATEGORIES.filter(c => c.title.toLowerCase().includes(q)) : [...CATEGORIES];
+    renderCats();
+  }
+
+  function pickQuestion() {
+    if (!selectedCat) return;
+    const cat = CATEGORIES.find(c => c.title === selectedCat);
+    if (!cat) return;
+    const q = cat.questions[Math.floor(Math.random() * cat.questions.length)];
+    seenSet.add(q.num);
+    document.getElementById('seenCount').textContent = seenSet.size;
+
+    const res = document.getElementById('catResult');
+    res.classList.remove('show');
+    void res.offsetWidth;
+    res.classList.add('show');
+
+    document.getElementById('catNum').innerHTML = `${cat.icon} Zadanie nr <strong>${q.num}</strong>`;
+    document.getElementById('catResultTitle').textContent = cat.title;
+    document.getElementById('catQ').innerHTML = q.q;
+
+    // Ponowne wywołanie MathJax do przerenderowania równań matematycznych
+    if (window.MathJax) {
+      MathJax.typesetPromise([document.getElementById('catQ')]);
+    }
+
+    launchConfetti();
+  }
+
+  function launchConfetti() {
+    const wrapper = document.getElementById('confettiWrapper');
+    wrapper.innerHTML = '';
+    // Paleta dla matmy (niebieski, morski, złoty)
+    const colors = ['#2563eb','#06b6d4','#10b981','#fbbf24','#3b82f6'];
+    for (let i = 0; i < 40; i++) {
+      const el = document.createElement('div');
+      el.className = 'conf';
+      el.style.cssText = `
+        left: ${Math.random()*100}%;
+        top: -20px;
+        background: ${colors[Math.floor(Math.random()*colors.length)]};
+        width: ${6+Math.random()*8}px;
+        height: ${6+Math.random()*8}px;
+        border-radius: ${Math.random()>0.5?'50%':'2px'};
+        animation-duration: ${1+Math.random()*1.2}s;
+        animation-delay: ${Math.random()*0.4}s;
+        opacity: ${0.7+Math.random()*0.3};
+      `;
+      wrapper.appendChild(el);
+    }
+    setTimeout(() => wrapper.innerHTML = '', 2500);
+  }
+</script>
+</body>
+</html>
