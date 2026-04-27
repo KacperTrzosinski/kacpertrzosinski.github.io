@@ -3,21 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorium Projektów</title>
+    <meta name="description" content="Zbiór projektów, wizualizacji algorytmów i pomocy maturalnych." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div class="header">
-        -----
+    <div class="bg-elements">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="glow glow-3"></div>
     </div>
-    <div class="main">
-        <a href="./funThings/path_algs.html" class="button">Algorytmy szukania scieżki</a>
-        <a href="./funThings/piGen.html" class="button">Algorytmy generowania PI</a>
-        <a href="./funThings/sort_algs.html" class="button">Algorytmy sortujące</a>
-        <a href="./funThings/maturka/polski.html" class="button">Zadania maturalne - Polski</a>
-        <a href="./funThings/maturka/matematyka.html" class="button">Zadania maturalne - Matematyka</a>
-    </div>
-    <div class="footer">
-        ------
-    </div>
+
+    <header class="header">
+        <h1>Witaj w moim <span>Laboratorium</span></h1>
+        <p>Zbiór wizualizacji algorytmów, mini-projektów oraz interaktywnych aplikacji przygotowujących do matury.</p>
+    </header>
+
+    <main class="main-content" id="main-cards">
+        <section class="category">
+            <h2 class="category-title">Wizualizacje Algorytmów</h2>
+            <div class="grid">
+                <a href="./funThings/path_algs.html" class="card card-purple">
+                    <div class="icon">🧭</div>
+                    <div class="card-content">
+                        <h3>Szukanie ścieżki</h3>
+                        <p>Interaktywna wizualizacja popularnych algorytmów pathfindingu grafowego.</p>
+                    </div>
+                </a>
+                <a href="./funThings/piGen.html" class="card card-blue">
+                    <div class="icon">🥧</div>
+                    <div class="card-content">
+                        <h3>Generowanie PI</h3>
+                        <p>Matematyczna aproksymacja i wizualizacja wyliczania liczby Pi.</p>
+                    </div>
+                </a>
+                <a href="./funThings/sort_algs.html" class="card card-pink">
+                    <div class="icon">📊</div>
+                    <div class="card-content">
+                        <h3>Algorytmy sortujące</h3>
+                        <p>Zobacz na żywo jak działają najpopularniejsze algorytmy sortowania danych.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="category">
+            <h2 class="category-title">Aplikacje Maturalne</h2>
+            <div class="grid">
+                <a href="./funThings/maturka/polski.html" class="card card-red">
+                    <div class="icon">📖</div>
+                    <div class="card-content">
+                        <h3>Język Polski</h3>
+                        <p>Aplikacja do losowania pytań jawnych i zagadnień na maturę ustną.</p>
+                    </div>
+                </a>
+                <a href="./funThings/maturka/matematyka.html" class="card card-gold">
+                    <div class="icon">📐</div>
+                    <div class="card-content">
+                        <h3>Matematyka</h3>
+                        <p>Baza zadań do rozwiązania z różnych działów na poziomie podstawowym.</p>
+                    </div>
+                </a>
+                <a href="./funThings/maturka/informatyka.html" class="card card-emerald">
+                    <div class="icon">💻</div>
+                    <div class="card-content">
+                        <h3>Informatyka</h3>
+                        <p>Algorytmy, pseudokod, SQL i bazy danych na poziomie rozszerzonym.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; Kacper Trzosiński. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Efekt śledzenia myszki (Glow hover effect)
+        document.getElementById('main-cards').onmousemove = e => {
+            for(const card of document.getElementsByClassName("card")) {
+                const rect = card.getBoundingClientRect(),
+                      x = e.clientX - rect.left,
+                      y = e.clientY - rect.top;
+
+                card.style.setProperty("--mouse-x", `${x}px`);
+                card.style.setProperty("--mouse-y", `${y}px`);
+            };
+        }
+    </script>
 </body>
 </html>
