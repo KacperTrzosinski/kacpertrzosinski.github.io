@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Matura Polski – Losowanie Tematów 2025</title>
-  <meta name="description" content="Aplikacja do losowania tematów maturalnych z języka polskiego 2025. Wylosuj losowy temat lub wybierz konkretną lekturę." />
+  <title>Matura Polski – Losowanie Tematów 2026-2028</title>
+  <meta name="description" content="Aplikacja do losowania jawnych tematów maturalnych z języka polskiego (2026-2028). Wylosuj losowy temat lub wybierz konkretną lekturę." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -254,18 +254,18 @@
 
 <div class="container">
   <header>
-    <div class="badge"><span>📚</span> Matura 2025</div>
+    <div class="badge"><span>📚</span> Matura 2026-2028</div>
     <h1>Losowanie Tematów<br/>Język Polski</h1>
-    <p class="subtitle">Wylosuj dowolny temat ze wszystkich lektur lub wybierz konkretną książkę i poznaj swoje pytanie.</p>
+    <p class="subtitle">Wylosuj jawny temat ze wszystkich lektur lub wybierz konkretną książkę i poznaj swoje pytanie.</p>
   </header>
 
   <div class="stats-row">
     <div class="stat-pill">
-      <div class="num">68</div>
+      <div class="num">76</div>
       <div class="lbl">Wszystkich tematów</div>
     </div>
     <div class="stat-pill">
-      <div class="num">28</div>
+      <div class="num">29</div>
       <div class="lbl">Lektur</div>
     </div>
     <div class="stat-pill">
@@ -313,12 +313,12 @@
     </div>
   </div>
 
-  <footer>Dane: <strong>CKE – Zadania jawne na rok 2025</strong> · Język Polski · Egzamin Maturalny</footer>
+  <footer>Dane: <strong>CKE – Zadania jawne na lata 2026-2028</strong> · Język Polski · Egzamin Maturalny</footer>
 </div>
 
 <script>
   // ───────────────────────────────────────────
-  // DATA
+  // DATA (Zaktualizowano wg wytycznych CKE 2026-2028)
   // ───────────────────────────────────────────
   const BOOKS = [
     {
@@ -327,7 +327,7 @@
       questions: [
         { num: 1, q: "Motyw cierpienia niezawinionego. Omów zagadnienie na podstawie znanych Ci fragmentów Księgi Hioba." },
         { num: 2, q: "Człowiek wobec niestałości świata. Omów zagadnienie na podstawie znanych Ci fragmentów Księgi Koheleta." },
-        { num: 3, q: "Wizja końca świata. Omów zagadnienie na podstawie znanych Ci fragmentów Apokalipsy św. Jana." },
+        { num: 3, q: "Wizja końca świata. Omów zagadnienie na podstawie znanych Ci fragmentów Apokalipsy św. Jana." }
       ]
     },
     {
@@ -336,227 +336,241 @@
       questions: [
         { num: 4, q: "Poświęcenie się w imię wyższych wartości. Omów zagadnienie na podstawie Mitologii (cz. I Grecja) Jana Parandowskiego." },
         { num: 5, q: "Problematyka winy i kary. Omów zagadnienie na podstawie Mitologii (cz. I Grecja) Jana Parandowskiego." },
-        { num: 6, q: "Miłość silniejsza niż śmierć. Omów zagadnienie na podstawie Mitologii (cz. I Grecja) Jana Parandowskiego." },
+        { num: 6, q: "Miłość silniejsza niż śmierć. Omów zagadnienie na podstawie Mitologii (cz. I Grecja) Jana Parandowskiego." }
       ]
     },
     {
       title: "Homer, Iliada (fragmenty)",
       icon: "⚔️",
       questions: [
-        { num: 7, q: "Heroizm jako postawa człowieka w zmaganiu się z losem. Omów zagadnienie na podstawie znanych Ci fragmentów Iliady Homera." },
+        { num: 7, q: "Heroizm jako postawa człowieka w zmaganiu się z losem. Omów zagadnienie na podstawie znanych Ci fragmentów Iliady Homera." }
       ]
     },
     {
       title: "Sofokles, Antygona",
       icon: "🎭",
       questions: [
-        { num: 8, q: "Konflikt racji moralnych. Omów zagadnienie na podstawie Antygony Sofoklesa." },
-        { num: 9, q: "Człowiek wobec przeznaczenia. Omów zagadnienie na podstawie Antygony Sofoklesa." },
+        { num: 8, q: "Prawa boskie a prawa ludzkie. Omów zagadnienie na podstawie Antygony Sofoklesa." },
+        { num: 9, q: "Człowiek wobec przeznaczenia. Omów zagadnienie na podstawie Antygony Sofoklesa." }
+      ]
+    },
+    {
+      title: "Lament świętokrzyski (fragmenty)",
+      icon: "🩸",
+      questions: [
+        { num: 10, q: "Motyw cierpiącej matki. Omów zagadnienie na podstawie znanych Ci fragmentów Lamentu świętokrzyskiego." }
       ]
     },
     {
       title: "Rozmowa Mistrza Polikarpa ze Śmiercią (fragmenty)",
       icon: "💀",
       questions: [
-        { num: 10, q: "Motyw tańca śmierci. Omów zagadnienie na podstawie znanych Ci fragmentów Rozmowy Mistrza Polikarpa ze Śmiercią." },
+        { num: 11, q: "Motyw tańca śmierci. Omów zagadnienie na podstawie znanych Ci fragmentów Rozmowy Mistrza Polikarpa ze Śmiercią." }
       ]
     },
     {
       title: "Pieśń o Rolandzie (fragmenty)",
       icon: "🛡️",
       questions: [
-        { num: 11, q: "Średniowieczny etos rycerski. Omów zagadnienie na podstawie znanych Ci fragmentów Pieśni o Rolandzie." },
+        { num: 12, q: "Średniowieczny wzorzec rycerza. Omów zagadnienie na podstawie znanych Ci fragmentów Pieśni o Rolandzie." }
       ]
     },
     {
       title: "William Szekspir, Makbet",
       icon: "👑",
       questions: [
-        { num: 12, q: "Moralna odpowiedzialność za czyny. Omów zagadnienie na podstawie Makbeta Williama Szekspira." },
-        { num: 13, q: "Czy człowiek decyduje o własnym losie? Omów zagadnienie na podstawie Makbeta Williama Szekspira." },
-        { num: 14, q: "Jaki wpływ na człowieka ma sprawowanie przez niego władzy? Omów zagadnienie na podstawie Makbeta Williama Szekspira." },
+        { num: 13, q: "Moralna odpowiedzialność za czyny. Omów zagadnienie na podstawie Makbeta Williama Szekspira." },
+        { num: 14, q: "Czy człowiek decyduje o własnym losie? Omów zagadnienie na podstawie Makbeta Williama Szekspira." },
+        { num: 15, q: "Jaki wpływ na człowieka ma sprawowanie przez niego władzy? Omów zagadnienie na podstawie Makbeta Williama Szekspira." }
       ]
     },
     {
       title: "Molier, Skąpiec",
       icon: "💰",
       questions: [
-        { num: 15, q: "Czy dobra materialne czynią człowieka szczęśliwym? Omów zagadnienie na podstawie Skąpca Moliera." },
-        { num: 16, q: "Przyczyny nieporozumień między rodzicami a dziećmi. Omów zagadnienie na podstawie Skąpca Moliera." },
+        { num: 16, q: "Czy dobra materialne czynią człowieka szczęśliwym? Omów zagadnienie na podstawie Skąpca Moliera." },
+        { num: 17, q: "Przyczyny nieporozumień między rodzicami a dziećmi. Omów zagadnienie na podstawie Skąpca Moliera." }
       ]
     },
     {
       title: "Ignacy Krasicki, wybrana satyra",
       icon: "🖋️",
       questions: [
-        { num: 17, q: "Wady ludzkie w krzywym zwierciadle satyry. Omów zagadnienie na podstawie znanej Ci satyry Ignacego Krasickiego." },
+        { num: 18, q: "Wady ludzkie w krzywym zwierciadle satyry. Omów zagadnienie na podstawie znanej Ci satyry Ignacego Krasickiego." }
       ]
     },
     {
       title: "Adam Mickiewicz, Romantyczność oraz wybrane ballady",
       icon: "🌙",
       questions: [
-        { num: 18, q: "Świat ducha a świat rozumu. Omów zagadnienie na podstawie Romantyczności Adama Mickiewicza." },
-        { num: 19, q: "Jakie znaczenie dla człowieka ma przyroda? Omów zagadnienie na podstawie znanych Ci ballad Adama Mickiewicza." },
+        { num: 19, q: "Świat ducha a świat rozumu. Omów zagadnienie na podstawie Romantyczności Adama Mickiewicza." },
+        { num: 20, q: "Na czym polega ludowa sprawiedliwość? Omów zagadnienie na podstawie znanych Ci ballad Adama Mickiewicza." }
       ]
     },
     {
       title: "Adam Mickiewicz, Dziady część III",
       icon: "🕯️",
       questions: [
-        { num: 20, q: "Losy młodzieży polskiej pod zaborami. Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." },
-        { num: 21, q: "Mesjanizm jako romantyczna idea poświęcenia. Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." },
-        { num: 22, q: "Postawy społeczeństwa polskiego wobec zaborcy. Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." },
-        { num: 23, q: "Różne postawy człowieka wobec Boga. Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." },
-        { num: 24, q: "Jakie prawdy o człowieku ujawniają jego sny albo widzenia? Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." },
-        { num: 25, q: "W jakim celu twórca nawiązuje do motywów biblijnych? Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." },
+        { num: 21, q: "Losy młodzieży polskiej pod zaborami. Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." },
+        { num: 22, q: "Mesjanizm jako romantyczna idea poświęcenia. Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." },
+        { num: 23, q: "Postawy społeczeństwa polskiego wobec zaborcy. Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." },
+        { num: 24, q: "Różne postawy człowieka wobec Boga. Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." },
+        { num: 25, q: "Jakie prawdy o człowieku ujawniają jego sny albo widzenia? Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." },
+        { num: 26, q: "W jakim celu twórca nawiązuje do motywów biblijnych? Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." },
+        { num: 27, q: "Walka dobra ze złem o duszę ludzką. Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." },
+        { num: 28, q: "Czym dla człowieka może być wolność? Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." },
+        { num: 29, q: "Motyw samotności. Omów zagadnienie na podstawie Dziadów części III Adama Mickiewicza." }
       ]
     },
     {
       title: "Bolesław Prus, Lalka",
       icon: "🏙️",
       questions: [
-        { num: 26, q: "Miłość – siła destrukcyjna czy motywująca do działania? Omów zagadnienie na podstawie Lalki Bolesława Prusa." },
-        { num: 27, q: "Różne oblicza przyjaźni. Omów zagadnienie na podstawie Lalki Bolesława Prusa." },
-        { num: 28, q: "Praca jako pasja człowieka. Omów zagadnienie na podstawie Lalki Bolesława Prusa." },
-        { num: 29, q: "Jaką rolę w relacjach międzyludzkich odgrywają majątek i pochodzenie? Omów zagadnienie na podstawie Lalki Bolesława Prusa." },
-        { num: 30, q: "Konfrontacja marzeń z rzeczywistością. Omów zagadnienie na podstawie Lalki Bolesława Prusa." },
-        { num: 31, q: "Jakie cechy charakteru ułatwiają człowiekowi osiągnięcie celu? Omów zagadnienie na podstawie Lalki Bolesława Prusa." },
-        { num: 32, q: "Miasto – przestrzeń przyjazna czy wroga człowiekowi? Omów zagadnienie na podstawie Lalki Bolesława Prusa." },
+        { num: 30, q: "Miłość – siła destrukcyjna czy motywująca do działania? Omów zagadnienie na podstawie Lalki Bolesława Prusa." },
+        { num: 31, q: "Praca jako pasja człowieka. Omów zagadnienie na podstawie Lalki Bolesława Prusa." },
+        { num: 32, q: "Jaką rolę w relacjach międzyludzkich odgrywają majątek i pochodzenie? Omów zagadnienie na podstawie Lalki Bolesława Prusa." },
+        { num: 33, q: "Konfrontacja marzeń z rzeczywistością. Omów zagadnienie na podstawie Lalki Bolesława Prusa." },
+        { num: 34, q: "Miasto – przestrzeń przyjazna czy wroga człowiekowi? Omów zagadnienie na podstawie Lalki Bolesława Prusa." },
+        { num: 35, q: "Czym dla człowieka mogą być wspomnienia? Omów zagadnienie na podstawie Lalki Bolesława Prusa." }
       ]
     },
     {
       title: "Henryk Sienkiewicz, Potop (fragmenty)",
       icon: "🌊",
       questions: [
-        { num: 33, q: "Postawy odwagi i tchórzostwa. Omów zagadnienie na podstawie znanych Ci fragmentów Potopu Henryka Sienkiewicza." },
+        { num: 36, q: "Postawy odwagi i tchórzostwa. Omów zagadnienie na podstawie znanych Ci fragmentów Potopu Henryka Sienkiewicza." }
       ]
     },
     {
       title: "Fiodor Dostojewski, Zbrodnia i kara",
       icon: "🔪",
       questions: [
-        { num: 34, q: "Walka człowieka ze swoimi słabościami. Omów zagadnienie na podstawie Zbrodni i kary Fiodora Dostojewskiego." },
-        { num: 35, q: "Motyw winy i kary. Omów zagadnienie na podstawie Zbrodni i kary Fiodora Dostojewskiego." },
-        { num: 36, q: "Ile człowiek jest gotów poświęcić dla innych? Omów zagadnienie na podstawie Zbrodni i kary Fiodora Dostojewskiego." },
-        { num: 37, q: "Co może determinować ludzkie postępowanie? Omów zagadnienie na podstawie Zbrodni i kary Fiodora Dostojewskiego." },
+        { num: 37, q: "Walka człowieka ze swoimi słabościami. Omów zagadnienie na podstawie Zbrodni i kary Fiodora Dostojewskiego." },
+        { num: 38, q: "Motyw winy i kary. Omów zagadnienie na podstawie Zbrodni i kary Fiodora Dostojewskiego." },
+        { num: 39, q: "Ile człowiek jest gotów poświęcić dla innych? Omów zagadnienie na podstawie Zbrodni i kary Fiodora Dostojewskiego." },
+        { num: 40, q: "Co może determinować ludzkie postępowanie? Omów zagadnienie na podstawie Zbrodni i kary Fiodora Dostojewskiego." },
+        { num: 41, q: "Motyw przemiany bohatera. Omów zagadnienie na podstawie Zbrodni i kary Fiodora Dostojewskiego." }
       ]
     },
     {
       title: "Stanisław Wyspiański, Wesele",
       icon: "💃",
       questions: [
-        { num: 38, q: "Co utrudnia porozumienie między przedstawicielami różnych grup społecznych? Omów zagadnienie na podstawie Wesela Stanisława Wyspiańskiego." },
-        { num: 39, q: "Rola chłopów i inteligencji w sprawie niepodległościowej. Omów zagadnienie na podstawie Wesela Stanisława Wyspiańskiego." },
-        { num: 40, q: "Sen o Polsce czy sąd nad Polską? Omów zagadnienie na podstawie Wesela Stanisława Wyspiańskiego." },
-        { num: 41, q: "Symboliczne znaczenie widm i zjaw. Omów zagadnienie na podstawie Wesela Stanisława Wyspiańskiego." },
-        { num: 42, q: "Motyw tańca. Omów zagadnienie na podstawie Wesela Stanisława Wyspiańskiego." },
+        { num: 42, q: "Co utrudnia porozumienie między przedstawicielami różnych grup społecznych? Omów zagadnienie na podstawie Wesela Stanisława Wyspiańskiego." },
+        { num: 43, q: "Rola chłopów i inteligencji w sprawie niepodległościowej. Omów zagadnienie na podstawie Wesela Stanisława Wyspiańskiego." },
+        { num: 44, q: "Sen o Polsce czy sąd nad Polską? Omów zagadnienie na podstawie Wesela Stanisława Wyspiańskiego." },
+        { num: 45, q: "Symboliczne znaczenie widm i zjaw. Omów zagadnienie na podstawie Wesela Stanisława Wyspiańskiego." },
+        { num: 46, q: "Motyw tańca. Omów zagadnienie na podstawie Wesela Stanisława Wyspiańskiego." }
       ]
     },
     {
       title: "Władysław Stanisław Reymont, Chłopi (fragmenty)",
       icon: "🌾",
       questions: [
-        { num: 43, q: "Obyczaj i tradycja w życiu społeczeństwa. Omów zagadnienie na podstawie znanych Ci fragmentów Chłopów Władysława Stanisława Reymonta." },
+        { num: 47, q: "Obyczaj i tradycja w życiu społeczeństwa. Omów zagadnienie na podstawie znanych Ci fragmentów Chłopów Władysława Stanisława Reymonta." }
       ]
     },
     {
       title: "Stefan Żeromski, Przedwiośnie",
       icon: "🌱",
       questions: [
-        { num: 44, q: "Jakie znaczenie ma tytuł dla odczytania sensu utworu? Omów zagadnienie na podstawie Przedwiośnia Stefana Żeromskiego." },
-        { num: 45, q: "Wojna i rewolucja jako źródła doświadczeń człowieka. Omów zagadnienie na podstawie Przedwiośnia Stefana Żeromskiego." },
-        { num: 46, q: "Różne wizje odbudowy Polski po odzyskaniu niepodległości. Omów zagadnienie na podstawie Przedwiośnia Stefana Żeromskiego." },
-        { num: 47, q: "Młodość jako czas kształtowania własnej tożsamości. Omów zagadnienie na podstawie Przedwiośnia Stefana Żeromskiego." },
+        { num: 48, q: "Jakie znaczenie ma tytuł dla odczytania sensu utworu? Omów zagadnienie na podstawie Przedwiośnia Stefana Żeromskiego." },
+        { num: 49, q: "Wojna i rewolucja jako źródła doświadczeń człowieka. Omów zagadnienie na podstawie Przedwiośnia Stefana Żeromskiego." },
+        { num: 50, q: "Różne wizje odbudowy Polski po odzyskaniu niepodległości. Omów zagadnienie na podstawie Przedwiośnia Stefana Żeromskiego." },
+        { num: 51, q: "Młodość jako czas kształtowania własnej tożsamości. Omów zagadnienie na podstawie Przedwiośnia Stefana Żeromskiego." },
+        { num: 52, q: "Rola autorytetu w życiu człowieka. Omów zagadnienie na podstawie Przedwiośnia Stefana Żeromskiego." },
+        { num: 53, q: "Utopijny i realny obraz rzeczywistości. Omów zagadnienie na podstawie Przedwiośnia Stefana Żeromskiego." }
       ]
     },
     {
       title: "Witold Gombrowicz, Ferdydurke (fragmenty)",
       icon: "🎪",
       questions: [
-        { num: 48, q: "Groteskowy obraz świata. Omów zagadnienie na podstawie znanych Ci fragmentów Ferdydurke Witolda Gombrowicza." },
-        { num: 49, q: "Człowiek wobec presji otoczenia. Omów zagadnienie na podstawie znanych Ci fragmentów Ferdydurke Witolda Gombrowicza." },
+        { num: 54, q: "Groteskowy obraz świata. Omów zagadnienie na podstawie znanych Ci fragmentów Ferdydurke Witolda Gombrowicza." },
+        { num: 55, q: "Człowiek wobec presji otoczenia. Omów zagadnienie na podstawie znanych Ci fragmentów Ferdydurke Witolda Gombrowicza." }
       ]
     },
     {
       title: "Tadeusz Borowski, Proszę państwa do gazu",
       icon: "🚂",
       questions: [
-        { num: 50, q: "„Człowiek zlagrowany” jako ofiara zbrodniczego systemu. Omów zagadnienie na podstawie utworu Proszę państwa do gazu Tadeusza Borowskiego." },
+        { num: 56, q: "„Człowiek zlagrowany” jako ofiara zbrodniczego systemu. Omów zagadnienie na podstawie utworu Proszę państwa do gazu Tadeusza Borowskiego." }
       ]
     },
     {
       title: "Gustaw Herling-Grudziński, Inny świat (fragmenty)",
       icon: "❄️",
       questions: [
-        { num: 51, q: "Jakie znaczenie ma tytuł dla odczytania sensu utworu? Omów zagadnienie na podstawie znanych Ci fragmentów Innego świata Gustawa Herlinga-Grudzińskiego." },
-        { num: 52, q: "Konsekwencje zniewolenia człowieka. Omów zagadnienie na podstawie znanych Ci fragmentów Innego świata Gustawa Herlinga-Grudzińskiego." },
+        { num: 57, q: "Jakie znaczenie ma tytuł dla odczytania sensu utworu? Omów zagadnienie na podstawie znanych Ci fragmentów Innego świata Gustawa Herlinga-Grudzińskiego." },
+        { num: 58, q: "Konsekwencje zniewolenia człowieka. Omów zagadnienie na podstawie znanych Ci fragmentów Innego świata Gustawa Herlinga-Grudzińskiego." }
       ]
     },
     {
       title: "Hanna Krall, Zdążyć przed Panem Bogiem",
       icon: "✡️",
       questions: [
-        { num: 53, q: "Czy możliwe jest zachowanie godności w skrajnych sytuacjach? Omów zagadnienie na podstawie Zdążyć przed Panem Bogiem Hanny Krall." },
-        { num: 54, q: "Zagłada z perspektywy świadka i uczestnika wydarzeń w getcie. Omów zagadnienie na podstawie Zdążyć przed Panem Bogiem Hanny Krall." },
+        { num: 59, q: "Czy możliwe jest zachowanie godności w skrajnych sytuacjach? Omów zagadnienie na podstawie Zdążyć przed Panem Bogiem Hanny Krall." },
+        { num: 60, q: "Zagłada z perspektywy świadka i uczestnika wydarzeń w getcie. Omów zagadnienie na podstawie Zdążyć przed Panem Bogiem Hanny Krall." },
+        { num: 61, q: "Walka o życie z perspektywy wojennej i powojennej. Omów zagadnienie na podstawie Zdążyć przed Panem Bogiem Hanny Krall." }
       ]
     },
     {
       title: "Albert Camus, Dżuma",
       icon: "🦠",
       questions: [
-        { num: 55, q: "Co skłania człowieka do poświęceń? Omów zagadnienie na podstawie Dżumy Alberta Camusa." },
-        { num: 56, q: "Człowiek wobec cierpienia i śmierci. Omów zagadnienie na podstawie Dżumy Alberta Camusa." },
-        { num: 57, q: "Czy możliwa jest przyjaźń w sytuacjach skrajnych? Omów zagadnienie na podstawie Dżumy Alberta Camusa." },
+        { num: 62, q: "Co skłania człowieka do poświęceń? Omów zagadnienie na podstawie Dżumy Alberta Camusa." },
+        { num: 63, q: "Człowiek wobec cierpienia i śmierci. Omów zagadnienie na podstawie Dżumy Alberta Camusa." },
+        { num: 64, q: "Czy możliwa jest przyjaźń w sytuacjach skrajnych? Omów zagadnienie na podstawie Dżumy Alberta Camusa." },
+        { num: 65, q: "Jakie postawy przyjmuje człowiek wobec zła? Omów zagadnienie na podstawie Dżumy Alberta Camusa." }
       ]
     },
     {
       title: "George Orwell, Rok 1984",
       icon: "👁️",
       questions: [
-        { num: 58, q: "Relacje międzyludzkie w rzeczywistości państwa totalitarnego. Omów zagadnienie na podstawie utworu Rok 1984 George’a Orwella." },
-        { num: 59, q: "Jak zachować wolność w państwie totalitarnym? Omów zagadnienie na podstawie utworu Rok 1984 George’a Orwella." },
-        { num: 60, q: "Znaczenie propagandy w państwie totalitarnym. Omów zagadnienie na podstawie utworu Rok 1984 George’a Orwella." },
-        { num: 61, q: "Nowomowa jako sposób na ograniczenie wolności człowieka. Omów zagadnienie na podstawie utworu Rok 1984 George’a Orwella." },
+        { num: 66, q: "Czy możliwe jest zbudowanie doskonałego państwa? Omów zagadnienie na podstawie utworu Rok 1984 George’a Orwella." },
+        { num: 67, q: "Jak zachować wolność w państwie totalitarnym? Omów zagadnienie na podstawie utworu Rok 1984 George’a Orwella." },
+        { num: 68, q: "Znaczenie propagandy w państwie totalitarnym. Omów zagadnienie na podstawie utworu Rok 1984 George’a Orwella." },
+        { num: 69, q: "Nowomowa jako sposób na ograniczenie wolności człowieka. Omów zagadnienie na podstawie utworu Rok 1984 George’a Orwella." }
       ]
     },
     {
       title: "Sławomir Mrożek, Tango",
       icon: "🕺",
       questions: [
-        { num: 62, q: "Bunt przeciwko porządkowi społecznemu. Omów zagadnienie na podstawie Tanga Sławomira Mrożka." },
-        { num: 63, q: "Problem upadku wartości. Omów zagadnienie na podstawie Tanga Sławomira Mrożka." },
-        { num: 64, q: "Normy społeczne – ograniczają człowieka czy porządkują życie? Omów zagadnienie na podstawie Tanga Sławomira Mrożka." },
+        { num: 70, q: "Bunt przeciwko porządkowi społecznemu. Omów zagadnienie na podstawie Tanga Sławomira Mrożka." },
+        { num: 71, q: "Konflikt pokoleń. Omów zagadnienie na podstawie Tanga Sławomira Mrożka." },
+        { num: 72, q: "Normy społeczne ograniczają człowieka czy porządkują życie? Omów zagadnienie na podstawie Tanga Sławomira Mrożka." }
       ]
     },
     {
       title: "Marek Nowakowski, Górą „Edek”",
       icon: "📰",
       questions: [
-        { num: 65, q: "W jakim celu autor nawiązuje w swoim tekście do innego tekstu? Omów zagadnienie na podstawie utworu Górą „Edek” Marka Nowakowskiego." },
+        { num: 73, q: "W jakim celu autor nawiązuje w swoim tekście do innego tekstu? Omów zagadnienie na podstawie utworu Górą „Edek” Marka Nowakowskiego." }
       ]
     },
     {
       title: "Andrzej Stasiuk, Miejsce",
       icon: "🏔️",
       questions: [
-        { num: 66, q: "Jaką wartość dla człowieka ma pamięć o przeszłości? Omów zagadnienie na podstawie Miejsca Andrzeja Stasiuka." },
+        { num: 74, q: "Miejsca ważne w życiu człowieka. Omów zagadnienie na podstawie Miejsca Andrzeja Stasiuka." }
       ]
     },
     {
       title: "Olga Tokarczuk, Profesor Andrews w Warszawie",
       icon: "🏅",
       questions: [
-        { num: 67, q: "Stan wojenny z perspektywy obcokrajowca. Omów zagadnienie na podstawie utworu Profesor Andrews w Warszawie Olgi Tokarczuk." },
+        { num: 75, q: "Stan wojenny z perspektywy obcokrajowca. Omów zagadnienie na podstawie utworu Profesor Andrews w Warszawie Olgi Tokarczuk." }
       ]
     },
     {
       title: "Ryszard Kapuściński, Podróże z Herodotem (fragmenty)",
       icon: "🌍",
       questions: [
-        { num: 68, q: "Czym dla człowieka może być podróżowanie? Omów zagadnienie na podstawie znanych Ci fragmentów Podróży z Herodotem Ryszarda Kapuścińskiego." },
+        { num: 76, q: "Czym dla człowieka może być podróżowanie? Omów zagadnienie na podstawie znanych Ci fragmentów Podróży z Herodotem Ryszarda Kapuścińskiego." }
       ]
-    },
+    }
   ];
 
   // build flat list of all questions
