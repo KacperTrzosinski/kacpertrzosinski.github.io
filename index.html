@@ -35,7 +35,7 @@
 
     <header class="header">
         <h1>Witaj w moim <span>Laboratorium</span></h1>
-        <p>Zbiór wizualizacji algorytmów, mini-projektów oraz interaktywnych aplikacji przygotowujących do matury.</p>
+        <p id="typing-text">Zbiór wizualizacji algorytmów, mini-projektów oraz interaktywnych aplikacji przygotowujących do matury.</p>
     </header>
 
     <main class="main-content" id="main-cards">
@@ -92,11 +92,33 @@
                 </a>
             </div>
         </section>
+        <section class="category">
+            <h2 class="category-title">Eksperymenty i Narzędzia (Wkrótce)</h2>
+            <div class="grid">
+                <a href="#" class="card card-purple">
+                    <div class="icon">🔬</div>
+                    <div class="card-content">
+                        <h3>Symulacje Fizyczne</h3>
+                        <p>Moduł do eksperymentów z fizyką 2D i silnikiem kolizji. (Projekt w przygotowaniu)</p>
+                    </div>
+                </a>
+                <a href="#" class="card card-blue">
+                    <div class="icon">⚙️</div>
+                    <div class="card-content">
+                        <h3>Kalkulator Punktów</h3>
+                        <p>Narzędzie przeliczające wyniki z matur na punkty rekrutacyjne na studia. (Projekt w przygotowaniu)</p>
+                    </div>
+                </a>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
         <p>&copy; Kacper Trzosiński. All rights reserved.</p>
     </footer>
+
+    <!-- Skrypt do efektu 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
     <script>
         // Efekt śledzenia myszki (Glow hover effect)
@@ -110,6 +132,29 @@
                 card.style.setProperty("--mouse-y", `${y}px`);
             };
         }
+
+        // Efekt 3D Tilt
+        VanillaTilt.init(document.querySelectorAll(".card"), {
+            max: 8,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.15,
+            scale: 1.02
+        });
+
+        // Efekt maszyny do pisania
+        const textElement = document.getElementById('typing-text');
+        const textToType = textElement.innerText;
+        textElement.innerText = '';
+        let i = 0;
+        function typeWriter() {
+            if (i < textToType.length) {
+                textElement.innerHTML += textToType.charAt(i);
+                i++;
+                setTimeout(typeWriter, 30);
+            }
+        }
+        setTimeout(typeWriter, 500);
     </script>
 </body>
 </html>
