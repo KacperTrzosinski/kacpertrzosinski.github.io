@@ -15,6 +15,7 @@ Aby dodać nowy artykuł:
        "id": "twoj-unikalny-id",
        "title": "Tytuł artykułu",
        "file": "twoj_plik.md",
+       "category": "kategoria wyświetlana na stronie",
        "tags": ["tag1", "tag2"]
    }
    ```
