@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function initWiki() {
     try {
-        const response = await fetch(ARTICLES_LIST_URL);
+        const response = await fetch(ARTICLES_LIST_URL + '?v=' + new Date().getTime());
         articles = await response.json();
         
         renderSidebar();
@@ -174,7 +174,7 @@ function loadHome() {
                     <a href="#${article.id}" class="card ${cardColor}" style="text-decoration: none; padding: 24px;">
                         <div class="card-content">
                             <h3 style="margin-top: 0;">${article.title}</h3>
-                            <p style="margin-bottom: 0;">${article.tags ? article.tags.map(t => `#${t}`).join(' ') : ''}</p>
+                            <p style="margin-bottom: 0; font-size: 0.95rem; line-height: 1.5;">${article.description || 'Brak opisu dla tego artykułu.'}</p>
                         </div>
                     </a>
             `;
@@ -214,7 +214,7 @@ async function loadArticle(id) {
     }
     
     try {
-        const response = await fetch(`${ARTICLES_DIR}${article.file}`);
+        const response = await fetch(`${ARTICLES_DIR}${article.file}?v=` + new Date().getTime());
         if (!response.ok) throw new Error('Network response was not ok');
         const markdown = await response.text();
         

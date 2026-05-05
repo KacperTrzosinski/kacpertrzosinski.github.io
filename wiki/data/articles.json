@@ -4,20 +4,23 @@
     "title": "Wprowadzenie",
     "file": "welcome.md",
     "category": "Ogólne",
-    "tags": ["start", "pomoc"]
+    "tags": ["start", "pomoc"],
+    "description": "Przewodnik po Twojej nowej Bazie Wiedzy. Dowiedz się, jak dodawać nowe wpisy, przypisywać je do kategorii i organizować."
   },
   {
     "id": "css-glassmorphism",
     "title": "Glassmorphism w CSS",
     "file": "css_glassmorphism.md",
     "category": "Frontend WebDev",
-    "tags": ["css", "design", "frontend"]
+    "tags": ["css", "design", "frontend"],
+    "description": "Nowoczesny styl polegający na tworzeniu efektu matowego szkła z rozmyciem tła."
   },
   {
     "id": "git-cheatsheet",
     "title": "Git Cheat Sheet",
     "file": "git_cheatsheet.md",
     "category": "Narzędzia",
-    "tags": ["git", "narzędzia", "vcs"]
+    "tags": ["git", "narzędzia", "vcs"],
+    "description": "Przydatna ściągawka najpopularniejszych i najważniejszych komend systemu kontroli wersji Git."
   }
 ]

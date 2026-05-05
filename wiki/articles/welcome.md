@@ -16,7 +16,8 @@ Aby dodać nowy artykuł:
        "title": "Tytuł artykułu",
        "file": "twoj_plik.md",
        "category": "kategoria wyświetlana na stronie",
-       "tags": ["tag1", "tag2"]
+       "tags": ["tag1", "tag2"],
+       "description": "Krótki opis widoczny na kafelku na stronie głównej."
    }
    ```
 4. Odśwież stronę! Artykuł automatycznie pojawi się w menu bocznym.
