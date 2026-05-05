@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baza Wiedzy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="css/wiki.css">
+    <!-- Highlight.js for code snippets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <div class="bg-elements">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="glow glow-3"></div>
+    </div>
+
+    <div class="wiki-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>Baza Wiedzy</h2>
+                <a href="../index.html" class="back-link">← Powrót do menu</a>
+            </div>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Szukaj artykułów...">
+            </div>
+            <nav class="sidebar-nav" id="article-list">
+                <!-- Articles will be injected here -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="wiki-content" id="wiki-content">
+            <div class="markdown-body" id="markdown-container">
+                <div class="loading">Wczytywanie...</div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="js/wiki.js"></script>
+</body>
+</html>

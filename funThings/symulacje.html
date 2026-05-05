@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symulacje Fizyczne 2D</title>
+    <meta name="description" content="Moduł do eksperymentów z fizyką 2D i silnikiem kolizji." />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <style>
+        :root {
+            --bg: #09090b;
+            --surface: rgba(39, 39, 42, 0.6);
+            --surface-hover: rgba(63, 63, 70, 0.8);
+            --border: rgba(168, 85, 247, 0.3); /* Purple theme matching index card */
+            --accent: #a855f7; /* Purple-500 */
+            --accent2: #c084fc; /* Purple-400 */
+            --text: #f8fafc;
+            --text-muted: #a1a1aa;
+            --radius: 16px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Tło - Glow */
+        .bg-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Sidebar Glassmorphism */
+        .sidebar {
+            width: 320px;
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-right: 1px solid var(--border);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 10;
+            box-shadow: 5px 0 30px rgba(0,0,0,0.5);
+            overflow-y: auto;
+        }
+
+        /* Scrollbar dla sidebara */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 10px;
+        }
+
+        .header {
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin: 0 0 5px 0;
+            background: linear-gradient(135deg, #fff, var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .control-group {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .control-group h3 {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--accent2);
+            font-weight: 600;
+        }
+
+        .btn {
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            color: var(--text);
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+        }
+
+        .btn.danger {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #fca5a5;
+        }
+
+        .btn.danger:hover {
+            background: #ef4444;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+        }
+
+        label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        /* Canvas area */
+        .canvas-container {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            background-color: transparent;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Home button */
+        .back-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+            margin-bottom: 10px;
+        }
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        .instruction {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: auto;
+            padding-top: 20px;
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: 40vh;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                box-sizing: border-box;
+            }
+            .canvas-container {
+                height: 60vh;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <div class="sidebar">
+        <div>
+            <a href="../index.html" class="back-link">← Wróć do Laboratorium</a>
+        </div>
+        
+        <div class="header">
+            <h1>Symulacje 2D</h1>
+            <p class="subtitle">Eksperymentuj z grawitacją, tarciem i zderzeniami sprężystymi.</p>
+        </div>
+
+        <div class="control-group">
+            <h3>Dodaj obiekty</h3>
+            <button class="btn" onclick="addBox()">🧊 Dodaj Kwadrat</button>
+            <button class="btn" onclick="addCircle()">⚽ Dodaj Koło</button>
+            <button class="btn" onclick="addStack()">🧱 Dodaj Wieżę</button>
+            <button class="btn" onclick="addSoftBody()">💧 Dodaj Miękkie Ciało</button>
+            <button class="btn" onclick="addFluid()">🌊 Dodaj Płyn (Cząsteczki)</button>
+            <button class="btn" onclick="addNewtonsCradle()">⚖️ Wahadło Newtona</button>
+        </div>
+
+        <div class="control-group">
+            <h3>Fizyka Środowiska</h3>
+            <label>
+                Grawitacja Y
+                <span id="gravYVal">1.0</span>
+            </label>
+            <input type="range" id="gravityY" min="-2" max="2" step="0.1" value="1" oninput="updateGravity()">
+            
+            <label>
+                Grawitacja X
+                <span id="gravXVal">0.0</span>
+            </label>
+            <input type="range" id="gravityX" min="-2" max="2" step="0.1" value="0" oninput="updateGravity()">
+        </div>
+
+        <div class="control-group">
+            <h3>Narzędzia</h3>
+            <button class="btn" id="windBtn" onclick="toggleWind()">💨 Włącz Wiatr (Aerodynamika)</button>
+            <label style="display: none; margin-top: 5px; cursor: pointer; color: var(--accent2);" id="windVisLabel">
+                Wizualizacja opływu (cząsteczki)
+                <input type="checkbox" id="windVisToggle" onchange="toggleWindVis()" checked style="width: auto;">
+            </label>
+            <button class="btn danger" style="margin-top: 10px;" onclick="clearWorld()">🗑️ Wyczyść Wszystko</button>
+        </div>
+
+        <div class="instruction">
+            Możesz chwytać i rzucać obiektami za pomocą myszki.
+        </div>
+    </div>
+
+    <div class="canvas-container" id="canvas-container">
+        <!-- Matter.js canvas will be injected here -->
+    </div>
+
+    <script>
+        // Matter.js aliases
+        const Engine = Matter.Engine,
+              Render = Matter.Render,
+              Runner = Matter.Runner,
+              Bodies = Matter.Bodies,
+              Composite = Matter.Composite,
+              Composites = Matter.Composites,
+              MouseConstraint = Matter.MouseConstraint,
+              Mouse = Matter.Mouse,
+              World = Matter.World;
+
+        // Inicjalizacja silnika
+        const engine = Engine.create();
+        const world = engine.world;
+
+        // Container limits
+        const container = document.getElementById('canvas-container');
+        let width = container.clientWidth;
+        let height = container.clientHeight;
+
+        // Inicjalizacja renderera
+        const render = Render.create({
+            element: container,
+            engine: engine,
+            options: {
+                width: width,
+                height: height,
+                wireframes: false,
+                background: 'transparent',
+                pixelRatio: window.devicePixelRatio
+            }
+        });
+
+        Render.run(render);
+
+        // Inicjalizacja runnera (uruchamia engine)
+        const runner = Runner.create();
+        Runner.run(runner, engine);
+
+        // Zmienne dla ścian
+        let ground, ceiling, leftWall, rightWall;
+        const wallThickness = 100;
+        const wallOptions = { isStatic: true, render: { fillStyle: '#27272a' } };
+
+        function createBoundaries() {
+            if (ground) {
+                World.remove(world, [ground, ceiling, leftWall, rightWall]);
+            }
+            
+            ground = Bodies.rectangle(width / 2, height + wallThickness/2, width * 2, wallThickness, wallOptions);
+            ceiling = Bodies.rectangle(width / 2, -wallThickness/2, width * 2, wallThickness, wallOptions);
+            leftWall = Bodies.rectangle(-wallThickness/2, height / 2, wallThickness, height * 2, wallOptions);
+            rightWall = Bodies.rectangle(width + wallThickness/2, height / 2, wallThickness, height * 2, wallOptions);
+            
+            World.add(world, [ground, ceiling, leftWall, rightWall]);
+        }
+
+        createBoundaries();
+
+        // Dodanie interakcji myszką
+        const mouse = Mouse.create(render.canvas);
+        mouse.pixelRatio = window.devicePixelRatio; // Poprawka na offset dla ekranów o innej gęstości pikseli
+        const mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: {
+                    visible: false
+                }
+            }
+        });
+        World.add(world, mouseConstraint);
+        render.mouse = mouse;
+
+        // Paleta kolorów dla obiektów
+        const colors = ['#a855f7', '#c084fc', '#3b82f6', '#10b981', '#f43f5e', '#f59e0b'];
+        function getRandomColor() {
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // --- FUNKCJE DODAWANIA OBIEKTÓW ---
+
+        function getSpawnPos() {
+            return {
+                x: width / 2 + (Math.random() * 200 - 100),
+                y: 100 + Math.random() * 50
+            };
+        }
+
+        function addBox() {
+            const pos = getSpawnPos();
+            const size = 30 + Math.random() * 40;
+            const box = Bodies.rectangle(pos.x, pos.y, size, size, {
+                restitution: 0.6,
+                friction: 0.05,
+                render: { fillStyle: getRandomColor(), strokeStyle: 'rgba(255,255,255,0.2)', lineWidth: 1 }
+            });
+            World.add(world, box);
+        }
+
+        function addCircle() {
+            const pos = getSpawnPos();
+            const radius = 15 + Math.random() * 25;
+            const circle = Bodies.circle(pos.x, pos.y, radius, {
+                restitution: 0.9, // Bouncy
+                friction: 0.01,
+                render: { fillStyle: getRandomColor(), strokeStyle: 'rgba(255,255,255,0.2)', lineWidth: 1 }
+            });
+            World.add(world, circle);
+        }
+
+        function addStack() {
+            const columns = Math.min(6, Math.floor(width / 60));
+            const rows = 4;
+            const size = 35;
+            const stack = Composites.stack(width / 2 - (columns*size)/2, Math.max(100, height - (rows*size) - 100), columns, rows, 0, 0, function(x, y) {
+                return Bodies.rectangle(x, y, size, size, {
+                    render: { fillStyle: '#3f3f46', strokeStyle: '#a1a1aa', lineWidth: 1 }
+                });
+            });
+            World.add(world, stack);
+        }
+
+        function addSoftBody() {
+            const particleRadius = 12;
+            const columns = Math.min(6, Math.floor(width / 40));
+            const rows = 4;
+            const softBody = Composites.softBody(
+                width / 2 - (columns*particleRadius), 50, 
+                columns, rows, 
+                0, 0, 
+                true, 
+                particleRadius, 
+                { render: { fillStyle: getRandomColor() } }
+            );
+            World.add(world, softBody);
+        }
+
+        function addFluid() {
+            const particleRadius = 6;
+            const columns = Math.min(18, Math.floor(width / 20));
+            const rows = 12;
+            const fluid = Composites.stack(width / 2 - (columns*particleRadius), 50, columns, rows, 2, 2, function(x, y) {
+                return Bodies.circle(x, y, particleRadius, {
+                    restitution: 0.1,
+                    friction: 0.05,
+                    frictionAir: 0.01,
+                    density: 0.05,
+                    render: { fillStyle: '#3b82f6', strokeStyle: 'rgba(255,255,255,0.1)', lineWidth: 1 }
+                });
+            });
+            World.add(world, fluid);
+        }
+
+        function addNewtonsCradle() {
+            const cx = width / 2;
+            const cy = 100;
+            const cradle = Composites.newtonsCradle(cx - 100, cy, 5, 20, 200);
+            Composite.allBodies(cradle).forEach(b => {
+                b.render.fillStyle = '#ef4444';
+                b.render.strokeStyle = 'rgba(255,255,255,0.2)';
+                b.render.lineWidth = 1;
+            });
+            World.add(world, cradle);
+        }
+
+        function clearWorld() {
+            // Pobranie wszystkich ciał
+            const bodies = Composite.allBodies(world);
+            
+            // Usunięcie tych, które nie są statyczne (ściany, podłoga itp.)
+            const bodiesToRemove = bodies.filter(b => !b.isStatic);
+            
+            // Usunięcie powiązań softbody (constraints)
+            const constraints = Composite.allConstraints(world);
+            const constraintsToRemove = constraints.filter(c => c !== mouseConstraint.constraint);
+
+            World.remove(world, bodiesToRemove);
+            World.remove(world, constraintsToRemove);
+        }
+
+        // --- ZMIANA GRAWITACJI I WIATRU ---
+        function updateGravity() {
+            const gX = parseFloat(document.getElementById('gravityX').value);
+            const gY = parseFloat(document.getElementById('gravityY').value);
+            
+            world.gravity.x = gX;
+            world.gravity.y = gY;
+            
+            document.getElementById('gravXVal').innerText = gX.toFixed(1);
+            document.getElementById('gravYVal').innerText = gY.toFixed(1);
+        }
+
+        let windActive = false;
+        let windVisActive = true;
+
+        function toggleWindVis() {
+            windVisActive = document.getElementById('windVisToggle').checked;
+        }
+
+        function toggleWind() {
+            windActive = !windActive;
+            const btn = document.getElementById('windBtn');
+            const visLabel = document.getElementById('windVisLabel');
+            if (windActive) {
+                btn.innerHTML = '🛑 Wyłącz Wiatr';
+                btn.style.background = 'var(--accent)';
+                btn.style.color = '#fff';
+                visLabel.style.display = 'flex';
+            } else {
+                btn.innerHTML = '💨 Włącz Wiatr (Aerodynamika)';
+                btn.style.background = '';
+                btn.style.color = '';
+                visLabel.style.display = 'none';
+            }
+        }
+
+        let tickCounter = 0;
+        // Apply wind force on every tick
+        Matter.Events.on(engine, 'beforeUpdate', function() {
+            tickCounter++;
+            const bodies = Composite.allBodies(world);
+
+            if (windActive) {
+                for (let i = 0; i < bodies.length; i++) {
+                    const body = bodies[i];
+                    if (!body.isStatic && body.label !== 'windParticle') {
+                        // Siła zależy od powierzchni obiektu co imituje opór aerodynamiczny
+                        const forceMagnitude = 0.00015 * body.area; 
+                        Matter.Body.applyForce(body, body.position, {
+                            x: forceMagnitude,
+                            y: 0
+                        });
+                    }
+                }
+
+                // Wizualizacja przepływu powietrza
+                if (windVisActive) {
+                    for (let j = 0; j < 2; j++) {
+                        let yPos = Math.random() * height;
+                        let particle = Bodies.circle(-10, yPos, 2, {
+                            label: 'windParticle',
+                            friction: 0,
+                            frictionAir: 0.01,
+                            restitution: 0.1,
+                            density: 0.00001, 
+                            render: { fillStyle: 'rgba(168, 85, 247, 0.6)' },
+                            collisionFilter: {
+                                // Moga kolidować z obiektami, ale żeby nie zakłócać się nawzajem, można by ustawić odpowiednie maski. 
+                                // Domyślnie zderzają się ze wszystkim, co daje świetny efekt opływu.
+                            }
+                        });
+                        Matter.Body.setVelocity(particle, { x: 12 + Math.random() * 6, y: (Math.random() - 0.5) * 2 });
+                        World.add(world, particle);
+                    }
+                }
+            }
+
+            // Cleanup cząsteczek wiatru, które wyleciały za ekran (sprawdzamy co 10 klatkę dla optymalizacji)
+            if (tickCounter % 10 === 0) {
+                for (let i = 0; i < bodies.length; i++) {
+                    if (bodies[i].label === 'windParticle') {
+                        if (bodies[i].position.x > width + 50 || bodies[i].position.y < -50 || bodies[i].position.y > height + 50) {
+                            World.remove(world, bodies[i]);
+                        }
+                    }
+                }
+            }
+        });
+
+        // Obsługa resize okna
+        window.addEventListener('resize', () => {
+            width = container.clientWidth;
+            height = container.clientHeight;
+            
+            render.bounds.max.x = width;
+            render.bounds.max.y = height;
+            render.options.width = width;
+            render.options.height = height;
+            render.canvas.width = width;
+            render.canvas.height = height;
+            
+            createBoundaries();
+        });
+        
+        // Dodaj parę obiektów na start
+        setTimeout(() => {
+            addStack();
+            setTimeout(addCircle, 500);
+            setTimeout(addBox, 1000);
+        }, 100);
+
+    </script>
+</body>
+</html>

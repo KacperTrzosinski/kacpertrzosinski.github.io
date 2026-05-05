@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
     <div class="bg-elements">
         <div class="glow glow-1"></div>
@@ -19,7 +21,8 @@
 
     <header class="header">
         <h1>Witaj w moim <span>Laboratorium</span></h1>
-        <p id="typing-text">Zbiór wizualizacji algorytmów, mini-projektów oraz interaktywnych aplikacji przygotowujących do matury.</p>
+        <p id="typing-text">Zbiór wizualizacji algorytmów, mini-projektów oraz interaktywnych aplikacji przygotowujących
+            do matury.</p>
     </header>
 
     <main class="main-content" id="main-cards">
@@ -76,21 +79,35 @@
                 </a>
             </div>
         </section>
+
         <section class="category">
-            <h2 class="category-title">Eksperymenty i Narzędzia (Wkrótce)</h2>
+            <h2 class="category-title">Baza Wiedzy</h2>
             <div class="grid">
-                <a href="#" class="card card-purple">
+                <a href="./wiki/index.html" class="card card-emerald">
+                    <div class="icon">📚</div>
+                    <div class="card-content">
+                        <h3>Osobiste Wiki</h3>
+                        <p>Zbiór notatek, fragmentów kodu i artykułów z różnych dziedzin.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+        <section class="category">
+            <h2 class="category-title">Eksperymenty i Narzędzia</h2>
+            <div class="grid">
+                <a href="./funThings/symulacje.html" class="card card-purple">
                     <div class="icon">🔬</div>
                     <div class="card-content">
                         <h3>Symulacje Fizyczne</h3>
-                        <p>Moduł do eksperymentów z fizyką 2D i silnikiem kolizji. (Projekt w przygotowaniu)</p>
+                        <p>Interaktywny moduł do eksperymentów z fizyką 2D i silnikiem kolizji oparty na Matter.js.</p>
                     </div>
                 </a>
                 <a href="#" class="card card-blue">
                     <div class="icon">⚙️</div>
                     <div class="card-content">
                         <h3>Kalkulator Punktów</h3>
-                        <p>Narzędzie przeliczające wyniki z matur na punkty rekrutacyjne na studia. (Projekt w przygotowaniu)</p>
+                        <p>Narzędzie przeliczające wyniki z matur na punkty rekrutacyjne na studia. (Projekt w
+                            przygotowaniu)</p>
                     </div>
                 </a>
             </div>
@@ -107,10 +124,10 @@
     <script>
         // Efekt śledzenia myszki (Glow hover effect)
         document.getElementById('main-cards').onmousemove = e => {
-            for(const card of document.getElementsByClassName("card")) {
+            for (const card of document.getElementsByClassName("card")) {
                 const rect = card.getBoundingClientRect(),
-                      x = e.clientX - rect.left,
-                      y = e.clientY - rect.top;
+                    x = e.clientX - rect.left,
+                    y = e.clientY - rect.top;
 
                 card.style.setProperty("--mouse-x", `${x}px`);
                 card.style.setProperty("--mouse-y", `${y}px`);
@@ -141,4 +158,5 @@
         setTimeout(typeWriter, 500);
     </script>
 </body>
+
 </html>

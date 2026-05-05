@@ -1,0 +1,20 @@
+[
+    {
+        "id": "welcome",
+        "title": "Wprowadzenie",
+        "file": "welcome.md",
+        "tags": ["start", "pomoc"]
+    },
+    {
+        "id": "css-glassmorphism",
+        "title": "Glassmorphism w CSS",
+        "file": "css_glassmorphism.md",
+        "tags": ["css", "design", "frontend"]
+    },
+    {
+        "id": "git-cheatsheet",
+        "title": "Git Cheat Sheet",
+        "file": "git_cheatsheet.md",
+        "tags": ["git", "narzędzia", "vcs"]
+    }
+]
