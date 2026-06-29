@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wizualizacja: Branch Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .bp-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .state-machine {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        /* Line connecting states */
+        .state-machine::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50px;
+            right: 50px;
+            height: 4px;
+            background: #334155;
+            z-index: 0;
+            transform: translateY(-50%);
+        }
+
+        .state-node {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #1e293b;
+            border: 4px solid #475569;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 1;
+            transition: all 0.3s ease;
+            position: relative;
+            color: #94a3b8;
+        }
+
+        .state-node.active {
+            transform: scale(1.15);
+            background: #0f172a;
+            color: white;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        /* Colors for different states */
+        .node-00.active { border-color: #ef4444; box-shadow: 0 0 25px rgba(239, 68, 68, 0.4); } /* Strongly Not Taken */
+        .node-01.active { border-color: #f97316; box-shadow: 0 0 25px rgba(249, 115, 22, 0.4); } /* Weakly Not Taken */
+        .node-10.active { border-color: #3b82f6; box-shadow: 0 0 25px rgba(59, 130, 246, 0.4); } /* Weakly Taken */
+        .node-11.active { border-color: #22c55e; box-shadow: 0 0 25px rgba(34, 197, 94, 0.4); } /* Strongly Taken */
+
+        .state-title { font-weight: 800; font-size: 1.1rem; margin-bottom: 0.2rem; }
+        .state-desc { font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; opacity: 0.8; }
+        .state-bits { font-size: 1.2rem; font-family: 'JetBrains Mono', monospace; margin-top: 0.5rem; font-weight: bold; }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn-taken { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .btn-not-taken { background: linear-gradient(135deg, #ef4444, #dc2626); }
+
+        .stats-panel {
+            display: flex;
+            justify-content: space-around;
+            background: #0f172a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            margin-top: 2rem;
+        }
+
+        .stat-box { text-align: center; }
+        .stat-val { font-size: 2.5rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-top: 0.5rem; }
+        .stat-val.good { color: #22c55e; }
+        .stat-val.bad { color: #ef4444; }
+        .stat-val.acc { color: #38bdf8; }
+
+        .history-log {
+            background: #1e293b;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .log-entry {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 4px;
+        }
+
+        .log-success { border-left: 4px solid #22c55e; }
+        .log-fail { border-left: 4px solid #ef4444; }
+    </style>
+</head>
+<body>
+    <div class="bg-elements">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+    </div>
+
+    <header class="header">
+        <h1>2-Bit <span>Branch Predictor</span></h1>
+        <p>Interaktywna wizualizacja automatu skończonego Smitha (2-bit saturating counter).</p>
+        <a href="index.html" class="back-link">← Powrót do Symulatora CPU</a>
+    </header>
+
+    <div class="bp-container">
+        
+        <div class="info-text">
+            <h3>Jak to działa?</h3>
+            <p style="color: var(--text-light); line-height: 1.6; margin-top: 0.5rem;">
+                Gdy procesor napotyka instrukcję skoku warunkowego (np. if-else w pętli), nie wie jeszcze, czy skok nastąpi, dopóki go nie policzy. 
+                Aby nie zatrzymywać potoku (Pipeline), <strong>Branch Predictor zgaduje</strong>. Najpopularniejszym algorytmem jest 2-bitowy licznik nasycający. 
+                Kliknij poniżej "Skok Wykonany" lub "Skok Niewykonany" aby zasymulować prawdziwy wynik instrukcji i zobacz jak predykator się uczy!
+            </p>
+        </div>
+
+        <!-- State Machine Visualization -->
+        <div class="state-machine">
+            <div class="state-node node-00" id="node-00">
+                <div class="state-title">Silnie NIE</div>
+                <div class="state-desc">Predykcja: Nie</div>
+                <div class="state-bits">00</div>
+            </div>
+            <div class="state-node node-01 active" id="node-01">
+                <div class="state-title">Słabo NIE</div>
+                <div class="state-desc">Predykcja: Nie</div>
+                <div class="state-bits">01</div>
+            </div>
+            <div class="state-node node-10" id="node-10">
+                <div class="state-title">Słabo TAK</div>
+                <div class="state-desc">Predykcja: Tak</div>
+                <div class="state-bits">10</div>
+            </div>
+            <div class="state-node node-11" id="node-11">
+                <div class="state-title">Silnie TAK</div>
+                <div class="state-desc">Predykcja: Tak</div>
+                <div class="state-bits">11</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-not-taken" onclick="simulateBranch(false)">Skok NIEWYKONANY (False)</button>
+            <button class="btn btn-taken" onclick="simulateBranch(true)">Skok WYKONANY (True)</button>
+        </div>
+
+        <div class="stats-panel">
+            <div class="stat-box">
+                <div>Poprawne Predykcje</div>
+                <div class="stat-val good" id="stat-correct">0</div>
+            </div>
+            <div class="stat-box">
+                <div>Błędy (Flushe)</div>
+                <div class="stat-val bad" id="stat-miss">0</div>
+            </div>
+            <div class="stat-box">
+                <div>Skuteczność</div>
+                <div class="stat-val acc" id="stat-acc">0%</div>
+            </div>
+        </div>
+
+        <div>
+            <h3 style="margin-bottom: 1rem;">Historia Predykcji</h3>
+            <div class="history-log" id="history-log">
+                <!-- Logs here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State Machine states: 0=Strongly Not Taken, 1=Weakly Not, 2=Weakly Taken, 3=Strongly Taken
+        let currentState = 1; // Start at Weakly Not Taken
+        let correctCount = 0;
+        let missCount = 0;
+
+        const nodes = [
+            document.getElementById('node-00'),
+            document.getElementById('node-01'),
+            document.getElementById('node-10'),
+            document.getElementById('node-11')
+        ];
+
+        function updateUI() {
+            // Update active node
+            nodes.forEach((n, idx) => {
+                if (idx === currentState) n.classList.add('active');
+                else n.classList.remove('active');
+            });
+
+            // Update stats
+            document.getElementById('stat-correct').innerText = correctCount;
+            document.getElementById('stat-miss').innerText = missCount;
+            let total = correctCount + missCount;
+            let acc = total === 0 ? 0 : Math.round((correctCount / total) * 100);
+            document.getElementById('stat-acc').innerText = acc + '%';
+        }
+
+        function simulateBranch(actualTaken) {
+            // Predykcja aktualnego stanu
+            let prediction = (currentState >= 2); // true jeśli stan 10(2) lub 11(3)
+            let isCorrect = (prediction === actualTaken);
+
+            if (isCorrect) correctCount++;
+            else missCount++;
+
+            // Update state machine
+            let oldState = currentState;
+            if (actualTaken) {
+                if (currentState < 3) currentState++; // W prawo (w stronę TAK)
+            } else {
+                if (currentState > 0) currentState--; // W lewo (w stronę NIE)
+            }
+
+            // Log entry
+            const log = document.getElementById('history-log');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${isCorrect ? 'log-success' : 'log-fail'}`;
+            
+            let predText = prediction ? "TAK" : "NIE";
+            let actText = actualTaken ? "TAK" : "NIE";
+            let resultText = isCorrect ? "SUKCES" : "FLUSH POTOKU!";
+
+            entry.innerHTML = `
+                <span>Predykcja: <strong>${predText}</strong> | Rzeczywistość: <strong>${actText}</strong></span>
+                <span style="color: ${isCorrect ? '#22c55e' : '#ef4444'}">${resultText}</span>
+            `;
+            
+            log.prepend(entry); // Add to top
+
+            updateUI();
+        }
+
+        updateUI();
+    </script>
+</body>
+</html>

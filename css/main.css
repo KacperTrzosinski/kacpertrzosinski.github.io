@@ -254,3 +254,72 @@ body {
     .main-content { padding: 0 16px 60px; }
     .header h1 { font-size: 2.2rem; }
 }
+
+/* METRICS DASHBOARD (Moved from sidebar) */
+.metrics-dashboard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .metrics-dashboard {
+        grid-template-columns: 1fr 1.5fr;
+    }
+}
+
+.metrics-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.metrics-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 0.5rem;
+}
+
+.metrics-card p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    color: #cbd5e1;
+    font-size: 1.05rem;
+    padding: 0.25rem 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.05);
+}
+
+.metrics-card p:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.metrics-card span, .metrics-card strong {
+    font-size: 1.15rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.metrics-card.accent-pink { border-color: rgba(236, 72, 153, 0.4); background: rgba(236, 72, 153, 0.05); }
+.metrics-card.accent-pink h3 { color: #ec4899; }
+.metrics-card.accent-pink span, .metrics-card.accent-pink strong { color: #fbcfe8; }
+
+.metrics-card.accent-gold { border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.05); }
+.metrics-card.accent-gold h3 { color: #f59e0b; }
+.metrics-card.accent-gold span, .metrics-card.accent-gold strong { color: #fde68a; }
+
+.metrics-card.accent-purple { border-color: rgba(168, 85, 247, 0.4); background: rgba(168, 85, 247, 0.05); }
+.metrics-card.accent-purple h3 { color: #a855f7; }
+.metrics-card.accent-purple span, .metrics-card.accent-purple strong { color: #e9d5ff; }
+
+.metrics-card.accent-blue { border-color: rgba(59, 130, 246, 0.4); background: rgba(59, 130, 246, 0.05); }
+.metrics-card.accent-blue h3 { color: #3b82f6; }
+.metrics-card.accent-blue span, .metrics-card.accent-blue strong { color: #bfdbfe; }

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wizualizacja Pracy Procesora Graficznego (GPU)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-elements">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="glow glow-3"></div>
+    </div>
+
+    <header class="header">
+        <h1>Symulator <span>GPU</span></h1>
+        <p>Interaktywna wizualizacja architektury SIMT (Single Instruction, Multiple Threads), jednostek SM, rdzeni RT, Tensor oraz VRAM.</p>
+        <a href="../../index.html" class="back-link">← Powrót do Laboratorium</a>
+    </header>
+
+    <div class="simulator-container">
+        <!-- Panel Sterowania -->
+        <aside class="control-panel card card-emerald">
+            <h2>Architektura GPU</h2>
+            
+            <div class="control-group" style="margin-bottom: 1.5rem;">
+                <label for="preset-gpu">Gotowe Presety (Modele GPU):</label>
+                <select id="preset-gpu" style="width: 100%; padding: 0.5rem; background: #0f172a; color: white; border: 1px solid #334155; border-radius: 4px;">
+                    <option value="custom">-- Własna Konfiguracja --</option>
+                    <optgroup label="NVIDIA GeForce (Konsumenckie)">
+                        <option value="gtx1060">GTX 1060 (6GB)</option>
+                        <option value="gtx1650">GTX 1650 (4GB)</option>
+                        <option value="rtx2060">RTX 2060 (6GB)</option>
+                        <option value="rtx3060">RTX 3060 (12GB)</option>
+                        <option value="rtx3080">RTX 3080 (10GB)</option>
+                        <option value="rtx4060">RTX 4060 (8GB)</option>
+                        <option value="rtx4080">RTX 4080 (16GB)</option>
+                        <option value="rtx4090">RTX 4090 (24GB Flagowiec)</option>
+                    </optgroup>
+                    <optgroup label="AMD Radeon (Konsumenckie)">
+                        <option value="rx6600">RX 6600 (8GB)</option>
+                        <option value="rx7900xtx">RX 7900 XTX (24GB Flagowiec)</option>
+                    </optgroup>
+                    <optgroup label="Przemysłowe / Serwerowe AI">
+                        <option value="rtx6000">RTX 6000 Ada (Stacja Robocza)</option>
+                        <option value="h100">NVIDIA H100 (Datacenter 80GB HBM3)</option>
+                        <option value="mi300x">AMD Instinct MI300X (AI 192GB HBM3)</option>
+                        <option value="b200">NVIDIA B200 (Blackwell Concept)</option>
+                    </optgroup>
+                    <optgroup label="Klaster Superkomputerowy">
+                        <option value="dgx_h100">Węzeł DGX Superpod (8x H100)</option>
+                        <option value="dgx_b200">Węzeł DGX Superpod (8x B200)</option>
+                        <option value="crypto_rig">Koparka Krypto (6x RTX 3080)</option>
+                    </optgroup>
+                    <optgroup label="Konsole i inne">
+                        <option value="ps5">PlayStation 5 GPU</option>
+                        <option value="steamdeck">Steam Deck GPU (RDNA 2)</option>
+                        <option value="arc_a770">Intel Arc A770 (16GB)</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="control-group" data-tooltip="Klastry GPU (Multi-GPU). W grach rzadko używane, ale kluczowe w centrach danych (np. serwery obliczeniowe AI).">
+                <label for="gpus-slider">Klastry (Sztuki GPU): <span id="gpus-val">1</span></label>
+                <input type="range" id="gpus-slider" min="1" max="128" step="1" value="1">
+            </div>
+
+            <div class="control-group" data-tooltip="Streaming Multiprocessors (NVIDIA) lub Compute Units (AMD). Główne bloki budulcowe procesora. Im więcej, tym większa wydajność całkowita.">
+                <label for="sms-slider">Bloki SM: <span id="sms-val">4</span></label>
+                <input type="range" id="sms-slider" min="1" max="256" step="1" value="4">
+            </div>
+
+            <div class="control-group" data-tooltip="Taktowanie zegara procesora. MHz = MegaHertz (Miliony cykli na sekundę). Im wyższe taktowanie, tym szybciej rdzenie pracują.">
+                <label for="core-speed-slider">Taktowanie Rdzenia: <span id="core-speed-val">1000 MHz</span></label>
+                <input type="range" id="core-speed-slider" min="500" max="4000" step="50" value="1000">
+            </div>
+
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 0.5rem 0;">
+
+            <h3>Konfiguracja Bloku SM</h3>
+
+            <div class="control-group" data-tooltip="Podstawowe rdzenie wykonujące matematykę zmiennoprzecinkową (FP32). W NVIDIA zwane CUDA.">
+                <label for="shaders-slider">Rdzenie CUDA (na 1 SM): <span id="shaders-val">64</span></label>
+                <input type="range" id="shaders-slider" min="16" max="256" step="16" value="64">
+            </div>
+            
+            <div class="control-group" data-tooltip="Rdzenie specjalistyczne do sztucznej inteligencji i głębokiego uczenia. Mnożą duże macierze w jednym cyklu (np. 4x4 matrix).">
+                <label for="tensors-slider">Rdzenie Tensor (na 1 SM): <span id="tensors-val">4</span></label>
+                <input type="range" id="tensors-slider" min="0" max="64" step="1" value="4">
+            </div>
+
+            <div class="control-group" data-tooltip="Rdzenie przyspieszające Ray Tracing (śledzenie promieni). Optymalizują sprawdzanie kolizji promienia światła z wielokątami.">
+                <label for="rt-slider">Rdzenie RT (na 1 SM): <span id="rt-val">1</span></label>
+                <input type="range" id="rt-slider" min="0" max="16" step="1" value="1">
+            </div>
+
+            <div class="control-group" data-tooltip="Texture Mapping Units (TMU): Mapują tekstury na trójkąty. Istotne dla ładnie wyglądających gier.">
+                <label for="tmu-slider">Jednostki TMU (na 1 SM): <span id="tmu-val">4</span></label>
+                <input type="range" id="tmu-slider" min="1" max="32" step="1" value="4">
+            </div>
+
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 0.5rem 0;">
+
+            <h3>Pamięć VRAM i Backend</h3>
+
+            <div class="control-group" data-tooltip="Pojemność Pamięci Podręcznej (L2 Cache). Przechowuje najczęściej używane dane dla wszystkich bloków SM na karcie. Współczesne GPU posiadają potężne ilości tej pamięci. MB = MegaBytes (Miliony bajtów).">
+                <label for="cache-slider">Rozmiar L2 Cache: <span id="cache-val">16 MB</span></label>
+                <input type="range" id="cache-slider" min="4" max="256" step="4" value="16">
+            </div>
+
+            <div class="control-group" data-tooltip="Typ pamięci VRAM. Określa przepustowość przesyłania danych między rdzeniem a pamięcią (GB/s = Gigabytes per second).">
+                <label for="vram-type">Generacja VRAM:</label>
+                <select id="vram-type" style="width: 100%; padding: 0.5rem; background: #0f172a; color: white; border: 1px solid #334155; border-radius: 4px;">
+                    <option value="GDDR5">GDDR5 (Stare GPU, ~256 GB/s)</option>
+                    <option value="GDDR5X">GDDR5X (~320 GB/s)</option>
+                    <option value="GDDR6">GDDR6 (Standard, ~448 GB/s)</option>
+                    <option value="GDDR6X">GDDR6X (Mocne PC, ~760 GB/s)</option>
+                    <option value="HBM2">HBM2 (Serwery, ~512 GB/s)</option>
+                    <option value="HBM2E">HBM2E (~900 GB/s)</option>
+                    <option value="HBM3" selected>HBM3 (AI/Flagship, ~1500 GB/s)</option>
+                </select>
+            </div>
+
+            <div class="control-group" data-tooltip="Rozmiar dedykowanej pamięci graficznej. GB = GigaBytes (Miliardy bajtów). Więcej GB to lepsze tekstury i większe modele AI.">
+                <label for="vram-size-slider">Pojemność VRAM (na 1 układ): <span id="vram-size-val">24 GB</span></label>
+                <input type="range" id="vram-size-slider" min="2" max="512" step="2" value="24">
+            </div>
+
+            <div class="control-group" data-tooltip="Render Output Units (ROP): Zapisują ostateczne piksele do bufora ramki (Framebuffer) po zakończeniu renderowania.">
+                <label for="rop-slider">Jednostki ROP (Globalne): <span id="rop-val">64</span></label>
+                <input type="range" id="rop-slider" min="16" max="512" step="16" value="64">
+            </div>
+
+            <div class="control-actions">
+                <button id="btn-start" class="btn btn-primary">Uruchom Symulację</button>
+                <button id="btn-reset" class="btn btn-secondary">Reset</button>
+            </div>
+            
+        </aside>
+
+        <!-- Główna Wizualizacja Architektury -->
+        <main class="sim-view">
+            <div class="metrics-dashboard">
+                <div class="metrics-card">
+                    <h3>Statystyki Sprzętowe GPU</h3>
+                    <p data-tooltip="Sumaryczna teoretyczna wydajność obliczeniowa w formacie FP32 (Single Precision). TFLOPS = Tera Floating Point Operations Per Second (Biliony operacji zmiennoprzecinkowych na sekundę).">Surowa moc FP32: <span id="out-tflops">0 TFLOPS</span></p>
+                    <p data-tooltip="Dodatkowa moc koprocesorów macierzowych (Tensor Cores / Matrix Cores). Kluczowe w AI (np. LLM) oraz upscalingu DLSS. Często pracują na liczbach 16-bit lub 8-bit.">Moc Tensor (AI): <span id="out-tensor">0 TFLOPS</span></p>
+                    <p data-tooltip="Szybkość przesyłania danych między pamięcią VRAM a rdzeniem GPU. GB/s = Gigabytes per second. Mało przepustowości udusi nawet najszybszy rdzeń.">Przepustowość VRAM: <span id="out-bandwidth">0 GB/s</span></p>
+                    <p data-tooltip="Szacowana ilość promieni światła liczona sprzętowo na sekundę. MRays/s = Miliony Promieni na sekundę. Podstawa fotorealistycznej grafiki (Ray Tracing).">Moc Ray Tracingu: <span id="out-rt">0 MRays/s</span></p>
+                    <p data-tooltip="Podstawowa jednostka wykonawcza (Thread). Oznacza ile niezależnych mikrozadań graficznych przetworzono jednocześnie.">Przetworzone Wątki: <span id="stat-threads">0</span></p>
+                </div>
+                <div class="metrics-card accent-gold">
+                    <h3>Zrozumiałe dla człowieka</h3>
+                    <p data-tooltip="Szacowana płynność gry. FPS = Frames Per Second (Klatki na sekundę). Im więcej, tym płynniejszy obraz.">Gry (FPS w 4K Ultra): <strong id="real-fps">0 FPS</strong></p>
+                    <p data-tooltip="Szacowana szybkość tworzenia grafik przez modele generatywne (np. Stable Diffusion). Obr./s = Obrazy na sekundę (Images per second).">Generowanie AI: <strong id="real-ai">0 obr./s</strong></p>
+                    <p data-tooltip="Czas potrzebny do wyszkolenia dużego modelu językowego (Large Language Model). Wymaga ogromnej ilości TFLOPSów.">Trenowanie GPT-3: <strong id="real-gpt">Wiele lat</strong></p>
+                    <p data-tooltip="Szybkość rozwiązywania zagadek kryptograficznych (algorytm pamięciożerny np. Ethereum). MH/s = Mega Hashes per second.">Mining (Ethash): <strong id="real-crypto">0 MH/s</strong></p>
+                    <p data-tooltip="Szybkość wydobycia bitcoina (algorytm SHA-256). Karty graficzne kiedyś królowały w tej dziedzinie, dziś wyparte przez asic.">Wydobycie Bitcoina: <strong id="real-btc">0 GH/s</strong></p>
+                    <p data-tooltip="Szybkość łamania prostego hasła (Brute Force). GPU są w tym tysiące razy szybsze niż CPU. BH/s = Billion Hashes per second.">Łamanie haseł MD5: <strong id="real-pass">0 BH/s</strong></p>
+                    <p data-tooltip="Fizyka N-Body (symulacja gwiazd i grawitacji). Szacowana ilość punktów obliczanych w czasie rzeczywistym.">Symulacja Galaktyk: <strong id="real-stars">0 gwiazd</strong></p>
+                    <p data-tooltip="Wkład w medycynę (np. Folding@Home). Ilość wygenerowanych nanosekund symulacji zwijania się białek w lekach na dobę (ns/dzień).">Symulacja Białek (Medycyna): <strong id="real-med">0 ns/dzień</strong></p>
+                    <p data-tooltip="Ilość kamer miejskiego monitoringu (strumieni 1080p), z których karta jest w stanie wyłapywać i rozpoznawać twarze w czasie rzeczywistym.">Rozpoznawanie z kamer: <strong id="real-cam">0 strumieni</strong></p>
+                    <p data-tooltip="Czas renderowania 1 pełnej, kinowej klatki animacji 3D z tysiącami źródeł światła. S/klatka = Sekundy na jedną klatkę.">Film Pixara z RT: <strong id="real-film">0 s / klatka</strong></p>
+                    <p data-tooltip="Renderowanie fraktali (np. zbiór Mandelbrota). Ekstremalnie obciąża czyste operacje zmiennoprzecinkowe (FP32). Miliardy iteracji na sekundę.">Renderowanie Fraktali: <strong id="real-frac">0 GIter/s</strong></p>
+                    <p data-tooltip="Symulacja dynamiki płynów (np. przewidywanie pogody). Pokazuje jak ogromną siatkę punktów (w km²) GPU przelicza na żywo.">Radar Pogodowy (Fluid): <strong id="real-weather">0 km²</strong></p>
+                    <p data-tooltip="Transkrypcja mowy na tekst (np. model Whisper). Ile godzin surowego nagrania dźwiękowego karta może przetłumaczyć na tekst w zaledwie 1 minutę.">Rozpoznawanie Mowy: <strong id="real-whisper">0 godz/min</strong></p>
+                </div>
+            </div>
+
+            <div class="hardware-component vram-container" data-tooltip="VRAM: Graficzna Pamięć Operacyjna. W przeciwieństwie do RAMu w PC, jest połączona ekstremalnie szybką szyną z procesorem GPU.">
+                <div class="component-title">Pamięć VRAM (<span id="ui-vram-label">HBM3 24GB</span>)</div>
+                <div class="ram-blocks" id="vram-blocks">
+                    <!-- Data packets representing textures/matrices -->
+                </div>
+            </div>
+
+            <div class="bus-connection">
+                <div class="data-flow-arrows"></div>
+                <div class="bus-label" id="bus-label">Szyna pamięci: ~1000 GB/s</div>
+            </div>
+
+            <!-- Główny układ GPU -->
+            <div class="gpu-die" id="gpu-die">
+                <div class="cpu-title">Rdzeń GPU (Die)</div>
+                
+                <div class="gpu-frontend" data-tooltip="GigaThread Engine (Command Processor): Pobiera rozkazy od procesora (CPU) i rozdziela paczki wątków (Bloki/Warpy) do poszczególnych SM.">
+                    GigaThread / Work Distributor
+                </div>
+                
+                <div class="global-l2-cache" data-tooltip="Globalne L2 Cache: Pamięć współdzielona przez wszystkie bloki SM na karcie graficznej.">
+                    L2 Cache (<span id="ui-l2-size">16MB</span>)
+                </div>
+
+                <div class="rop-cluster" id="rop-cluster" data-tooltip="Partycje ROP: Render Output Units połączone z kontrolerami pamięci. Odpowiadają za wygładzanie krawędzi (AA) i zapis pikseli.">
+                    <!-- ROPs here -->
+                </div>
+
+                <div class="sm-grid" id="sm-grid">
+                    <!-- Bloki SM generowane dynamicznie -->
+                </div>
+            </div>
+            
+        </main>
+    </div>
+
+    <section class="info-panel card card-emerald" style="margin-top: 1.5rem;">
+        <h2>Zaawansowane koncepcje GPU</h2>
+        <p style="margin-top: 1rem; margin-bottom: 1rem; color: var(--text-light);">
+            Karty graficzne są niezwykle złożonymi jednostkami. Zamiast sprytu pojedynczego, superszybkiego rdzenia (jak w CPU), GPU używa setek lub tysięcy prostszych jednostek, które wykonują to samo polecenie na różnych danych w tym samym czasie (SIMT). Dowiedz się, jak to działa od kuchni.
+        </p>
+        <div style="display: flex; gap: 1rem;">
+            <a href="rt_visualizer.html" class="btn btn-primary" style="text-decoration: none; display: inline-block;">Zobacz jak działa Ray Tracing (Rdzenie RT)</a>
+            <a href="tensor_visualizer.html" class="btn btn-secondary" style="text-decoration: none; display: inline-block;">Architektura Tensor (AI)</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; Kacper Trzosiński. Laboratorium Projektów.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akademia Składania PC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-elements">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="glow glow-3"></div>
+    </div>
+
+    <header class="header">
+        <h1>Akademia <span>Składania PC</span></h1>
+        <p>Naucz się dobierać odpowiednie części komputerowe do konkretnych zastosowań i określonego budżetu.</p>
+        <a href="../../index.html" class="back-link">← Powrót do Laboratorium</a>
+    </header>
+
+    <main class="simulator-container">
+        <!-- Panel Misji -->
+        <aside class="panel card card-pink">
+            <h2>Aktualna Misja</h2>
+            <div id="mission-container">
+                <h3 id="mission-title" style="color: #ec4899; margin-top: 1rem;">Ładowanie misji...</h3>
+                <p id="mission-desc" style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 1rem;">...</p>
+                <div class="budget-display">
+                    Budżet: <span id="budget-current">0</span> / <span id="budget-max">0</span> PLN
+                </div>
+                <div class="progress-bar-container">
+                    <div id="budget-bar" class="progress-bar"></div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 2rem;">Twój Koszyk</h3>
+            <ul class="cart-list" id="cart-list">
+                <!-- Items will be injected here -->
+            </ul>
+            
+            <button id="btn-submit" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">Złóż Komputer i Oceń!</button>
+            <button id="btn-next-mission" class="btn btn-secondary" style="margin-top: 0.5rem; width: 100%; display: none;">Kolejna Misja</button>
+        </aside>
+
+        <!-- Sklep / Katalog Części -->
+        <div class="shop-panel">
+            <div class="category-tabs" id="category-tabs">
+                <button class="tab-btn active" data-cat="cpu">Procesory (CPU)</button>
+                <button class="tab-btn" data-cat="mobo">Płyty Główne</button>
+                <button class="tab-btn" data-cat="ram">Pamięć RAM</button>
+                <button class="tab-btn" data-cat="gpu">Karty Graficzne</button>
+                <button class="tab-btn" data-cat="storage">Dyski</button>
+                <button class="tab-btn" data-cat="psu">Zasilacze</button>
+            </div>
+            
+            <div id="category-guide" class="guide-box">
+                <!-- Educational text injected here -->
+            </div>
+            
+            <div class="parts-grid" id="parts-grid">
+                <!-- Parts injected here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Zakończenia -->
+    <div id="result-modal" class="modal-overlay">
+        <div class="modal-content card-purple">
+            <h2 id="modal-title">Ocena Zestawu</h2>
+            <div id="modal-feedback" class="feedback-text"></div>
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span>Wydajność w Grach</span>
+                    <strong id="score-gaming">0</strong>
+                </div>
+                <div class="stat-box">
+                    <span>Wydajność Pracy (Pro)</span>
+                    <strong id="score-prod">0</strong>
+                </div>
+                <div class="stat-box">
+                    <span>Kompatybilność</span>
+                    <strong id="score-compat" style="color: #10b981;">OK</strong>
+                </div>
+            </div>
+            <button id="btn-close-modal" class="btn btn-primary" style="margin-top: 2rem; width: 100%;">Zamknij</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

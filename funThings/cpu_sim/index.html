@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wizualizacja Pracy Procesora (CPU)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-elements">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="glow glow-3"></div>
+    </div>
+
+    <header class="header">
+        <h1>Symulator <span>CPU</span></h1>
+        <p>Interaktywna wizualizacja pokazująca jak działa procesor, rdzenie, wątki i pamięć podręczna.</p>
+        <a href="../../index.html" class="back-link">← Powrót do Laboratorium</a>
+    </header>
+
+    <div class="simulator-container">
+        <!-- Panel Sterowania -->
+        <aside class="control-panel card card-purple">
+            <h2>Ustawienia CPU</h2>
+            <h3>Konfiguracja Architektury (Frontend)</h3>
+
+            <div class="control-group" style="margin-bottom: 1.5rem;">
+                <label for="preset-cpu">Gotowe Presety (Modele CPU):</label>
+                <select id="preset-cpu" style="width: 100%; padding: 0.5rem; background: #0f172a; color: white; border: 1px solid #334155; border-radius: 4px;">
+                    <option value="custom">-- Własna Konfiguracja --</option>
+                    <optgroup label="Intel Core">
+                        <option value="i3_10100">Intel Core i3-10100 (4 Rdzenie)</option>
+                        <option value="i5_13600k">Intel Core i5-13600K (14 Rdzeni)</option>
+                        <option value="i9_14900k">Intel Core i9-14900K (24 Rdzenie)</option>
+                    </optgroup>
+                    <optgroup label="AMD Ryzen">
+                        <option value="r5_7600x">AMD Ryzen 5 7600X (6 Rdzeni)</option>
+                        <option value="r7_7800x3d">AMD Ryzen 7 7800X3D (Ogromny Cache)</option>
+                        <option value="r9_7950x">AMD Ryzen 9 7950X (16 Rdzeni)</option>
+                    </optgroup>
+                    <optgroup label="Stacje Robocze (HEDT) / Serwery">
+                        <option value="tr_7995wx">AMD Threadripper PRO (96 Rdzeni)</option>
+                        <option value="epyc_9754">AMD EPYC 9754 Bergamo (128 Rdzeni)</option>
+                        <option value="xeon_8490h">Intel Xeon Platinum 8490H (60 Rdzeni)</option>
+                        <option value="xeon_w3495x">Intel Xeon W-3495X (56 Rdzeni)</option>
+                    </optgroup>
+                    <optgroup label="Konsolowe / Urządzenia Przenośne">
+                        <option value="steamdeck">Steam Deck APU</option>
+                        <option value="switch">Nintendo Switch (Tegra X1)</option>
+                        <option value="rpi4">Raspberry Pi 4</option>
+                    </optgroup>
+                    <optgroup label="Architektura ARM / Apple">
+                        <option value="apple_m1">Apple M1</option>
+                        <option value="apple_m3max">Apple M3 Max</option>
+                    </optgroup>
+                    <optgroup label="Superkomputery & Historia">
+                        <option value="frontier">Węzeł Superkomputera Frontier</option>
+                        <option value="pentium4">Retro: Intel Pentium 4 (1 Rdzeń)</option>
+                        <option value="core2duo">Retro: Intel Core 2 Duo</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="cores-slider">Liczba Rdzeni: <span id="cores-val">1</span></label>
+                <input type="range" id="cores-slider" min="1" max="192" value="1">
+                <small>Więcej rdzeni pozwala na jednoczesne wykonywanie wielu zadań (wielowątkowość).</small>
+            </div>
+            
+            <div class="control-group">
+                <label for="speed-slider">Taktowanie Zegara (Częstotliwość): <span id="speed-val">1 Hz</span></label>
+                <input type="range" id="speed-slider" min="1" max="1000" step="1" value="1">
+                <small>Określa ile cykli procesor wykonuje w ciągu sekundy. Wyższe taktowanie = szybsze przetwarzanie.</small>
+            </div>
+
+            <div class="control-group">
+                <label for="cache-slider">Rozmiar Cache (L1): <span id="cache-val">64 kB</span></label>
+                <input type="range" id="cache-slider" min="32" max="1024" step="32" value="64">
+                <small>Szybka pamięć podręczna blisko rdzenia. Zmniejsza opóźnienia w dostępie do RAM.</small>
+            </div>
+
+            <div class="control-actions">
+                <button id="btn-start" class="btn btn-primary">Uruchom Symulację</button>
+                <button id="btn-reset" class="btn btn-secondary">Zresetuj</button>
+            </div>
+        </aside>
+
+        <!-- Obszar Wizualizacji -->
+        <main class="visualization-area">
+            <div class="metrics-dashboard">
+                <div class="metrics-card">
+                    <h3>Statystyki CPU (Na sekundę symulacji)</h3>
+                    <p data-tooltip="Suma wszystkich instrukcji przetworzonych pomyślnie przez procesor. IPS = Instructions Per Second. W prawdziwym procesorze są to MIPS (Miliony) lub GIPS (Miliardy).">Wykonane instrukcje: <span id="stat-completed">0</span></p>
+                    <p data-tooltip="Instrukcje załadowane z bardzo wolnej Pamięci Operacyjnej (RAM). Częste pobieranie stąd zwalnia CPU.">Oczekujące (w RAM): <span id="stat-pending">200</span></p>
+                </div>
+                <div class="metrics-card accent-pink">
+                    <h3>Zrozumiałe dla człowieka</h3>
+                    <p data-tooltip="Szacowana wydajność w grach bez użycia karty graficznej (Software Render). FPS = Frames Per Second (Klatki na sekundę). Procesor liczy piksele fatalnie w porównaniu do GPU.">Gry 3D (Software): <strong id="real-fps">0 FPS</strong></p>
+                    <p data-tooltip="Szacowany czas ładowania systemu Windows (Boot time). m = minuty, s = sekundy. Im silniejszy CPU, tym szybszy start.">Bootowanie Windows: <strong id="real-boot">~</strong></p>
+                    <p data-tooltip="Tyle linijek kodu C++ procesor kompiluje lub wykonuje na sekundę (LOC/s = Lines Of Code per second).">Linie Kodu / s: <strong id="real-code">0</strong></p>
+                    <p data-tooltip="Szybkość kompresowania plików do archiwum .ZIP. Im więcej rdzeni i cache, tym szybciej idzie pakowanie danych. MB/s = Megabajty na sekundę.">Kompresja .ZIP: <strong id="real-zip">0 MB/s</strong></p>
+                    <p data-tooltip="Szacowany czas wyliczenia 1 miliona cyfr liczby Pi. Test czystej wydajności pojedynczego rdzenia (Single-Core).">Wyliczenie 1M cyfr Pi: <strong id="real-pi">~</strong></p>
+                    <p data-tooltip="Ilość analizowanych w pamięci pozycji szachowych przez silnik typu Stockfish. KN/s = KiloNodes (Tysiące węzłów na sekundę). Silnie obciąża każdy jeden rdzeń.">Analiza Szachów: <strong id="real-chess">0 KN/s</strong></p>
+                    <p data-tooltip="Czas potrzebny algorytmowi procesora do zweryfikowania biometrii (Odblokowanie twarzą lub palcem). Milisekundy (ms).">Odblokowanie telefonu: <strong id="real-face">~</strong></p>
+                    <p data-tooltip="Kultowy benchmark programistów. Czas potrzebny na kompilację (złożenie ze źródeł) Jądra systemu Linux. Wymaga ogromnej liczby rdzeni do zrównoleglenia zadań.">Kompilacja Linuxa: <strong id="real-linux">~</strong></p>
+                    <p data-tooltip="Szybkość, z jaką procesor radzi sobie z szyfrowaniem i deszyfrowaniem dysku w algorytmie AES (Advanced Encryption Standard). W GB/s.">Szyfrowanie AES (Dysk): <strong id="real-aes">0 GB/s</strong></p>
+                    <p data-tooltip="Szybkość przewidywania i analizowania tysięcy scenariuszy giełdowych metodą symulacji Monte Carlo. Tysiące symulacji na sekundę.">Symulacje Giełdowe: <strong id="real-stock">0 k/s</strong></p>
+                </div>
+            </div>
+            
+            <!-- Pamięć RAM -->
+            <div class="hardware-component ram-container" data-tooltip="Pamięć Operacyjna (RAM). Przechowuje program i dane. Działa wolniej niż Cache, ale ma znacznie większą pojemność.">
+                <div class="component-title">Pamięć Operacyjna (RAM)</div>
+                <div class="component-desc">Najwolniejsza, ale największa pamięć. Tutaj znajdują się programy do wykonania.</div>
+                <div class="ram-blocks" id="ram-blocks">
+                    <!-- Instrukcje będą tutaj -->
+                </div>
+            </div>
+
+            <!-- Magistrala (Bus) -->
+            <div class="bus-connection">
+                <div class="data-flow-arrows"></div>
+            </div>
+
+            <!-- Procesor (CPU) -->
+            <div class="cpu-package" id="cpu-package">
+                <div class="cpu-title">Procesor (CPU)</div>
+                
+                <div class="cpu-cores-grid" id="cpu-cores">
+                    <!-- Rdzenie będą generowane dynamicznie -->
+                </div>
+            </div>
+            
+        </main>
+    </div>
+
+    <!-- Panel Informacyjny -->
+    <section class="info-panel card card-blue">
+        <h2>Jak działa procesor? (Cykl Rozkazowy)</h2>
+        <div class="info-grid">
+            <div class="info-step">
+                <div class="step-num">1. Fetch (Pobranie)</div>
+                <p>Procesor pobiera kolejną instrukcję do wykonania z pamięci (Cache lub RAM).</p>
+            </div>
+            <div class="info-step">
+                <div class="step-num">2. Decode (Dekodowanie)</div>
+                <p>Jednostka Sterująca (Control Unit) analizuje instrukcję i przygotowuje odpowiednie obwody do jej wykonania.</p>
+            </div>
+            <div class="info-step">
+                <div class="step-num">3. Execute (Wykonanie)</div>
+                <p>Jednostka Arytmetyczno-Logiczna (ALU) przetwarza dane (np. dodaje liczby).</p>
+            </div>
+            <div class="info-step">
+                <div class="step-num">4. Store (Zapis)</div>
+                <p>Wynik jest zapisywany w rejestrach procesora lub z powrotem do pamięci RAM.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-panel card card-pink" style="margin-top: 1.5rem;">
+        <h2>Chcesz wiedzieć więcej?</h2>
+        <p style="margin-top: 1rem; margin-bottom: 1rem; color: var(--text-light);">
+            Branch Predictor (Predykator Skoków) to jeden z najważniejszych elementów współczesnych procesorów. 
+            Dzięki niemu procesor nie musi czekać na ewaluację instrukcji warunkowych (np. w pętlach).
+        </p>
+        <a href="branch_predictor.html" class="btn btn-primary" style="text-decoration: none; display: inline-block;">Zobacz jak działa Branch Predictor</a>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; Kacper Trzosiński. Laboratorium Projektów.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

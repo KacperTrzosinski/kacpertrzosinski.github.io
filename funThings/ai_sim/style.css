@@ -1,0 +1,213 @@
+/* AI Simulator Styles */
+.simulator-container {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+@media (max-width: 1024px) {
+    .simulator-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.panel {
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+}
+
+.control-group {
+    margin-bottom: 1.5rem;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    color: #e2e8f0;
+}
+
+.control-group span {
+    color: #38bdf8;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+}
+
+input[type=range] {
+    width: 100%;
+    accent-color: #38bdf8;
+}
+
+.btn {
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: 'Outfit', sans-serif;
+    color: white;
+}
+
+.btn-primary { background: linear-gradient(135deg, #3b82f6, #06b6d4); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); }
+.btn-secondary { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); }
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.2); }
+
+.metrics p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: #94a3b8;
+}
+
+.metrics strong {
+    font-family: 'JetBrains Mono', monospace;
+    color: #f8fafc;
+}
+
+/* Pipeline Viz */
+.pipeline-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.stage {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid #475569;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.stage.active {
+    background: rgba(14, 165, 233, 0.2);
+    border-color: #38bdf8;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+    transform: scale(1.02);
+}
+
+.stage-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.stage-name {
+    font-weight: 700;
+    color: #e2e8f0;
+    margin-bottom: 0.5rem;
+}
+
+.data-flow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    background: #0f172a;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    width: 100%;
+    text-align: center;
+    min-height: 2.2rem;
+}
+
+.arrow {
+    color: #64748b;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.transformer-block {
+    width: 100%;
+    max-width: 700px;
+    background: rgba(2, 6, 23, 0.5);
+    border: 2px dashed #6366f1;
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+}
+
+.transformer-block.active {
+    background: rgba(99, 102, 241, 0.2);
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+}
+
+.sub-stage {
+    flex: 1;
+    background: #1e293b;
+    border: 1px solid #475569;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    color: #cbd5e1;
+    transition: all 0.2s;
+}
+
+.sub-stage.active {
+    background: #4f46e5;
+    color: white;
+    border-color: #818cf8;
+}
+
+.output-console {
+    width: 100%;
+    max-width: 700px;
+    background: #000;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: #10b981;
+    min-height: 100px;
+}
+
+/* Tooltips */
+[data-tooltip] {
+    position: relative;
+    cursor: help;
+}
+
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1e293b;
+    color: #f8fafc;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    width: max-content;
+    max-width: 300px;
+    white-space: normal;
+    text-align: left;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, bottom 0.2s;
+    z-index: 100;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    border: 1px solid #334155;
+    line-height: 1.5;
+}
+
+[data-tooltip]:hover::after {
+    opacity: 1;
+    bottom: 120%;
+}

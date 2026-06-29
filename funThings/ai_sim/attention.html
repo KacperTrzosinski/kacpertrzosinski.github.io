@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attention - AI Sim</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <style>
+        .subpage-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+        }
+        .attention-demo {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: rgba(0,0,0,0.4);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+        .word {
+            display: inline-block;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .word:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .link-line {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Jak działa <span>Self-Attention?</span></h1>
+        <p>Dlaczego współczesne sieci neuronowe w ogóle "rozumieją" kontekst całego zdania?</p>
+        <a href="index.html" class="back-link">← Powrót do Symulatora AI</a>
+    </header>
+
+    <div class="subpage-container">
+        <h3>1. Mechanizm, który zmienił świat</h3>
+        <p style="color: #94a3b8; margin-top: 0.5rem; line-height: 1.6;">
+            Do 2017 roku sztuczna inteligencja czytała tekst "słowo po słowie", co sprawiało, że pod koniec długiego zdania zapominała jego początek.
+            Wtedy powstała architektura <strong>Transformer</strong> i mechanizm <strong>Self-Attention</strong>. 
+            Dzięki niemu, sieć analizując dowolne słowo w zdaniu, jednocześnie "patrzy" na wszystkie pozostałe słowa w tym samym zdaniu i oblicza za pomocą matematyki jak bardzo są one z nim powiązane.
+        </p>
+        
+        <h3 style="margin-top: 2rem;">2. Symulacja Kontekstu (Wyobraź sobie, że analizujesz słowo "zamek"):</h3>
+        <div class="attention-demo">
+            <p style="color: #cbd5e1; text-align: center; margin-bottom: 1rem;">Naciśnij przycisk poniżej, aby zasymulować skupienie uwagi modelu na słowie "ZAMEK".</p>
+            <div class="link-line">
+                <span class="word" id="w1">Wczoraj</span>
+                <span class="word" id="w2">kupiłem</span>
+                <span class="word" id="w3">nowy</span>
+                <span class="word" id="w4" style="border: 2px solid #8b5cf6;">ZAMEK</span>
+                <span class="word" id="w5">do</span>
+                <span class="word" id="w6">drzwi</span>
+            </div>
+            <button class="btn btn-primary" style="margin: 0 auto; display: block; margin-top: 1rem;" onclick="runAttention()">Oblicz Attention</button>
+        </div>
+
+        <p style="color: #94a3b8; margin-top: 2rem; line-height: 1.6;">
+            Dzięki silnemu połączeniu ze słowem "drzwi", model natychmiast wie, że nie chodzi tu o zamek z piasku, ani zamek błyskawiczny. Wie, jakiego następnego słowa użyć w odpowiedzi. To właśnie dzieje się miliardy razy na sekundę wewnątrz warstw Transformera (suwak "Liczba Warstw" w symulatorze).
+        </p>
+    </div>
+
+    <script>
+        function runAttention() {
+            document.getElementById('w6').style.backgroundColor = 'rgba(139, 92, 246, 0.8)';
+            document.getElementById('w6').style.boxShadow = '0 0 20px #8b5cf6';
+            
+            document.getElementById('w2').style.backgroundColor = 'rgba(139, 92, 246, 0.4)';
+            document.getElementById('w5').style.backgroundColor = 'rgba(139, 92, 246, 0.6)';
+            
+            document.getElementById('w1').style.opacity = '0.3';
+            document.getElementById('w3').style.opacity = '0.3';
+            
+            setTimeout(() => {
+                alert("Model stwierdził: Słowo ZAMEK jest w 80% powiązane ze słowem 'drzwi', w 40% z 'do', a w 20% z 'kupiłem'. Zignorowano słowo 'Wczoraj'. Znaczenie słowa zostało rozpoznane!");
+            }, 500);
+        }
+    </script>
+</body>
+</html>

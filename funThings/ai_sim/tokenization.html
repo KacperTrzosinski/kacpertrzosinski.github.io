@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokenizator - AI Sim</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <style>
+        .subpage-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+        }
+        .token-box {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.2s;
+        }
+        .token-box:hover { transform: scale(1.1); }
+        
+        .color-1 { background-color: #ef4444; }
+        .color-2 { background-color: #3b82f6; }
+        .color-3 { background-color: #10b981; }
+        .color-4 { background-color: #f59e0b; }
+        .color-5 { background-color: #8b5cf6; }
+        .color-6 { background-color: #ec4899; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Jak działa <span>Tokenizacja?</span></h1>
+        <p>Maszyny nie rozumieją liter ani słów. Rozumieją tylko liczby (Tokeny).</p>
+        <a href="index.html" class="back-link">← Powrót do Symulatora AI</a>
+    </header>
+
+    <div class="subpage-container">
+        <h3>1. Czym jest Token?</h3>
+        <p style="color: #94a3b8; margin-top: 0.5rem; line-height: 1.6;">
+            Zanim model sztucznej inteligencji "przeczyta" Twój tekst, musi on zostać poszatkowany na mniejsze kawałki zwane tokenami. 
+            Jeden token to najczęściej fragment słowa (około 4 liter w języku angielskim). Krótkie słowa są jednym tokenem, a długie (np. "Niesamowity") mogą zostać rozbite na 3 lub 4 tokeny (np. "Nie", "sam", "owity"). Każdy token ma z góry przypisaną liczbę ID w słowniku modelu.
+        </p>
+        
+        <h3 style="margin-top: 2rem;">2. Zobacz to w akcji:</h3>
+        <div style="background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin-top: 1rem; text-align: center;">
+            <p style="margin-bottom: 1rem; font-style: italic; color: #cbd5e1;">Zdanie wejściowe: "Sztuczna inteligencja zjada świat!"</p>
+            
+            <div class="token-box color-1">Sz</div>
+            <div class="token-box color-2">tuc</div>
+            <div class="token-box color-3">zna</div>
+            <div class="token-box color-4"> inteligencja</div>
+            <div class="token-box color-5"> z</div>
+            <div class="token-box color-6">jada</div>
+            <div class="token-box color-1"> ś</div>
+            <div class="token-box color-2">wiat</div>
+            <div class="token-box color-3">!</div>
+            
+            <p style="margin-top: 1.5rem; font-family: 'JetBrains Mono'; color: #60a5fa;">Tablica ID: [8432, 112, 54, 99234, 12, 654, 88, 1421, 0]</p>
+        </div>
+
+        <h3 style="margin-top: 2rem;">3. Dlaczego okno kontekstu mierzy się w tokenach?</h3>
+        <p style="color: #94a3b8; margin-top: 0.5rem; line-height: 1.6;">
+            Suwak <strong>"Okna Kontekstu" (Context Window)</strong> w symulatorze określa jak dużą listę tych liczb model potrafi przetwarzać jednocześnie. 
+            Jeżeli model ma okno wielkości 8192 tokenów, potrafi "pamiętać" około 10 stron tekstu z Waszej rozmowy, zanim zacznie zapominać o czym rozmawialiście na samym początku.
+        </p>
+    </div>
+</body>
+</html>

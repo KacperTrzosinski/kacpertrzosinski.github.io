@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rdzenie Tensor - Akceleracja AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .tensor-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: rgba(2, 44, 34, 0.6);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .matrix-math {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+        }
+        .matrix {
+            background: rgba(0,0,0,0.4);
+            border: 2px solid #334155;
+            border-radius: 8px;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            position: relative;
+        }
+        .m-cell {
+            width: 30px;
+            height: 30px;
+            background: #1e293b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            color: #94a3b8;
+            transition: all 0.2s;
+        }
+        .m-cell.highlight {
+            background: #a855f7;
+            color: white;
+            box-shadow: 0 0 10px #a855f7;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Rdzenie <span>Tensor (AI)</span></h1>
+        <p>Gigantyczna moc obliczeniowa dla sieci neuronowych dzięki operacjom macierzowym.</p>
+        <a href="index.html" class="back-link">← Powrót do Symulatora GPU</a>
+    </header>
+
+    <div class="tensor-container">
+        <h3>Mnożenie Macierzy (Matrix Multiply-Accumulate)</h3>
+        <p style="color: var(--text-light); line-height: 1.6; margin-top: 0.5rem;">
+            Zwykły rdzeń CUDA może w jednym cyklu zegara dodać lub pomnożyć dwie liczby (skalary). 
+            Aby trenować sztuczną inteligencję (Deep Learning), procesor musi wykonywać miliardy operacji na macierzach (tablicach liczb).
+            <strong>Rdzeń Tensor</strong> w jednym cyklu zegara może pomnożyć całą macierz 4x4 przez inną macierz 4x4 i dodać wynik do trzeciej macierzy (D = A * B + C). To oznacza dziesiątki operacji sprzętowych w jednym tyknięciu zegara!
+        </p>
+
+        <div class="matrix-math">
+            <!-- Matrix A -->
+            <div class="matrix" id="mat-a">
+                <script>for(let i=0;i<16;i++) document.write(`<div class="m-cell" id="a-${i}">${~~(Math.random()*9)}</div>`)</script>
+                <div style="position:absolute; top:-25px; left:50%; transform:translateX(-50%); font-size:1rem; color:#94a3b8;">A (Wagi)</div>
+            </div>
+            <div>×</div>
+            <!-- Matrix B -->
+            <div class="matrix" id="mat-b">
+                <script>for(let i=0;i<16;i++) document.write(`<div class="m-cell" id="b-${i}">${~~(Math.random()*9)}</div>`)</script>
+                <div style="position:absolute; top:-25px; left:50%; transform:translateX(-50%); font-size:1rem; color:#94a3b8;">B (Wejście)</div>
+            </div>
+            <div>=</div>
+            <!-- Matrix D -->
+            <div class="matrix" id="mat-d">
+                <script>for(let i=0;i<16;i++) document.write(`<div class="m-cell" id="d-${i}">0</div>`)</script>
+                <div style="position:absolute; top:-25px; left:50%; transform:translateX(-50%); font-size:1rem; color:#a855f7; font-weight:bold;">D (Wynik)</div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <button class="btn btn-primary" style="background: linear-gradient(135deg, #a855f7, #7e22ce);" onclick="multiplyMatrices()">Oblicz za pomocą Rdzenia Tensor (1 Cykl)</button>
+        </div>
+    </div>
+
+    <script>
+        function multiplyMatrices() {
+            // Animacja podświetlenia wszystkiego na raz (symulacja 1 cyklu zegara)
+            for(let i=0; i<16; i++) {
+                document.getElementById(`a-${i}`).classList.add('highlight');
+                document.getElementById(`b-${i}`).classList.add('highlight');
+                document.getElementById(`d-${i}`).classList.add('highlight');
+                
+                // Losowe wartości w macierzy wynikowej
+                document.getElementById(`d-${i}`).innerText = ~~(Math.random() * 99);
+            }
+
+            setTimeout(() => {
+                for(let i=0; i<16; i++) {
+                    document.getElementById(`a-${i}`).classList.remove('highlight');
+                    document.getElementById(`b-${i}`).classList.remove('highlight');
+                    document.getElementById(`d-${i}`).classList.remove('highlight');
+                }
+            }, 500);
+        }
+    </script>
+</body>
+</html>

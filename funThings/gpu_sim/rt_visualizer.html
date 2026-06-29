@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rdzenie RT - Wizualizacja BVH</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .rt-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: rgba(2, 44, 34, 0.6);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .bvh-tree {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            margin: 2rem 0;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            position: relative;
+        }
+        .bvh-node {
+            padding: 1rem;
+            background: #1e293b;
+            border: 2px solid #059669;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #34d399;
+            position: absolute;
+            transition: all 0.3s;
+        }
+        .bvh-node.active {
+            background: #059669;
+            color: white;
+            box-shadow: 0 0 20px #34d399;
+            transform: scale(1.1);
+        }
+        .bvh-node.hit {
+            border-color: #f59e0b;
+            color: #f59e0b;
+        }
+        .bvh-node.miss {
+            opacity: 0.5;
+            border-color: #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Rdzenie <span>Ray Tracing (RT)</span></h1>
+        <p>Akceleracja śledzenia promieni i przechodzenia przez drzewa BVH.</p>
+        <a href="index.html" class="back-link">← Powrót do Symulatora GPU</a>
+    </header>
+
+    <div class="rt-container">
+        <h3>Jak działa Ray Tracing?</h3>
+        <p style="color: var(--text-light); line-height: 1.6; margin-top: 0.5rem;">
+            Bez rdzeni RT, procesor graficzny musiałby matematycznie sprawdzić przecięcie promienia (ray) z każdym trójkątem w scenie 3D. 
+            Aby to przyspieszyć, scena jest dzielona na pudełka w strukturze drzewiastej <strong>BVH (Bounding Volume Hierarchy)</strong>.
+            Rdzenie RT to wyspecjalizowane układy scalone potrafiące w jednym cyklu zegara sprawdzić, czy promień uderza w pudełko (Box Intersection) i z jakim trójkątem się przecina (Triangle Intersection).
+        </p>
+        
+        <div class="bvh-tree" id="bvh-area">
+            <div class="bvh-node" id="node-root" style="top: 20px; left: 50%; transform: translateX(-50%);">Root Box</div>
+            <div class="bvh-node" id="node-left" style="top: 120px; left: 25%;">Box A</div>
+            <div class="bvh-node" id="node-right" style="top: 120px; left: 75%;">Box B</div>
+            <div class="bvh-node" id="node-tri1" style="top: 220px; left: 15%;">Triangle 1</div>
+            <div class="bvh-node" id="node-tri2" style="top: 220px; left: 35%;">Triangle 2</div>
+        </div>
+
+        <div style="text-align: center;">
+            <button class="btn btn-primary" onclick="shootRay()">Wystrzel Promień (Symulacja)</button>
+            <p id="ray-status" style="margin-top: 1rem; font-family: 'JetBrains Mono'; font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <script>
+        function shootRay() {
+            const nodes = ['node-root', 'node-left', 'node-right', 'node-tri1', 'node-tri2'];
+            nodes.forEach(n => document.getElementById(n).className = 'bvh-node');
+            
+            const status = document.getElementById('ray-status');
+            status.innerText = "Sprawdzanie Root Box...";
+            status.style.color = '#34d399';
+            document.getElementById('node-root').classList.add('active');
+
+            setTimeout(() => {
+                document.getElementById('node-root').classList.remove('active');
+                document.getElementById('node-root').classList.add('hit');
+                
+                status.innerText = "Root trafiony. Sprawdzanie Box A i Box B...";
+                document.getElementById('node-left').classList.add('active');
+                document.getElementById('node-right').classList.add('active');
+
+                setTimeout(() => {
+                    // Box B pudło, Box A trafiony
+                    document.getElementById('node-right').classList.replace('active', 'miss');
+                    document.getElementById('node-left').classList.replace('active', 'hit');
+                    status.innerText = "Box B pominięty (Miss). Box A trafiony. Przeszukiwanie trójkątów...";
+                    
+                    document.getElementById('node-tri1').classList.add('active');
+                    document.getElementById('node-tri2').classList.add('active');
+
+                    setTimeout(() => {
+                        document.getElementById('node-tri2').classList.replace('active', 'miss');
+                        document.getElementById('node-tri1').classList.replace('active', 'hit');
+                        status.innerText = "SUKCES! Rdzeń RT znalazł przecięcie z Triangle 1. Odpowiedź wraca do Rdzeni CUDA (Shadera).";
+                        status.style.color = '#fbbf24';
+                    }, 1500);
+
+                }, 1500);
+
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

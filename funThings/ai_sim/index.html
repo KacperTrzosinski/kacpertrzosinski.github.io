@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symulator Sieci Neuronowej (LLM)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-elements">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="glow glow-3"></div>
+    </div>
+
+    <header class="header">
+        <h1>Symulator <span>Sztucznej Inteligencji</span></h1>
+        <p>Interaktywna wizualizacja działania Dużych Modeli Językowych (LLM). Dowiedz się, co kryje się za magią ChatGPT, Gemini czy Claude.</p>
+        <a href="../../index.html" class="back-link">← Powrót do Laboratorium</a>
+    </header>
+
+    <div class="simulator-container">
+        <!-- Panel Sterowania -->
+        <aside class="panel controls">
+            <h2>Konfiguracja Modelu</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Ustaw parametry ręcznie lub wybierz gotowy model.</p>
+
+            <div class="control-group">
+                <label for="preset-ai">Gotowe Presety (Architektury AI):</label>
+                <select id="preset-ai" style="width: 100%; padding: 0.5rem; background: #0f172a; color: white; border: 1px solid #334155; border-radius: 4px;">
+                    <option value="custom">-- Własna Konfiguracja --</option>
+                    <optgroup label="OpenAI">
+                        <option value="gpt2">GPT-2 (1.5B)</option>
+                        <option value="gpt3">GPT-3 (175B)</option>
+                        <option value="gpt4">GPT-4 (MoE, ~1.76T)</option>
+                        <option value="gpt4o">GPT-4o (Omni)</option>
+                    </optgroup>
+                    <optgroup label="Google">
+                        <option value="gemini_pro">Gemini 1.5 Pro</option>
+                        <option value="gemma_7b">Gemma 7B</option>
+                    </optgroup>
+                    <optgroup label="Anthropic">
+                        <option value="claude3_opus">Claude 3 Opus</option>
+                        <option value="claude3_sonnet">Claude 3.5 Sonnet</option>
+                    </optgroup>
+                    <optgroup label="Meta">
+                        <option value="llama2_70b">LLaMA 2 (70B)</option>
+                        <option value="llama3_8b">LLaMA 3 (8B)</option>
+                        <option value="llama3_400b">LLaMA 3 (400B+)</option>
+                    </optgroup>
+                    <optgroup label="Inne (Open Source / Giganci)">
+                        <option value="grok1">Grok-1 (314B, xAI)</option>
+                        <option value="qwen1_5_72b">Qwen 1.5 (72B, Alibaba)</option>
+                        <option value="deepseek_v2">DeepSeek V2 (236B MoE)</option>
+                        <option value="mistral_large">Mistral Large</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 0.5rem 0;">
+
+            <div class="control-group" data-tooltip="Całkowita liczba parametrów (wag i biasów) w sieci neuronowej. Więcej parametrów oznacza model mądrzejszy, ale wymagający więcej pamięci VRAM.">
+                <label for="params-slider">Ilość Parametrów: <span id="params-val">175</span> Miliardów (B)</label>
+                <input type="range" id="params-slider" min="1" max="2000" step="1" value="175">
+            </div>
+
+            <div class="control-group" data-tooltip="Ilość warstw bloków Transformera (Transformer Layers). Każda kolejna warstwa przetwarza dane na wyższym poziomie abstrakcji.">
+                <label for="layers-slider">Liczba Warstw (Layers): <span id="layers-val">96</span></label>
+                <input type="range" id="layers-slider" min="12" max="120" step="4" value="96">
+            </div>
+
+            <div class="control-group" data-tooltip="Szerokość sieci neuronowej (Hidden Dimension). Określa rozmiar wektora (tzw. embeddingu) dla każdego tokenu.">
+                <label for="dim-slider">Rozmiar Wektora (Hidden Dim): <span id="dim-val">12288</span></label>
+                <input type="range" id="dim-slider" min="768" max="16384" step="256" value="12288">
+            </div>
+            
+            <div class="control-group" data-tooltip="Rozmiar Okna Kontekstu. Oznacza ile tokenów (słów) model może 'pamiętać' w jednej rozmowie. 1 token to ~0.75 polskiego słowa.">
+                <label for="ctx-slider">Okno Kontekstu: <span id="ctx-val">8192</span> tokenów</label>
+                <input type="range" id="ctx-slider" min="2048" max="2000000" step="2048" value="8192">
+            </div>
+
+            <div class="control-actions" style="display:flex; flex-direction:column; gap:0.5rem;">
+                <button id="btn-generate" class="btn btn-primary">Symuluj Generowanie (Inference)</button>
+                <div style="display: flex; gap: 0.5rem;">
+                    <a href="tokenization.html" class="btn btn-secondary" style="flex:1; text-align:center; text-decoration:none; font-size:0.9rem;">Jak działa Tokenizator?</a>
+                    <a href="attention.html" class="btn btn-secondary" style="flex:1; text-align:center; text-decoration:none; font-size:0.9rem;">Jak działa Attention?</a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Główna Wizualizacja Architektury (Pipeline) -->
+        <main class="sim-view" id="visualization">
+            <div class="metrics-dashboard">
+                <div class="metrics-card">
+                    <h3>Wymagania Sprzętowe Modelu</h3>
+                    <p data-tooltip="Ilość pamięci na karcie graficznej wymagana do samego wgrania wag modelu do pamięci w formacie FP16 (16-bitowe liczby zmiennoprzecinkowe). GB = Gigabajty.">VRAM Modelu (FP16): <strong id="vram-model">350 GB</strong></p>
+                    <p data-tooltip="Dodatkowa pamięć Video RAM potrzebna na przechowanie historii rozmowy, by model jej nie zapomniał (tzw. KV Cache). Szybko rośnie przy gigantycznym Oknie Kontekstu.">VRAM Kontekstu (KV Cache): <strong id="vram-kv">5 GB</strong></p>
+                    <p data-tooltip="Szacowana cena najtańszego zestawu profesjonalnych kart graficznych (często NVIDIA H100 lub A100) wymaganego, by w ogóle zmieścić ten model w pamięci. PLN = Polski Złoty.">Szacunkowy koszt GPU: <strong id="gpu-cost" style="color:#f59e0b;">500,000 PLN</strong></p>
+                </div>
+                <div class="metrics-card accent-purple">
+                    <h3>Zrozumiałe dla człowieka</h3>
+                    <p data-tooltip="Szacowany czas wygenerowania i wypisania na ekran tekstu na 1 stronę A4 (ok. 500 słów). Silnie zależny od rozmiaru modelu.">Czas 1 strony A4: <strong id="real-a4">~</strong></p>
+                    <p data-tooltip="Szacowany koszt prądu i wynajmu klastra GPU potrzebnego do 'przeczytania całego internetu' podczas trenowania takiego modelu.">Koszt treningu AI: <strong id="real-train-cost">~</strong></p>
+                    <p data-tooltip="Mniej więcej tyle książek wiedzy ludzkości (tekstu) zostało wyuczone i skompresowane w parametrach tego modelu.">Zapisana wiedza: <strong id="real-books">~</strong></p>
+                    <p data-tooltip="Długość półki na książki potrzebnej do zmieszczenia wiedzy, którą wchłonął ten model. (KM = Kilometry).">Regał z wiedzą: <strong id="real-shelf">~</strong></p>
+                    <p data-tooltip="Rozmiar czystego pliku tekstowego (bez obrazków), na którym uczył się model (tzw. Dataset). TB = Terabajty samego tekstu!">Surowy Treningowy Tekst: <strong id="real-dataset">~</strong></p>
+                    <p data-tooltip="Ilość wcieleń (żyć ludzkich po 80 lat ciągłego czytania bez snu), jakie musiałby poświęcić człowiek na przeczytanie danych z treningu.">Lata czytania (Ludzkie Życia): <strong id="real-lives">~</strong></p>
+                    <p data-tooltip="Szacunkowe zużycie energii potrzebnej do wygenerowania jednej przeciętnej odpowiedzi. Podane w Dżulach (J) lub Kilodżulach (kJ).">Ślad węglowy 1 odp.: <strong id="real-power">~</strong></p>
+                    <p data-tooltip="Liczba parametrów w stosunku do średniej liczby synaps u dorosłego człowieka (~100 Trylionów). Pokazuje, jak daleko nam do symulacji całego ludzkiego mózgu.">Odpowiednik mózgu: <strong id="real-brain">~</strong></p>
+                    <p data-tooltip="Uproszczona estymacja 'sztucznej inteligencji' (IQ) na podstawie czystej ilości parametrów i okna kontekstu (Wartość czysto hipotetyczna).">Hipotetyczne IQ: <strong id="real-iq">~</strong></p>
+                </div>
+            </div>
+            
+            <div class="panel visualizer">
+            <h2>Architektura Transformera (Pipeline)</h2>
+            <div class="pipeline-container">
+                <!-- Krok 1: Tokenizacja -->
+                <div class="stage" id="stage-tok" data-tooltip="Tokenizator dzieli wpisany tekst na mniejsze kawałki zwane tokenami i przypisuje im liczby (ID).">
+                    <div class="stage-icon">✂️</div>
+                    <div class="stage-name">1. Tokenizacja</div>
+                    <div class="data-flow" id="flow-tok">"Ala" -> [34, 102]</div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Krok 2: Embedding -->
+                <div class="stage" id="stage-emb" data-tooltip="Embedding konwertuje liczby (ID tokenów) na wielowymiarowe wektory liczb zmiennoprzecinkowych. Zapewnia to matematyczną reprezentację znaczenia słów. Dodawane jest też pozycjonowanie (Positional Encoding).">
+                    <div class="stage-icon">🧬</div>
+                    <div class="stage-name">2. Embedding + Pozycja</div>
+                    <div class="data-flow" id="flow-emb">[0.12, -0.44, 0.89...]</div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Krok 3: Transformer Layers (Attention + FFN) -->
+                <div class="transformer-block" id="stage-trans">
+                    <div class="stage-name" style="text-align:center; color:#fff; margin-bottom: 0.5rem;">3. Bloki Transformera (<span id="viz-layers-count">96</span>x)</div>
+                    <div style="display:flex; justify-content:center; gap: 1rem;">
+                        <div class="sub-stage" id="stage-attn" data-tooltip="Self-Attention sprawdza relacje między KAŻDYM wyrazem a resztą kontekstu. Oblicza co jest najważniejsze w zdaniu.">
+                            🧠 Self-Attention
+                        </div>
+                        <div class="sub-stage" id="stage-ffn" data-tooltip="Feed Forward Network (FFN). Przetwarza wynik z Attention, wykorzystując wyuczone fakty i logikę zapisaną w parametrach modelu.">
+                            ⚙️ FFN
+                        </div>
+                    </div>
+                    <div class="data-flow" id="flow-trans" style="margin-top:0.5rem;">Przetwarzanie ukrytych warstw...</div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <!-- Krok 4: Un-embedding & Softmax -->
+                <div class="stage" id="stage-out" data-tooltip="Logits i Softmax konwertują wektor wyjściowy z powrotem na prawdopodobieństwa kolejnych słów. Wybierane jest słowo o największym prawdopodobieństwie.">
+                    <div class="stage-icon">🎲</div>
+                    <div class="stage-name">4. Softmax (Wybór Słowa)</div>
+                    <div class="data-flow" id="flow-out">Prawdopodobieństwa: "ma" (80%), "kot" (15%)</div>
+                </div>
+
+                <div class="output-console" id="generation-output">
+                    > Oczekuję na prompt...
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
