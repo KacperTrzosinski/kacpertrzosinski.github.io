@@ -221,7 +221,8 @@ function handleHashChange() {
     if (!hash || hash === 'home') {
         loadHome();
     } else {
-        loadArticle(hash);
+        const [id, anchor] = hash.split('#');
+        loadArticle(id, anchor);
     }
 }
 
@@ -304,7 +305,7 @@ function loadHome() {
     document.getElementById('wiki-content').scrollTop = 0;
 }
 
-async function loadArticle(id) {
+async function loadArticle(id, anchor = null) {
     currentArticleId = id;
     
     // Update active state in sidebar
@@ -340,8 +341,20 @@ async function loadArticle(id) {
             hljs.highlightElement(block);
         });
 
-        // Scroll to top
-        document.getElementById('wiki-content').scrollTop = 0;
+        // Scroll to anchor if specified, otherwise scroll to top
+        if (anchor) {
+            const decodedAnchor = decodeURIComponent(anchor);
+            const element = document.getElementById(decodedAnchor) || 
+                            document.getElementsByName(decodedAnchor)[0] || 
+                            document.querySelector(`[id*="${decodedAnchor}"]`);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                document.getElementById('wiki-content').scrollTop = 0;
+            }
+        } else {
+            document.getElementById('wiki-content').scrollTop = 0;
+        }
         
     } catch (error) {
         console.error('Error loading article:', error);
@@ -351,3 +364,69 @@ async function loadArticle(id) {
         `;
     }
 }
+
+function resolveRelativePath(basePath, relativePath) {
+    const normalizedBase = basePath.replace(/\\/g, '/');
+    const normalizedRel = relativePath.replace(/\\/g, '/');
+    
+    const baseDirParts = normalizedBase.split('/');
+    baseDirParts.pop(); // remove filename
+    
+    const relParts = normalizedRel.split('/');
+    for (const part of relParts) {
+        if (part === '.' || part === '') {
+            continue;
+        } else if (part === '..') {
+            if (baseDirParts.length > 0) baseDirParts.pop();
+        } else {
+            baseDirParts.push(part);
+        }
+    }
+    
+    return baseDirParts.join('/');
+}
+
+// Intercept clicks on links inside markdown body to handle relative .md file navigation
+document.addEventListener('click', (e) => {
+    const a = e.target.closest('.markdown-body a');
+    if (!a) return;
+    
+    const href = a.getAttribute('href');
+    if (!href) return;
+    
+    // Ignore absolute and normal hash links
+    if (href.startsWith('http://') || href.startsWith('https://') || href.startsWith('#') || href.startsWith('//')) {
+        return;
+    }
+    
+    const decodedHref = decodeURIComponent(href);
+    const [pathPart, anchorPart] = decodedHref.split('#');
+    
+    if (pathPart.endsWith('.md')) {
+        const currentArticle = articles.find(art => art.id === currentArticleId);
+        let targetFile = pathPart;
+        
+        if (currentArticle && !pathPart.startsWith('file:///')) {
+            targetFile = resolveRelativePath(currentArticle.file, pathPart);
+        }
+        
+        // Match the resolved relative path, or match via endsWith suffix for absolute/file links
+        let targetArticle = articles.find(art => art.file.toLowerCase() === targetFile.toLowerCase());
+        
+        if (!targetArticle) {
+            targetArticle = articles.find(art => {
+                const cleanPathPart = pathPart.replace(/\\/g, '/');
+                const cleanArtFile = art.file.replace(/\\/g, '/');
+                return cleanPathPart.toLowerCase().endsWith(cleanArtFile.toLowerCase());
+            });
+        }
+        
+        if (targetArticle) {
+            e.preventDefault();
+            // Change hash to trigger SPA navigation
+            window.location.hash = targetArticle.id + (anchorPart ? `#${anchorPart}` : '');
+        } else {
+            console.warn(`Could not resolve article link for: ${href}`);
+        }
+    }
+});
