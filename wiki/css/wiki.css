@@ -113,7 +113,7 @@ body {
     margin-top: 4px;
     overflow: hidden;
     transition: max-height 0.3s ease-out;
-    max-height: 1000px; /* arbitrary max-height for animation */
+    max-height: 9999px; /* increased to prevent truncation in large directories */
 }
 
 .category-folder.collapsed .category-content {

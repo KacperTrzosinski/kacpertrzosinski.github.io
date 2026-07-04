@@ -1,26 +1,2446 @@
 [
   {
-    "id": "welcome",
-    "title": "Wprowadzenie",
-    "file": "welcome.md",
-    "category": "Ogólne",
-    "tags": ["start", "pomoc"],
-    "description": "Przewodnik po Twojej nowej Bazie Wiedzy. Dowiedz się, jak dodawać nowe wpisy, przypisywać je do kategorii i organizować."
+    "id": "csharp-roadmapa-01-podstawy-projekt-001-math-parser-cli",
+    "title": "Projekt 001 Math Parser CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_001_Math_Parser_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nProjekt polega na stworzeniu konsolowego kalkulatora, który potrafi sparsować i poprawnie obliczyć wartość wyrażenia matematycznego podanego ..."
   },
   {
-    "id": "css-glassmorphism",
+    "id": "csharp-roadmapa-01-podstawy-projekt-002-media-library-cli",
+    "title": "Projekt 002 Media Library CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_002_Media_Library_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nProjekt polega na stworzeniu aplikacji konsolowej pozwalającej na zarządzanie katalogiem domowych mediów: książek, filmów, albumów muzycznych..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-003-investment-portfolio",
+    "title": "Projekt 003 Investment Portfolio",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_003_Investment_Portfolio.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSymulator portfela inwestycyjnego służy do śledzenia posiadanych aktywów finansowych (akcji, kryptowalut, walut fiat) oraz symulacji transakc..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-004-log-analyzer-cli",
+    "title": "Projekt 004 Log Analyzer CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_004_Log_Analyzer_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nAnaliza logów to jedno z podstawowych zadań w pracy programisty i administratora systemów. Projekt polega na stworzeniu narzędzia wiersza pol..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-005-task-manager-cli",
+    "title": "Projekt 005 Task Manager CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_005_Task_Manager_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nProjekt polega na stworzeniu konsolowej aplikacji typu \"To-Do List\" o rozbudowanej strukturze. Aplikacja pozwala na dodawanie zadań, przypisy..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-006-banking-system-console",
+    "title": "Projekt 006 Banking System Console",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_006_Banking_System_Console.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nProjekt polega na stworzeniu konsolowej aplikacji symulującej system bankowy obsługujący konta osobiste i oszczędnościowe, autoryzację operac..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-007-config-converter-cli",
+    "title": "Projekt 007 Config Converter CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_007_Config_Converter_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nKonwersja formatów danych to częste wyzwanie inżynieryjne. W tym projekcie stworzysz narzędzie CLI, które przetwarza tradycyjne pliki konfigu..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-008-text-rpg-engine",
+    "title": "Projekt 008 Text RPG Engine",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_008_Text_RPG_Engine.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nGry tekstowe wymagają elastycznego silnika, który potrafi przetwarzać komendy wpisywane przez użytkownika (np. go north, take sword, use key ..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-009-employee-time-tracker",
+    "title": "Projekt 009 Employee Time Tracker",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_009_Employee_Time_Tracker.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nZarządzanie czasem pracy to klasyczny problem biznesowy, który wymaga precyzyjnego operowania na przedziałach czasowych oraz wykrywania konfl..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-010-contact-manager-cli",
+    "title": "Projekt 010 Contact Manager CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_010_Contact_Manager_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nPraca z danymi wprowadzonymi przez użytkownika zawsze niesie ze sobą ryzyko błędów lub złośliwego działania. W tym projekcie stworzysz zaawan..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-011-zip-hash-manager",
+    "title": "Projekt 011 Zip Hash Manager",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_011_Zip_Hash_Manager.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nProjekt polega na stworzeniu narzędzia konsolowego do zarządzania spakowanymi archiwami ZIP oraz weryfikacji integralności plików. Aplikacja ..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-012-inventory-thread-simulator",
+    "title": "Projekt 012 Inventory Thread Simulator",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_012_Inventory_Thread_Simulator.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nAplikacje biznesowe często działają w środowiskach wielowątkowych, gdzie wiele procesów jednocześnie próbuje modyfikować te same zasoby (np. ..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-013-cinema-reservation-cli",
+    "title": "Projekt 013 Cinema Reservation CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_013_Cinema_Reservation_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nZarządzanie miejscami siedzącymi w kinie lub teatrze to doskonały problem do nauki manipulacji tablicami wielowymiarowymi oraz ustrukturyzowa..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-014-custom-csv-engine",
+    "title": "Projekt 014 Custom CSV Engine",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_014_Custom_CSV_Engine.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nFormat CSV (Comma-Separated Values) wydaje się prosty, jednak poprawna obsługa wszystkich jego niuansów (znaki nowej linii wewnątrz wartości,..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-015-console-expense-tracker",
+    "title": "Projekt 015 Console Expense Tracker",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_015_Console_Expense_Tracker.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nŚledzenie finansów osobistych wymaga zbierania transakcji przychodów i rozchodów, kategoryzowania ich oraz generowania raportów. Projekt pole..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-016-elevator-simulator-cli",
+    "title": "Projekt 016 Elevator Simulator CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_016_Elevator_Simulator_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nProjekt polega na stworzeniu konsolowej symulacji systemu sterowania windami w wielopiętrowym budynku biurowym. Zadaniem systemu jest efektyw..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-017-word-frequency-analyzer-cli",
+    "title": "Projekt 017 Word Frequency Analyzer CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_017_Word_Frequency_Analyzer_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nProjekt polega na stworzeniu zaawansowanego programu konsolowego do analizy statystycznej tekstów literackich, artykułów lub logów. Aplikacja..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-018-candidate-evaluator",
+    "title": "Projekt 018 Candidate Evaluator",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_018_Candidate_Evaluator.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nDziały HR w dużych korporacjach technologicznych filtrują setki CV dziennie. Projekt polega na stworzeniu systemu, który automatycznie ocenia..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-019-console-invoice-generator",
+    "title": "Projekt 019 Console Invoice Generator",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_019_Console_Invoice_Generator.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nGenerowanie faktur to krytyczny komponent każdego oprogramowania ERP czy sklepu internetowego. System musi precyzyjnie operować na kwotach ne..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-020-in-memory-key-value-db",
+    "title": "Projekt 020 In Memory Key Value DB",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_020_In_Memory_Key_Value_DB.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nBazy danych typu klucz-wartość (np. Redis) są fundamentem współczesnych systemów cache. Projekt polega na stworzeniu własnego, konsolowego si..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-021-markdown-converter-cli",
+    "title": "Projekt 021 Markdown Converter CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_021_Markdown_Converter_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nProjekt polega na zbudowaniu konwertera plików tekstowych z formatu Markdown (.md) do ustrukturyzowanego kodu HTML (.html). Aplikacja musi pr..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-022-ast-tree-builder-cli",
+    "title": "Projekt 022 AST Tree Builder CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_022_AST_Tree_Builder_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW informatyce drzewo składniowe (Abstract Syntax Tree - AST) reprezentuje strukturę kodu źródłowego programu lub wyrażenia. W tym projekcie z..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-023-in-memory-graph-simulator",
+    "title": "Projekt 023 In Memory Graph Simulator",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_023_In_Memory_Graph_Simulator.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSieci społecznościowe (np. Facebook, LinkedIn) opierają się na grafach relacji między użytkownikami (węzły reprezentują ludzi, a krawędzie – ..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-024-ascii-matrix-generator",
+    "title": "Projekt 024 ASCII Matrix Generator",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_024_ASCII_Matrix_Generator.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWizualizacja danych bez interfejsu graficznego to spore wyzwanie. Ten projekt polega na stworzeniu konsolowego generatora uproszczonych kodów..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-025-aes-password-manager-cli",
+    "title": "Projekt 025 AES Password Manager CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_025_AES_Password_Manager_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nBezpieczeństwo danych to fundament inżynierii oprogramowania. Projekt polega na stworzeniu konsolowego menedżera haseł, który przechowuje log..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-026-console-ftp-client",
+    "title": "Projekt 026 Console FTP Client",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_026_Console_FTP_Client.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nTransmisja plików przez sieć to klasyczny problem inżynieryjny. Projekt polega na stworzeniu uproszczonego klienta protokołu FTP (File Transf..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-027-console-music-playlist",
+    "title": "Projekt 027 Console Music Playlist",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_027_Console_Music_Playlist.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nOdtwarzacze muzyczne przechowują listy utworów i umożliwiają przechodzenie do następnego utworu, powrót do poprzedniego, zapętlanie playlisty..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-028-in-memory-sql-parser",
+    "title": "Projekt 028 In Memory SQL Parser",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_028_In_Memory_SQL_Parser.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWiększość baz danych posiada parser języka SQL, który tłumaczy tekst zapytania na instrukcje zrozumiałe dla silnika bazy. W tym projekcie nap..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-029-virtual-file-system-cli",
+    "title": "Projekt 029 Virtual File System CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_029_Virtual_File_System_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSystemy plików (takie jak NTFS czy ext4) organizują dane w hierarchiczne struktury katalogów i plików. Zrozumienie sposobu, w jaki systemy op..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-030-bulk-file-renamer",
+    "title": "Projekt 030 Bulk File Renamer",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_030_Bulk_File_Renamer.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nPorządkowanie dużej liczby plików (np. zdjęć z aparatu, plików muzycznych lub logów) wymaga automatyzacji. Projekt polega na stworzeniu narzę..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-031-json-syntax-validator-cli",
+    "title": "Projekt 031 JSON Syntax Validator CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_031_JSON_Syntax_Validator_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWalidacja formatów danych to proces sprawdzania, czy wejściowy ciąg znaków jest zgodny z formalną gramatyką języka. Projekt polega na stworze..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-032-file-system-watcher-cli",
+    "title": "Projekt 032 File System Watcher CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_032_File_System_Watcher_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nMonitorowanie aktywności systemu plików jest niezbędne w systemach automatyzacji (np. automatyczne przebudowywanie kodu po edycji pliku - Liv..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-033-mini-console-spreadsheet",
+    "title": "Projekt 033 Mini Console Spreadsheet",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_033_Mini_Console_Spreadsheet.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nArkusze kalkulacyjne (np. Excel) bazują na siatce komórek, w których wartości mogą być stałymi tekstowymi, liczbami lub formułami wyliczanymi..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-034-support-ticket-dispatcher",
+    "title": "Projekt 034 Support Ticket Dispatcher",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_034_Support_Ticket_Dispatcher.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW centrach pomocy technicznej (Helpdesk) zgłoszenia klientów muszą być kolejkowane i automatycznie przydzielane do odpowiednich agentów na po..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-035-logic-gate-simulator-cli",
+    "title": "Projekt 035 Logic Gate Simulator CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_035_Logic_Gate_Simulator_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nProjektowanie i symulacja układów scalonych wymaga reprezentacji komponentów elektronicznych (bramek logicznych, przewodów, sygnałów) w kodzi..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-036-backup-tool-cli",
+    "title": "Projekt 036 Backup Tool CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_036_Backup_Tool_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nTworzenie kopii zapasowych to jeden z filarów bezpieczeństwa infrastruktury IT. Projekt polega na stworzeniu aplikacji CLI, która wykonuje ko..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-037-shopping-cart-simulator",
+    "title": "Projekt 037 Shopping Cart Simulator",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_037_Shopping_Cart_Simulator.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nE-commerce wymaga elastycznych systemów naliczania rabatów (np. \"Kup 3, zapłać za 2\", \"10% rabatu na całe zamówienie od 200 zł\", \"Darmowa wys..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-038-server-log-transpiler",
+    "title": "Projekt 038 Server Log Transpiler",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_038_Server_Log_Transpiler.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW pracy inżyniera oprogramowania często zachodzi potrzeba konwersji (transpilacji) nieustrukturyzowanych logów tekstowych do ustrukturyzowany..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-039-product-recommender-engine",
+    "title": "Projekt 039 Product Recommender Engine",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_039_Product_Recommender_Engine.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSystemy rekomendacji są sercem nowoczesnych platform takich jak Netflix czy Amazon. Projekt polega na zaimplementowaniu w pamięci silnika rek..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-040-console-text-editor-cli",
+    "title": "Projekt 040 Console Text Editor CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_040_Console_Text_Editor_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nNapisanie edytora tekstu działającego w terminalu (podobnego do uproszczonego Nano lub Vim) wymaga precyzyjnego zarządzania buforem tekstu, i..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-041-mini-roslyn-analyzer",
+    "title": "Projekt 041 Mini Roslyn Analyzer",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_041_Mini_Roslyn_Analyzer.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nNarzędzia do statycznej analizy kodu (Lintery) badają kod bez jego uruchamiania w celu wykrycia błędów, naruszeń standardów kodowania oraz wy..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-042-conway-game-of-life-cli",
+    "title": "Projekt 042 Conway Game Of Life CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_042_Conway_Game_of_Life_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nGra w Życie Conwaya to najsłynniejszy przykład automatu komórkowego. Na dwuwymiarowej siatce komórki rodzą się, żyją lub umierają w kolejnych..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-043-localization-translation-engine",
+    "title": "Projekt 043 Localization Translation Engine",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_043_Localization_Translation_Engine.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nZarządzanie internacjonalizacją (i18n) w dużych systemach wymaga narzędzi, które łączą elastyczność formatów edycyjnych (jak pliki JSON/CSV d..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-044-matrix-math-engine",
+    "title": "Projekt 044 Matrix Math Engine",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_044_Matrix_Math_Engine.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nMatematyka macierzowa jest fundamentem grafiki 3D, silników fizycznych gier oraz algorytmów uczenia maszynowego. Projekt polega na stworzeniu..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-045-regex-state-machine",
+    "title": "Projekt 045 Regex State Machine",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_045_Regex_State_Machine.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWyrażenia regularne pod maską nie są zwykłymi przeszukiwaniami tekstowymi – są one kompilowane do struktur zwanych automatami skończonymi. Zr..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-046-financial-stats-cli",
+    "title": "Projekt 046 Financial Stats CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_046_Financial_Stats_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nAnaliza statystyczna dużych zbiorów danych (Big Data) to chleb powszedni inżynierów oprogramowania pracujących w sektorze FinTech. Projekt po..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-047-decision-tree-evaluator",
+    "title": "Projekt 047 Decision Tree Evaluator",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_047_Decision_Tree_Evaluator.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nDrzewa decyzyjne są klasyczną strukturą reprezentacji reguł biznesowych oraz prostych modeli klasyfikacyjnych uczenia maszynowego. Projekt po..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-048-rest-client-with-ttl-cache",
+    "title": "Projekt 048 REST Client With TTL Cache",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_048_REST_Client_with_TTL_Cache.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nPobieranie danych z sieci Web API przy użyciu protokołu HTTP to podstawa integracji systemów. Częste odpytywanie serwerów zewnętrznych o te s..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-049-queue-theory-simulator-cli",
+    "title": "Projekt 049 Queue Theory Simulator CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_049_Queue_Theory_Simulator_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nTeoria kolejek (Queueing Theory) zajmuje się matematycznym badaniem linii oczekiwania. Symulatory kolejek są kluczowe przy projektowaniu serw..."
+  },
+  {
+    "id": "csharp-roadmapa-01-podstawy-projekt-050-file-duplicate-finder-cli",
+    "title": "Projekt 050 File Duplicate Finder CLI",
+    "file": "Csharp_Roadmapa/01_Podstawy/Projekt_050_File_Duplicate_Finder_CLI.md",
+    "category": "01_Podstawy",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "01_Podstawy"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nOczyszczanie dysku z powtarzających się plików wymaga napisania programu, który potrafi w optymalny sposób przeszukać tysiące ścieżek i ziden..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-051-concurrent-text-finder",
+    "title": "Projekt 051 Concurrent Text Finder",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_051_Concurrent_Text_Finder.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nProjekt polega na stworzeniu narzędzia konsolowego, które przeszukuje tysiące plików tekstowych (np. kod źródłowy, pliki dziennika) w wybrany..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-052-async-web-scraper",
+    "title": "Projekt 052 Async Web Scraper",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_052_Async_Web_Scraper.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nPobieranie danych ze stron internetowych (Web Scraping) to powszechny sposób agregacji informacji. Scraper musi pobierać dane wydajnie (wielo..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-053-sqlite-dapper-repository",
+    "title": "Projekt 053 SQLite Dapper Repository",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_053_SQLite_Dapper_Repository.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nDla lokalnych aplikacji desktopowych lub prostych systemów narzędziowych, pełnowymiarowy serwer bazy danych (np. SQL Server, PostgreSQL) to z..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-054-console-auth-system",
+    "title": "Projekt 054 Console Auth System",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_054_Console_Auth_System.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nPrzechowywanie haseł użytkowników w bazie danych w postaci otwartego tekstu (plain text) to kardynalny błąd bezpieczeństwa. W przypadku wycie..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-055-async-image-pipeline",
+    "title": "Projekt 055 Async Image Pipeline",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_055_Async_Image_Pipeline.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW aplikacjach przetwarzających duże wolumeny danych (np. serwisy społecznościowe generujące miniatury zdjęć, systemy OCR) przetwarzanie pojed..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-056-pdf-document-builder",
+    "title": "Projekt 056 PDF Document Builder",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_056_PDF_Document_Builder.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nGenerowanie raportów, faktur i certyfikatów w formacie PDF to powszechne wymaganie w systemach biznesowych. Często szablony dokumentów zmieni..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-057-async-tcp-chat-server",
+    "title": "Projekt 057 Async TCP Chat Server",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_057_Async_TCP_Chat_Server.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nKomunikacja sieciowa czasu rzeczywistego (Real-Time Communication) leży u podstaw systemów takich jak czaty, gry online czy systemy dystrybuc..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-058-cron-scheduler-daemon",
+    "title": "Projekt 058 Cron Scheduler Daemon",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_058_Cron_Scheduler_Daemon.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWiele systemów biznesowych wymaga wykonywania zadań w określonych odstępach czasu (np. wysyłanie raportów o 23:00, czyszczenie bazy danych co..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-059-csv-sqlite-loader-cli",
+    "title": "Projekt 059 CSV SQLite Loader CLI",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_059_CSV_SQLite_Loader_CLI.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWczytanie dużego pliku CSV (np. 1 000 000 wierszy) i zapisanie go do bazy danych linia po linii za pomocą pojedynczych zapytań SQL zajmie nie..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-060-real-time-stock-simulator",
+    "title": "Projekt 060 Real Time Stock Simulator",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_060_Real-time_Stock_Simulator.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSystemy transakcyjne na giełdach muszą błyskawicznie reagować na fluktuacje cenowe i dystrybuować aktualizacje do tysięcy inwestorów.\nProjekt..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-061-async-custom-http-server",
+    "title": "Projekt 061 Async Custom HTTP Server",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_061_Async_Custom_HTTP_Server.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nZrozumienie, jak działają serwery webowe pod spodem (np. Kestrel w ASP.NET Core, Nginx) wymaga odejścia od wysokopoziomowych frameworków i na..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-062-persistent-task-queue",
+    "title": "Projekt 062 Persistent Task Queue",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_062_Persistent_Task_Queue.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nKolejki zadań w pamięci (np. Channel<T>) tracą wszystkie dane w przypadku awarii zasilania lub restartu aplikacji. W systemach produkcyjnych ..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-063-boolean-parser-cli",
+    "title": "Projekt 063 Boolean Parser CLI",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_063_Boolean_Parser_CLI.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWeryfikacja układów logicznych oraz optymalizacja zapytań bazodanowych wymaga analizy wyrażeń boolowskich (np. (A AND B) OR (NOT C AND A)). P..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-064-folder-synchronizer-cli",
+    "title": "Projekt 064 Folder Synchronizer CLI",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_064_Folder_Synchronizer_CLI.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSynchronizacja danych między dwoma lokalizacjami (np. dyskiem lokalnym a sieciowym) w trybie dwukierunkowym (Two-way Synchronization) to trud..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-065-n-body-orbit-simulator",
+    "title": "Projekt 065 N Body Orbit Simulator",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_065_N-Body_Orbit_Simulator.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSymulacja oddziaływań grawitacyjnych wielu ciał (N-Body Simulation) to klasyczny problem fizyki i informatyki śledzący ruch planet, gwiazd cz..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-066-in-memory-graph-db",
+    "title": "Projekt 066 In Memory Graph DB",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_066_In_Memory_Graph_DB.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nBazy danych grafowych (np. Neo4j) przechowują dane w postaci wierzchołków (Nodes/Vertices) i krawędzi (Edges/Relationships) oznaczonych klucz..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-067-reflection-data-validator",
+    "title": "Projekt 067 Reflection Data Validator",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_067_Reflection_Data_Validator.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW aplikacjach biznesowych walidacja obiektów wejściowych (np. danych z formularzy lub żądań HTTP API) jest kluczowa dla zachowania spójności...."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-068-p2p-file-sharer",
+    "title": "Projekt 068 P2P File Sharer",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_068_P2P_File_Sharer.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWymiana plików w sieciach rozproszonych (Peer-to-Peer) eliminuje potrzebę posiadania centralnego serwera przechowującego pliki. Kluczowym ele..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-069-binary-protocol-serializer",
+    "title": "Projekt 069 Binary Protocol Serializer",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_069_Binary_Protocol_Serializer.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW komunikacji o niskich opóźnieniach (np. protokoły gier sieciowych, komunikacja z urządzeniami IoT, systemy High-Frequency Trading) tekstowe..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-070-bytecode-vm-engine",
+    "title": "Projekt 070 Bytecode VM Engine",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_070_Bytecode_VM_Engine.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWielkie platformy uruchomieniowe (np. CLR w .NET, JVM w Javie) kompilują kod źródłowy do pośredniego kodu bajtowego (Bytecode), który jest na..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-071-parser-generator-cli",
+    "title": "Projekt 071 Parser Generator CLI",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_071_Parser_Generator_CLI.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nTworzenie własnych języków programowania, specyficznych formatów plików czy języków zapytań (DSL - Domain Specific Language) wymaga zaawansow..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-072-generic-disk-cache-lru",
+    "title": "Projekt 072 Generic Disk Cache LRU",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_072_Generic_Disk_Cache_LRU.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWyszukiwanie danych w bazie danych lub zapytania sieciowe są kosztowne. Gdy dane nie mieszczą się w pamięci RAM, optymalnym rozwiązaniem jest..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-073-async-custom-dns-server",
+    "title": "Projekt 073 Async Custom DNS Server",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_073_Async_Custom_DNS_Server.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSystem Nazw Domenowych (DNS) tłumaczy nazwy domenowe czytelne dla człowieka (np. google.com) na adresy IP maszyn (np. 142.250.180.206). Zrozu..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-074-ecs-console-game-engine",
+    "title": "Projekt 074 ECS Console Game Engine",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_074_ECS_Console_Game_Engine.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nArchitektura zorientowana obiektowo w silnikach gier (oparta o głębokie hierarchie dziedziczenia) często prowadzi do problemów z wydajnością ..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-075-pcap-parser-cli",
+    "title": "Projekt 075 PCAP Parser CLI",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_075_PCAP_Parser_CLI.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nAnaliza ruchu sieciowego to kluczowy element bezpieczeństwa i diagnostyki systemów. Pliki .pcap (Packet Capture) są standardem branżowym używ..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-076-json-document-db",
+    "title": "Projekt 076 JSON Document DB",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_076_JSON_Document_DB.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nBazy dokumentowe (np. MongoDB) zapisują dane w postaci ustrukturyzowanych dokumentów (JSON/BSON) i wymagają wydajnego wyszukiwania po zindeks..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-077-c-dependency-analyzer",
+    "title": "Projekt 077 C# Dependency Analyzer",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_077_C#_Dependency_Analyzer.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW dużych systemach składających się z dziesiątek projektów (plików .csproj) łatwo doprowadzić do niepotrzebnego skomplikowania struktury zale..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-078-async-smtp-pop3-server",
+    "title": "Projekt 078 Async SMTP POP3 Server",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_078_Async_SMTP_POP3_Server.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nPoczta elektroniczna (e-mail) opiera się na dwóch głównych protokołach tekstowych: SMTP (Simple Mail Transfer Protocol - do wysyłania wiadomo..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-079-workflow-state-machine",
+    "title": "Projekt 079 Workflow State Machine",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_079_Workflow_State_Machine.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWiele procesów biznesowych (np. akceptacja faktury, proces rekrutacyjny, obsługa zamówień w sklepie) przechodzi przez określone stany według ..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-080-basic-heap-profiler",
+    "title": "Projekt 080 Basic Heap Profiler",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_080_Basic_Heap_Profiler.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nOptymalizacja aplikacji pod kątem zużycia pamięci wymaga profilowania steraty. W środowisku .NET Garbage Collector wykonuje świetną robotę, a..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-081-css-xml-selector-engine",
+    "title": "Projekt 081 CSS XML Selector Engine",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_081_CSS_XML_Selector_Engine.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWyszukiwanie elementów w plikach strukturyzowanych (np. HTML, XML) za pomocą selektorów CSS (np. div.content > p.highlight) jest powszechnie ..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-082-console-ssh-sftp-client",
+    "title": "Projekt 082 Console SSH SFTP Client",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_082_Console_SSH_SFTP_Client.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nBezpieczna administracja serwerami opiera się na protokołach SSH (Secure Shell) oraz SFTP (SSH File Transfer Protocol). Zapewniają one bezpie..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-083-directory-snapshot-cli",
+    "title": "Projekt 083 Directory Snapshot CLI",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_083_Directory_Snapshot_CLI.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWykrywanie zmian w systemie plików (audyt integralności plików, systemy wykrywania włamań IDS - Intrusion Detection System) wymaga robienia t..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-084-kademlia-dht-simulator",
+    "title": "Projekt 084 Kademlia DHT Simulator",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_084_Kademlia_DHT_Simulator.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nKademlia to zdecentralizowana rozproszona tablica mieszająca (DHT - Distributed Hash Table) stosowana w sieciach P2P (takich jak BitTorrent, ..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-085-ascii-timeline-renderer",
+    "title": "Projekt 085 ASCII Timeline Renderer",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_085_ASCII_Timeline_Renderer.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWizualizacja harmonogramów zadań (np. wykresy Gantta, osie czasu logów zdarzeń, plany projektów) w interfejsie konsolowym CLI ułatwia szybką ..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-086-reactive-spreadsheet-engine",
+    "title": "Projekt 086 Reactive Spreadsheet Engine",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_086_Reactive_Spreadsheet_Engine.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW przeciwieństwie do podstawowego arkusza kalkulacyjnego, systemy produkcyjne wymagają w pełni reaktywnego modelu danych (Reactive Programmin..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-087-markdown-doc-generator",
+    "title": "Projekt 087 Markdown Doc Generator",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_087_Markdown_Doc_Generator.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nUtrzymywanie aktualnej dokumentacji API w dużych projektach bywa problematyczne. W języku C# standardem jest pisanie komentarzy dokumentacyjn..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-088-async-custom-dhcp-server",
+    "title": "Projekt 088 Async Custom DHCP Server",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_088_Async_Custom_DHCP_Server.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nProtokół dynamicznej konfiguracji hosta (DHCP - Dynamic Host Configuration Protocol) automatycznie przydziela adresy IP, maski sieciowe, bram..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-089-topic-message-broker",
+    "title": "Projekt 089 Topic Message Broker",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_089_Topic_Message_Broker.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSystemy kolejkowania wiadomości (np. RabbitMQ, ActiveMQ, MQTT) rozsyłają wiadomości na podstawie tematów (Topics). Niezwykle ważną funkcją je..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-090-process-tree-explorer-cli",
+    "title": "Projekt 090 Process Tree Explorer CLI",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_090_Process_Tree_Explorer_CLI.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSystemy operacyjne uruchamiają programy w postaci procesów. Każdy proces (poza pierwszym) jest tworzony przez inny proces (proces rodzica - P..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-091-spreadsheetml-parser-engine",
+    "title": "Projekt 091 SpreadsheetML Parser Engine",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_091_SpreadsheetML_Parser_Engine.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nArkusze kalkulacyjne pakietu Microsoft Office Excel są zapisywane w formacie OpenXML, a konkretnie SpreadsheetML (pliki .xlsx są archiwami ZI..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-092-mermaid-diagram-generator",
+    "title": "Projekt 092 Mermaid Diagram Generator",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_092_Mermaid_Diagram_Generator.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWizualizacja powiązań między klasami ułatwia zrozumienie architektury systemu. Mermaid.js to popularne narzędzie, które pozwala generować dia..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-093-async-custom-ntp-server",
+    "title": "Projekt 093 Async Custom NTP Server",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_093_Async_Custom_NTP_Server.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nNetwork Time Protocol (NTP) to protokół sieciowy służący do precyzyjnej synchronizacji zegarów komputerowych w sieciach pakietowych o zmienne..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-094-3d-octree-collision-simulator",
+    "title": "Projekt 094 3D Octree Collision Simulator",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_094_3D_Octree_Collision_Simulator.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW symulacjach 3D, silnikach fizycznych i grach trójwymiarowych wykrywanie kolizji między setkami obiektów poruszających się w przestrzeni to ..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-095-shared-memory-ipc-cli",
+    "title": "Projekt 095 Shared Memory IPC CLI",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_095_Shared_Memory_IPC_CLI.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nKomunikacja międzyprocesowa (IPC - Inter-Process Communication) pozwala dwóm niezależnym programom działającym w tym samym systemie operacyjn..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-096-xml-json-transpiler-cli",
+    "title": "Projekt 096 XML JSON Transpiler CLI",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_096_XML_JSON_Transpiler_CLI.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nFormaty XML i JSON różnią się strukturalnie – XML wspiera atrybuty wewnątrz tagów, powtarzające się elementy o tej samej nazwie na jednym poz..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-097-advanced-spreadsheet-solver",
+    "title": "Projekt 097 Advanced Spreadsheet Solver",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_097_Advanced_Spreadsheet_Solver.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWzbogacenie reaktywnego arkusza kalkulacyjnego o zaawansowane funkcje matematyczno-statystyczne wymaga parsowania i ewaluacji zakresów komóre..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-098-async-custom-tftp-server",
+    "title": "Projekt 098 Async Custom TFTP Server",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_098_Async_Custom_TFTP_Server.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nTrivial File Transfer Protocol (TFTP) to uproszczony protokół przesyłu plików o niskim narzucie nagłówków, działający na bazie protokołu UDP ..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-099-disk-backed-message-broker",
+    "title": "Projekt 099 Disk Backed Message Broker",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_099_Disk-Backed_Message_Broker.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nKlasyczny broker wiadomości działający w pamięci RAM traci wszystkie dane przy awarii. Chcąc zachować trwałość danych, broker musi zapisywać ..."
+  },
+  {
+    "id": "csharp-roadmapa-02-srednie-projekt-100-udp-network-game-engine",
+    "title": "Projekt 100 UDP Network Game Engine",
+    "file": "Csharp_Roadmapa/02_Srednie/Projekt_100_UDP_Network_Game_Engine.md",
+    "category": "02_Srednie",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "02_Srednie"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nGry sieciowe czasu rzeczywistego (np. strzelanki wieloosobowe, gry akcji) wymagają minimalnych opóźnień (latencji). Protokół TCP jest zbyt wo..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-101-clean-web-api",
+    "title": "Projekt 101 Clean Web API",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_101_Clean_Web_API.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nBudowanie aplikacji klasy Enterprise wymaga modularnej architektury gwarantującej testowalność i uniezależnienie logiki biznesowej od technol..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-102-e-commerce-ef-core",
+    "title": "Projekt 102 E Commerce EF Core",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_102_E-Commerce_EF_Core.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nEntity Framework Core (EF Core) to główny system mapowania obiektowo-relacyjnego (ORM) stosowany w ekosystemie .NET. Pozwala on na programowa..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-103-xunit-testing-suite",
+    "title": "Projekt 103 XUnit Testing Suite",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_103_xUnit_Testing_Suite.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nJakość kodu w systemach inżynierskich jest bezpośrednio związana z pokryciem testami automatycznymi. Testy dają pewność, że refaktoryzacja ko..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-104-structured-logging-seq",
+    "title": "Projekt 104 Structured Logging Seq",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_104_Structured_Logging_Seq.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW klasycznych systemach logowania (np. zapis zwykłego tekstu do pliku) wyszukiwanie błędów lub korelacja zdarzeń w środowisku rozproszonym je..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-105-jwt-auth-rest-api",
+    "title": "Projekt 105 JWT Auth REST API",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_105_JWT_Auth_REST_API.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nBezpieczeństwo punktów końcowych (endpoints) w bezstanowych (stateless) architekturach Web API najczęściej opiera się na tokenach JWT (JSON W..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-106-ef-core-redis-cache",
+    "title": "Projekt 106 EF Core Redis Cache",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_106_EF_Core_Redis_Cache.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW aplikacjach o wysokim obciążeniu bezpośrednie odpytywanie bazy relacyjnej (SQL Server/PostgreSQL) przy każdym zapytaniu użytkownika prowadz..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-107-cqrs-mediatr-web-api",
+    "title": "Projekt 107 CQRS MediatR Web API",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_107_CQRS_MediatR_Web_API.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW klasycznych systemach kontrolery API bezpośrednio wywołują serwisy biznesowe, co prowadzi do ciasnego powiązania (tight coupling) oraz rozr..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-108-fluentvalidation-api",
+    "title": "Projekt 108 FluentValidation API",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_108_FluentValidation_API.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nUżywanie atrybutów walidacyjnych w modelach (np. [Required], [StringLength]) miesza reguły biznesowe z definicją danych i utrudnia dynamiczną..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-109-api-gateway-rate-limiting",
+    "title": "Projekt 109 API Gateway Rate Limiting",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_109_API_Gateway_Rate_Limiting.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nOchrona API przed przeciążeniem oraz złośliwymi atakami typu DoS / Brute-Force to kluczowy element bezpieczeństwa infrastruktury. Jedną z naj..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-110-signalr-notifications-hub",
+    "title": "Projekt 110 SignalR Notifications Hub",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_110_SignalR_Notifications_Hub.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nPowiadamianie użytkowników o zdarzeniach w systemie (np. nowe powiadomienie, zmiana statusu zamówienia, wiadomość od innego użytkownika) w cz..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-111-payment-gateway-api",
+    "title": "Projekt 111 Payment Gateway API",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_111_Payment_Gateway_API.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nObsługa transakcji płatniczych to krytyczny element każdego systemu e-commerce. Wymaga on wysokiego poziomu bezpieczeństwa, poprawnego zarząd..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-112-advanced-excel-generator",
+    "title": "Projekt 112 Advanced Excel Generator",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_112_Advanced_Excel_Generator.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nRaportowanie danych to standardowy wymóg aplikacji biznesowych. Generowanie dużych zestawień (np. miliony wierszy danych finansowych) bezpośr..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-113-async-mailer-queue",
+    "title": "Projekt 113 Async Mailer Queue",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_113_Async_Mailer_Queue.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWysyłanie wiadomości e-mail w trakcie obsługi żądania HTTP (np. rejestracji użytkownika) jest złą praktyką – serwer pocztowy może odpowiedzie..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-114-cloud-storage-api",
+    "title": "Projekt 114 Cloud Storage API",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_114_Cloud_Storage_API.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nZapisywanie plików przesłanych przez użytkowników bezpośrednio na dysku lokalnym serwera aplikacyjnego utrudnia skalowanie poziome (gdy uruch..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-115-elasticsearch-engine-api",
+    "title": "Projekt 115 Elasticsearch Engine API",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_115_Elasticsearch_Engine_API.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nKlasyczne bazy relacyjne SQL nie radzą sobie wydajnie z wyszukiwaniem pełnotekstowym (Full-text search), zwłaszcza gdy wymagane jest wyszukiw..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-116-hangfire-background-jobs",
+    "title": "Projekt 116 Hangfire Background Jobs",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_116_Hangfire_Background_Jobs.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW aplikacjach biznesowych wiele operacji (np. codzienne generowanie raportów o północy, czyszczenie nieaktywnych koszyków, wysyłka newsletter..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-117-pipelines-data-exporter",
+    "title": "Projekt 117 Pipelines Data Exporter",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_117_Pipelines_Data_Exporter.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWysokowydajny eksport danych z bazy do formatu CSV lub JSON (np. w systemach analitycznych) często napotyka barierę alokacji pamięci. Tradycy..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-118-grpc-microservice-api",
+    "title": "Projekt 118 GRPC Microservice API",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_118_gRPC_Microservice_API.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW architekturze mikroserwisów tradycyjna komunikacja REST JSON między usługami wewnątrz sieci wewnętrznej bywa powolna i generuje duży narzut..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-119-opentelemetry-jaeger-tracing",
+    "title": "Projekt 119 OpenTelemetry Jaeger Tracing",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_119_OpenTelemetry_Jaeger_Tracing.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW architekturze mikroserwisów pojedyncze kliknięcie użytkownika na froncie może uruchomić łańcuch zapytań HTTP i gRPC przechodzący przez 5 ró..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-120-secure-config-vault-api",
+    "title": "Projekt 120 Secure Config Vault API",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_120_Secure_Config_Vault_API.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nBezpieczne zarządzanie konfiguracją i sekretami (hasła do baz, klucze API) to kluczowy wymóg bezpieczeństwa w systemach Enterprise. Zapisywan..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-121-masstransit-rabbitmq-event-bus",
+    "title": "Projekt 121 MassTransit RabbitMQ Event Bus",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_121_MassTransit_RabbitMQ_Event_Bus.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW architekturze mikroserwisowej synchroniczna komunikacja (HTTP/gRPC) prowadzi do sprzężenia czasowego (temporal coupling) – jeśli mikroserwi..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-122-oauth2-keycloak-api",
+    "title": "Projekt 122 OAuth2 Keycloak API",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_122_OAuth2_Keycloak_API.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nUtrzymywanie własnej bazy użytkowników i haseł bezpośrednio w aplikacji niesie ryzyko bezpieczeństwa. W architekturach Enterprise uwierzyteln..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-123-prometheus-grafana-metrics",
+    "title": "Projekt 123 Prometheus Grafana Metrics",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_123_Prometheus_Grafana_Metrics.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nUtrzymywanie systemów produkcyjnych wymaga stałego śledzenia ich kondycji (Observability). Oprócz logów i rozproszonego śledzenia (tracing), ..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-124-advanced-redis-cache",
+    "title": "Projekt 124 Advanced Redis Cache",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_124_Advanced_Redis_Cache.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWdrożenie cache (np. w pamięci RAM lub Redis) to najprostsza metoda na przyspieszenie zapytań o stałe dane (np. lista kategorii, cennik). Jed..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-125-ksef-xml-generator-api",
+    "title": "Projekt 125 KSeF XML Generator API",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_125_KSeF_XML_Generator_API.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWdrożenie systemów KSeF (Krajowy System e-Faktur) lub podobnych rządowych platform fakturowania cyfrowego w Europie opiera się o sztywne, ust..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-126-openapi-client-generator",
+    "title": "Projekt 126 OpenAPI Client Generator",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_126_OpenAPI_Client_Generator.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nPodczas integracji między serwisami (lub frontendu z backendem) ręczne pisanie klas klientów HTTP (razem z modelami DTO i obsługą endpointów)..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-127-ftps-secure-server",
+    "title": "Projekt 127 FTPS Secure Server",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_127_FTPS_Secure_Server.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nTradycyjny protokół FTP przesyła hasła i dane otwartym tekstem, co ułatwia ich podsłuchanie. Standardem zapewniającym bezpieczeństwo jest FTP..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-128-3d-kd-tree-collision-solver",
+    "title": "Projekt 128 3D KD Tree Collision Solver",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_128_3D_KD-Tree_Collision_Solver.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nOprócz drzew ósemkowych (Octree), inną niezwykle wydajną przestrzenną strukturą danych jest Drzewo K-Wymiarowe (K-Dimensional Tree / KD-Tree)..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-129-named-pipes-ipc-cli",
+    "title": "Projekt 129 Named Pipes IPC CLI",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_129_Named_Pipes_IPC_CLI.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW komunikacji międzyprocesowej (IPC) na tej samej maszynie nazwane potoki (Named Pipes) stanowią jedno z najpopularniejszych i najbezpiecznie..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-130-partitioned-message-broker",
+    "title": "Projekt 130 Partitioned Message Broker",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_130_Partitioned_Message_Broker.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW klasycznych systemach kolejkowych pojedynczy temat (Topic) obsługuje wiadomości sekwencyjnie. Przy ogromnym obciążeniu przetwarzanie wiadom..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-131-custom-graphql-server",
+    "title": "Projekt 131 Custom GraphQL Server",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_131_Custom_GraphQL_Server.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nStandard GraphQL pozwala klientom na precyzyjne definiowanie struktury danych, które chcą otrzymać w odpowiedzi z serwera, eliminując problem..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-132-wasm-interpreter-vm",
+    "title": "Projekt 132 Wasm Interpreter VM",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_132_Wasm_Interpreter_VM.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWebAssembly (Wasm) to format instrukcji binarnych dla maszyn wirtualnych opartych na stosie. Pozwala na uruchamianie kodu skompilowanego z ję..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-133-async-directory-ldap-server",
+    "title": "Projekt 133 Async Directory LDAP Server",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_133_Async_Directory_LDAP_Server.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nLekki protokół dostępu do katalogów (LDAP - Lightweight Directory Access Protocol) jest powszechnie stosowany w systemach Enterprise (np. Mic..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-134-real-time-sql-sync",
+    "title": "Projekt 134 Real Time SQL Sync",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_134_Real-time_SQL_Sync.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nReplikacja danych w bazach danych polega na ciągłym kopiowaniu zmian (operacje INSERT/UPDATE/DELETE) z bazy źródłowej (Master) do bazy docelo..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-135-2pc-coordinator",
+    "title": "Projekt 135 2PC Coordinator",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_135_2PC_Coordinator.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW systemach rozproszonych (mikroserwisach) utrzymanie spójności danych między wieloma bazami danych w ramach jednej operacji (np. zakup towar..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-136-scss-sass-transpiler-cli",
+    "title": "Projekt 136 SCSS Sass Transpiler CLI",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_136_SCSS_Sass_Transpiler_CLI.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSass/SCSS to popularny preprocesor CSS, który rozszerza możliwości kaskadowych arkuszy stylów o funkcje takie jak zmienne (Variables), zagnie..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-137-mfa-ssh-server",
+    "title": "Projekt 137 MFA SSH Server",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_137_MFA_SSH_Server.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nTradycyjna autoryzacja hasłem w SSH jest wrażliwa na ataki typu Brute-Force. Zabezpieczenie dostępu do krytycznych terminali systemowych wyma..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-138-3d-bsp-tree-collision-solver",
+    "title": "Projekt 138 3D BSP Tree Collision Solver",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_138_3D_BSP-Tree_Collision_Solver.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW grach 3D o zamkniętych, statycznych przestrzeniach (np. korytarze w grach typu FPS) najstarszą i bardzo wydajną techniką podziału przestrze..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-139-ring-buffer-ipc-cli",
+    "title": "Projekt 139 Ring Buffer IPC CLI",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_139_Ring_Buffer_IPC_CLI.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW komunikacji międzyprocesowej o ultrawysokiej wydajności (Low Latency IPC) tradycyjne mechanizmy blokowania (np. Mutex systemowy) generują z..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-140-custom-amqp-broker",
+    "title": "Projekt 140 Custom AMQP Broker",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_140_Custom_AMQP_Broker.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nAdvanced Message Queuing Protocol (AMQP) to binarny protokół warstwy aplikacji służący do przesyłania wiadomości w systemach rozproszonych. S..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-141-complex-event-processor",
+    "title": "Projekt 141 Complex Event Processor",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_141_Complex_Event_Processor.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nPrzetwarzanie strumieniowe w czasie rzeczywistym wymaga analizy tysięcy zdarzeń (np. logi serwera, transakcje finansowe, sensory IoT) w locie..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-142-roslyn-architecture-analyzer",
+    "title": "Projekt 142 Roslyn Architecture Analyzer",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_142_Roslyn_Architecture_Analyzer.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW dużych projektach przestrzeganie czystej architektury (np. Clean Architecture) jest trudne do ręcznego kontrolowania. Często programiści pr..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-143-async-sip-voip-server",
+    "title": "Projekt 143 Async SIP VoIP Server",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_143_Async_SIP_VoIP_Server.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nVoIP (Voice over IP) umożliwia przesyłanie głosu i wideo przez sieci pakietowe IP. Głównym protokołem sterującym i zestawiającym połączenia t..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-144-2d-quadtree-physics-engine",
+    "title": "Projekt 144 2D Quadtree Physics Engine",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_144_2D_Quadtree_Physics_Engine.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSymulacje fizyczne i gry 2D (np. symulatory zderzeń ciał, fizyka cieczy oparta o cząsteczki) wymagają obliczania ruchu obiektów pod wpływem s..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-145-secure-shared-memory-ipc",
+    "title": "Projekt 145 Secure Shared Memory IPC",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_145_Secure_Shared_Memory_IPC.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWysokowydajna komunikacja międzyprocesowa (IPC) przez pamięć współdzieloną (Shared Memory) jest niezwykle szybka, ale domyślnie mało bezpiecz..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-146-custom-grpc-web-proxy",
+    "title": "Projekt 146 Custom GRPC Web Proxy",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_146_Custom_gRPC-Web_Proxy.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nStandard gRPC wymaga protokołu transportowego HTTP/2 z obsługą zwiastunów (HTTP/2 Trailers) do zwracania statusów wykonania. Ponieważ przeglą..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-147-wasm-jit-compiler-vm",
+    "title": "Projekt 147 Wasm JIT Compiler VM",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_147_Wasm_JIT_Compiler_VM.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nInterpreter kodu (np. wczytywanie bajtkodu Wasm w pętli) jest stosunkowo powolny. Aby uzyskać najwyższą wydajność, nowoczesne maszyny wirtual..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-148-async-radius-server",
+    "title": "Projekt 148 Async RADIUS Server",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_148_Async_RADIUS_Server.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nRemote Authentication Dial-In User Service (RADIUS) to binarny protokół sieciowy (działający na bazie UDP, porty 1812 i 1813) używany do cent..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-149-b-tree-diff-sync-cli",
+    "title": "Projekt 149 B Tree Diff Sync CLI",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_149_B-Tree_Diff_Sync_CLI.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWydajne synchronizowanie dużych struktur danych (np. baz danych zindeksowanych B-Drzewem na dysku) bez przesyłania całego pliku wymaga wyznac..."
+  },
+  {
+    "id": "csharp-roadmapa-03-trudne-projekt-150-raft-consensus-simulator",
+    "title": "Projekt 150 Raft Consensus Simulator",
+    "file": "Csharp_Roadmapa/03_Trudne/Projekt_150_Raft_Consensus_Simulator.md",
+    "category": "03_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "03_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW rozproszonych systemach bazodanowych i chmurowych (np. etcd, Consul) pojedynczy serwer nie może stanowić pojedynczego punktu awarii (Single..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-151-cqrs-event-sourcing",
+    "title": "Projekt 151 CQRS Event Sourcing",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_151_CQRS_Event_Sourcing.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nTradycyjne bazy danych przechowują wyłącznie aktualny stan obiektów (np. status zamówienia to \"Wysłane\"). Tracimy w ten sposób całą historię ..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-152-masstransit-saga-orchestrator",
+    "title": "Projekt 152 MassTransit Saga Orchestrator",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_152_MassTransit_Saga_Orchestrator.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW architekturze rozproszonej mikroserwisów transakcje klasyczne (ACID) realizowane przez dwufazowe zatwierdzanie (2PC) są wolne i blokują zas..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-153-outbox-inbox-processor",
+    "title": "Projekt 153 Outbox Inbox Processor",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_153_Outbox_Inbox_Processor.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW architekturze zorientowanej na zdarzenia (EDA) częstym problemem jest utrata spójności między zapisem w bazie danych a wysłaniem zdarzenia ..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-154-secure-dynamic-api-gateway",
+    "title": "Projekt 154 Secure Dynamic API Gateway",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_154_Secure_Dynamic_API_Gateway.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nBrama API (API Gateway) to centralny punkt wejściowy do systemu mikroserwisów, odpowiedzialny za routing żądań, autoryzację, limitowanie ruch..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-155-custom-mqtt-broker",
+    "title": "Projekt 155 Custom MQTT Broker",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_155_Custom_MQTT_Broker.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nMessage Queuing Telemetry Transport (MQTT) to lekki, binarny protokół transmisji danych przeznaczony dla urządzeń o ograniczonej mocy oblicze..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-156-custom-full-text-search",
+    "title": "Projekt 156 Custom Full Text Search",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_156_Custom_Full-Text_Search.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWyszukiwanie informacji w bazie danych za pomocą operatora LIKE '%tekst%' staje się nieefektywne przy milionach wierszy, ponieważ wymusza ska..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-157-ebpf-jit-compiler-vm",
+    "title": "Projekt 157 EBPF JIT Compiler VM",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_157_eBPF_JIT_Compiler_VM.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\neBPF (Extended Berkeley Packet Filter) to rewolucyjna technologia jądra systemu Linux (i obecnie Windows), pozwalająca na uruchamianie bezpie..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-158-radsec-tls-server",
+    "title": "Projekt 158 RadSec TLS Server",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_158_RadSec_TLS_Server.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nKlasyczny protokół RADIUS (przesyłany przez UDP z prostym szyfrowaniem hasła za pomocą MD5) jest podatny na podsłuch oraz ataki typu Man-in-t..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-159-disk-lsm-tree-engine",
+    "title": "Projekt 159 Disk LSM Tree Engine",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_159_Disk_LSM-Tree_Engine.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nBazy danych oparte o drzewa B-Tree (np. SQLite, PostgreSQL) świetnie radzą sobie z odczytami, ale przy intensywnych zapisach generują losowe ..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-160-paxos-consensus-simulator",
+    "title": "Projekt 160 Paxos Consensus Simulator",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_160_Paxos_Consensus_Simulator.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nOprócz algorytmu Raft, historycznym i matematycznym fundamentem systemów rozproszonych jest rodzina algorytmów konsensusu Paxos (stworzona pr..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-161-custom-html-template-engine",
+    "title": "Projekt 161 Custom HTML Template Engine",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_161_Custom_HTML_Template_Engine.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSilniki renderowania szablonów (takie jak Razor, Liquid czy Handlebars) pozwalają na dynamiczne generowanie dokumentów HTML poprzez wstrzykiw..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-162-ssh-interactive-shell-server",
+    "title": "Projekt 162 SSH Interactive Shell Server",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_162_SSH_Interactive_Shell_Server.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nUdostępnianie pełnego dostępu do powłoki systemowej (np. bash, powershell) przez SSH niesie ryzyko przejęcia serwera. Bezpiecznym i kontrolow..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-163-2d-polygon-bsp-physics-engine",
+    "title": "Projekt 163 2D Polygon BSP Physics Engine",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_163_2D_Polygon_BSP_Physics_Engine.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWiększość prostych silników fizyki obsługuje wyłącznie kolizje kół i prostokątów (Bounding Boxes). Wykrywanie zderzeń i obliczanie fizyki dla..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-164-priority-ring-buffer-ipc",
+    "title": "Projekt 164 Priority Ring Buffer IPC",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_164_Priority_Ring_Buffer_IPC.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW komunikacji międzyprocesowej o wysokiej wydajności (High-Performance IPC) często zachodzi potrzeba przesyłania wiadomości o różnych pozioma..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-165-custom-coap-broker",
+    "title": "Projekt 165 Custom CoAP Broker",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_165_Custom_CoAP_Broker.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nConstrained Application Protocol (CoAP) to wyspecjalizowany protokół warstwy aplikacji zdefiniowany w standardzie RFC 7252, przeznaczony dla ..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-166-fuzzy-full-text-search",
+    "title": "Projekt 166 Fuzzy Full Text Search",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_166_Fuzzy_Full-Text_Search.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nTradycyjne wyszukiwarki pełnotekstowe wymagają dokładnego dopasowania słów (po sprowadzeniu ich do formy bazowej). Jednak użytkownicy często ..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-167-ebpf-jit-vm-with-maps",
+    "title": "Projekt 167 EBPF JIT VM With Maps",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_167_eBPF_JIT_VM_with_Maps.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW klasycznej architekturze eBPF programy uruchamiane w piaskownicy (Sandbox) są bezstanowe – nie mogą zachowywać danych między kolejnymi uruc..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-168-radsec-tls-eap-server",
+    "title": "Projekt 168 RadSec TLS EAP Server",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_168_RadSec_TLS_EAP_Server.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nExtensible Authentication Protocol (EAP) to uniwersalny protokół uwierzytelniania zdefiniowany w RFC 3748, stosowany powszechnie w sieciach b..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-169-columnar-lsm-tree-engine",
+    "title": "Projekt 169 Columnar LSM Tree Engine",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_169_Columnar_LSM-Tree_Engine.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nTradycyjne bazy danych LSM (jak LevelDB) przechowują wiersze jako spójne bloki (Row-oriented). Jest to świetne do pobierania całych obiektów,..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-170-multi-paxos-consensus-simulator",
+    "title": "Projekt 170 Multi Paxos Consensus Simulator",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_170_Multi-Paxos_Consensus_Simulator.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nKlasyczny algorytm Basic Paxos pozwala na osiągnięcie porozumienia (konsensusu) co do tylko jednej wartości. Jeśli system ma przetwarzać ciąg..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-171-html-template-jit-compiler",
+    "title": "Projekt 171 HTML Template JIT Compiler",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_171_HTML_Template_JIT_Compiler.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nRenderowanie dynamicznych stron internetowych (szablonów HTML) na serwerze to jedno z najbardziej krytycznych zadań pod kątem wydajności (CPU..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-172-ssh-port-forwarding-server",
+    "title": "Projekt 172 SSH Port Forwarding Server",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_172_SSH_Port_Forwarding_Server.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nTunelowanie portów przez SSH (SSH Port Forwarding / SSH Tunneling) to potężna technika sieciowa pozwalająca na bezpieczne przekazywanie ruchu..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-173-3d-bsp-physics-engine",
+    "title": "Projekt 173 3D BSP Physics Engine",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_173_3D_BSP_Physics_Engine.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSymulacje fizyczne w trójwymiarze (3D) dla dynamicznych obiektów (np. gracz reprezentowany jako elipsoida lub kapsuła, spadające skrzynie jak..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-174-secure-priority-ring-buffer-ipc",
+    "title": "Projekt 174 Secure Priority Ring Buffer IPC",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_174_Secure_Priority_Ring_Buffer_IPC.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nBezpieczna i szybka komunikacja międzyprocesowa w środowiskach typu Enterprise (np. komunikacja agentów bezpieczeństwa z demonem systemowym) ..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-175-dtls-coap-message-broker",
+    "title": "Projekt 175 DTLS CoAP Message Broker",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_175_DTLS_CoAP_Message_Broker.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWdrożenie protokołu CoAP w środowiskach produkcyjnych (np. systemy automatyki budynkowej, urządzenia medyczne IoT) niesie duże ryzyko ataków ..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-176-semantic-vector-search",
+    "title": "Projekt 176 Semantic Vector Search",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_176_Semantic_Vector_Search.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nKlasyczne wyszukiwanie pełnotekstowe (oparte na słowach kluczowych i algorytmach typu TF-IDF/BM25) zawodzi, gdy użytkownik wpisuje zapytanie ..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-177-ebpf-jit-vm-callbacks",
+    "title": "Projekt 177 EBPF JIT VM Callbacks",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_177_eBPF_JIT_VM_Callbacks.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW zaawansowanych architekturach monitorowania systemów (np. systemy telemetryczne APM, firewalle) programy eBPF muszą nie tylko odczytywać i ..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-178-radsec-tls-eap-ttls-server",
+    "title": "Projekt 178 RadSec TLS EAP TTLS Server",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_178_RadSec_TLS_EAP-TTLS_Server.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nUwierzytelnianie EAP-TLS wymaga posiadania certyfikatu X.509 przez każde urządzenie klienckie (telefon, laptop), co jest trudne w konfiguracj..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-179-columnar-lsm-schema-on-read",
+    "title": "Projekt 179 Columnar LSM Schema On Read",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_179_Columnar_LSM_Schema-on-Read.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nKlasyczne bazy kolumnowe wymagają sztywnego zdefiniowania struktury tabeli przed zapisem (Schema-on-Write). Przy dynamicznie zmieniających si..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-180-multi-paxos-log-compaction",
+    "title": "Projekt 180 Multi Paxos Log Compaction",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_180_Multi-Paxos_Log_Compaction.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW rozproszonych systemach konsensusu (np. Multi-Paxos, Raft) dziennik transakcji (Log) stale rośnie przy każdym nowym zapisie. Po dłuższym cz..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-181-optimizing-html-jit-compiler",
+    "title": "Projekt 181 Optimizing HTML JIT Compiler",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_181_Optimizing_HTML_JIT_Compiler.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW zaawansowanych systemach kompilacji szablonów HTML (jak Razor/Blazor) prosty zapis instrukcji IL dla każdego tagu i fragmentu tekstu wciąż ..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-182-ssh-socks5-proxy-server",
+    "title": "Projekt 182 SSH SOCKS5 Proxy Server",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_182_SSH_SOCKS5_Proxy_Server.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nOprócz tunelowania statycznego (L-tunnel i R-tunnel, gdzie bindujemy konkretny port na konkretny port docelowy), protokół SSH umożliwia Tunel..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-183-3d-polygon-bsp-physics-engine",
+    "title": "Projekt 183 3D Polygon BSP Physics Engine",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_183_3D_Polygon_BSP_Physics_Engine.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nSymulacja fizyki 3D dla obiektów o nieregularnych kształtach (wielokąty wypukłe w przestrzeni trójwymiarowej - Convex Polyhedra / Mesh) to sz..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-184-distributed-ring-buffer-ipc",
+    "title": "Projekt 184 Distributed Ring Buffer IPC",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_184_Distributed_Ring_Buffer_IPC.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nTradycyjne bufory Ring Buffer IPC (współdzielona pamięć) ograniczają się do komunikacji między procesami na tej samej maszynie fizycznej. Aby..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-185-secure-dtls-coap-broker",
+    "title": "Projekt 185 Secure DTLS CoAP Broker",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_185_Secure_DTLS_CoAP_Broker.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nBezpieczeństwo sieci IoT w standardzie przemysłowym wymaga nie tylko szyfrowania transmisji, ale również silnej autoryzacji urządzeń końcowyc..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-186-fuzzy-semantic-vector-search",
+    "title": "Projekt 186 Fuzzy Semantic Vector Search",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_186_Fuzzy_Semantic_Vector_Search.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWyszukiwanie semantyczne (Vector Search) doskonale rozumie kontekst zapytania, ale ma ogromny problem, gdy użytkownik wpisze zapytanie zawier..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-187-optimizing-ebpf-jit-compiler",
+    "title": "Projekt 187 Optimizing EBPF JIT Compiler",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_187_Optimizing_eBPF_JIT_Compiler.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nMaszyny wirtualne eBPF w celach wydajnościowych powinny generować kod JIT, który jest jak najbliższy natywnym instrukcjom procesora. Podstawo..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-188-radsec-tls-eap-fast-server",
+    "title": "Projekt 188 RadSec TLS EAP FAST Server",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_188_RadSec_TLS_EAP-FAST_Server.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nUwierzytelnianie bezprzewodowe przy użyciu mTLS (EAP-TLS) wymaga certyfikatów po obu stronach, a EAP-TTLS wymaga certyfikatu serwera i weryfi..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-189-partitioned-columnar-lsm-engine",
+    "title": "Projekt 189 Partitioned Columnar LSM Engine",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_189_Partitioned_Columnar_LSM_Engine.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWielkie bazy danych przechowujące terabajty danych nie mogą trzymać wszystkich informacji w jednej globalnej tabeli ani w jednym potężnym pli..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-190-multi-paxos-cluster-reconfiguration",
+    "title": "Projekt 190 Multi Paxos Cluster Reconfiguration",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_190_Multi-Paxos_Cluster_Reconfiguration.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW rozproszonych bazach danych opartych o konsensus, konfiguracja klastra (lista aktywnych węzłów tworzących kworum) nie jest stała. Z biegiem..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-191-html-template-jit-cache",
+    "title": "Projekt 191 HTML Template JIT Cache",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_191_HTML_Template_JIT_Cache.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nGdy kompilujemy szablony HTML w locie do dynamicznego kodu IL (JIT), każda modyfikacja kodu szablonu (np. przy wdrożeniach lub podczas edycji..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-192-secure-ssh-socks5-proxy",
+    "title": "Projekt 192 Secure SSH SOCKS5 Proxy",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_192_Secure_SSH_SOCKS5_Proxy.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nDynamiczne tunelowanie SOCKS5 przez SSH to świetne rozwiązanie, ale w środowiskach korporacyjnych (Enterprise) może być wykorzystywane do obc..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-193-3d-polygon-bsp-physics-friction",
+    "title": "Projekt 193 3D Polygon BSP Physics Friction",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_193_3D_Polygon_BSP_Physics_Friction.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nPodstawowe silniki fizyki 3D często cierpią na brak stabilności – obiekty ślizgają się po powierzchniach bez końca lub drgają, gdy leżą na so..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-194-fault-tolerant-distributed-ring-buffer",
+    "title": "Projekt 194 Fault Tolerant Distributed Ring Buffer",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_194_Fault-Tolerant_Distributed_Ring_Buffer.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nRozproszone buforowanie pamięci IPC (Shared Memory klastra) o bardzo niskich opóźnieniach wymaga zabezpieczenia przed nagłymi awariami siecio..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-195-ace-oauth-dtls-coap-broker",
+    "title": "Projekt 195 ACE OAuth DTLS CoAP Broker",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_195_ACE-OAuth_DTLS_CoAP_Broker.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nW wielkich rozproszonych wdrożeniach IoT (np. inteligentne miasta, sensoryka przemysłowa) sama weryfikacja certyfikatów mTLS (DTLS) to za mał..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-196-semantic-search-fact-verification",
+    "title": "Projekt 196 Semantic Search Fact Verification",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_196_Semantic_Search_Fact_Verification.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nWyszukiwanie hybrydowe (tekstowo-wektorowe) gromadzi dokumenty wysoce dopasowane pod kątem językowym i tematycznym. Jednak w zastosowaniach k..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-197-memory-safe-ebpf-jit-compiler",
+    "title": "Projekt 197 Memory Safe EBPF JIT Compiler",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_197_Memory-Safe_eBPF_JIT_Compiler.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nUruchamianie zewnętrznego kodu w piaskownicy (Sandbox) niesie ogromne ryzyko – program eBPF mógłby próbować ominąć zabezpieczenia (np. poprze..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-198-mtls-eap-fast-radsec-server",
+    "title": "Projekt 198 MTLS EAP FAST RadSec Server",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_198_mTLS_EAP-FAST_RadSec_Server.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nUwierzytelnianie EAP-FAST opiera się na poświadczeniach PAC (Protected Access Credential). Najsłabszym punktem tego systemu jest faza początk..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-199-distributed-columnar-lsm-engine",
+    "title": "Projekt 199 Distributed Columnar LSM Engine",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_199_Distributed_Columnar_LSM_Engine.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nGdy dane są rozproszone na wielu maszynach (węzłach klastra), zapytania analityczne (OLAP) wymagają zaawansowanego orkiestratora, który roześ..."
+  },
+  {
+    "id": "csharp-roadmapa-04-bardzo-trudne-projekt-200-fully-featured-multi-paxos-consensus",
+    "title": "Projekt 200 Fully Featured Multi Paxos Consensus",
+    "file": "Csharp_Roadmapa/04_Bardzo_Trudne/Projekt_200_Fully-Featured_Multi-Paxos_Consensus.md",
+    "category": "04_Bardzo_Trudne",
+    "categoryPath": [
+      "Csharp_Roadmapa",
+      "04_Bardzo_Trudne"
+    ],
+    "tags": [],
+    "description": "Szczegółowy opis i cele edukacyjne:\nOsiągnięcie pełnej poprawności i odporności na awarie w rozproszonej bazie danych wymaga połączenia wszystkich zaawansowanych mechanizmów teo..."
+  },
+  {
+    "id": "csharp-roadmapa-spis-tresci",
+    "title": "Spis Treści - C# & .NET Developer Roadmap",
+    "file": "Csharp_Roadmapa/Spis_Tresci.md",
+    "category": "Csharp_Roadmapa",
+    "categoryPath": [
+      "Csharp_Roadmapa"
+    ],
+    "tags": [],
+    "description": "Kompleksowa ścieżka rozwoju dla programisty C# i platformy .NET składająca się z 200 projektów inżynieryjnych."
+  },
+  {
+    "id": "frontend-webdev-css-glassmorphism",
     "title": "Glassmorphism w CSS",
-    "file": "css_glassmorphism.md",
+    "file": "Frontend WebDev/css_glassmorphism.md",
     "category": "Frontend WebDev",
-    "tags": ["css", "design", "frontend"],
-    "description": "Nowoczesny styl polegający na tworzeniu efektu matowego szkła z rozmyciem tła."
+    "categoryPath": [
+      "Frontend WebDev"
+    ],
+    "tags": [],
+    "description": "Glassmorphism to jeden z najpopularniejszych trendów w projektowaniu UI z ostatnich lat. Charakteryzuje się efektem \"matowego szkła\" (frosted glass), przez które delikatnie prze..."
   },
   {
-    "id": "git-cheatsheet",
+    "id": "narzedzia-git-cheatsheet",
     "title": "Git Cheat Sheet",
-    "file": "git_cheatsheet.md",
+    "file": "Narzędzia/git_cheatsheet.md",
     "category": "Narzędzia",
-    "tags": ["git", "narzędzia", "vcs"],
-    "description": "Przydatna ściągawka najpopularniejszych i najważniejszych komend systemu kontroli wersji Git."
+    "categoryPath": [
+      "Narzędzia"
+    ],
+    "tags": [],
+    "description": "Przydatne komendy systemu Git do codziennej pracy."
+  },
+  {
+    "id": "ogolne-welcome",
+    "title": "Witaj w Twojej Osobistej Bazie Wiedzy! 👋",
+    "file": "Ogólne/welcome.md",
+    "category": "Ogólne",
+    "categoryPath": [
+      "Ogólne"
+    ],
+    "tags": [],
+    "description": "To miejsce jest zaprojektowane jako Twoje personalne Wiki. Możesz tutaj łatwo dodawać i organizować swoje notatki, fragmenty kodu, przemyślenia czy artykuły."
   }
 ]

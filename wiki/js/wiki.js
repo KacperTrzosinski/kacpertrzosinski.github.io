@@ -66,6 +66,116 @@ async function initWiki() {
     }
 }
 
+function buildTree(articlesList) {
+    const root = {
+        name: 'root',
+        type: 'folder',
+        children: {},
+        articles: []
+    };
+
+    articlesList.forEach(article => {
+        let pathParts = [];
+        if (article.categoryPath && Array.isArray(article.categoryPath)) {
+            pathParts = article.categoryPath;
+        } else if (article.file && article.file.includes('/')) {
+            const parts = article.file.split('/');
+            parts.pop(); // remove file name
+            pathParts = parts;
+        } else if (article.category) {
+            pathParts = [article.category];
+        }
+
+        let currentNode = root;
+        pathParts.forEach(part => {
+            if (!currentNode.children[part]) {
+                currentNode.children[part] = {
+                    name: part,
+                    type: 'folder',
+                    children: {},
+                    articles: []
+                };
+            }
+            currentNode = currentNode.children[part];
+        });
+
+        currentNode.articles.push(article);
+    });
+
+    return root;
+}
+
+function hasMatchingContent(node, searchQuery) {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+    
+    // Check if any direct article matches
+    const articleMatches = node.articles.some(article => 
+        article.title.toLowerCase().includes(query) || 
+        (article.tags && article.tags.some(t => t.toLowerCase().includes(query)))
+    );
+    if (articleMatches) return true;
+    
+    // Check if any subfolder matches
+    for (const folderName in node.children) {
+        if (hasMatchingContent(node.children[folderName], searchQuery)) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+function renderTree(node, container, searchQuery = '') {
+    // Render folders in this node sorted alphabetically
+    const folderNames = Object.keys(node.children).sort((a, b) => a.localeCompare(b, 'pl'));
+    for (const folderName of folderNames) {
+        const folder = node.children[folderName];
+        
+        if (!hasMatchingContent(folder, searchQuery)) continue;
+
+        const folderDiv = document.createElement('div');
+        folderDiv.className = 'category-folder';
+        if (!searchQuery) {
+            folderDiv.classList.add('collapsed');
+        }
+        
+        const folderHeader = document.createElement('div');
+        folderHeader.className = 'category-header';
+        folderHeader.innerHTML = `<span class="folder-icon">▼</span> ${folderName}`;
+        
+        const folderContent = document.createElement('div');
+        folderContent.className = 'category-content';
+
+        folderHeader.onclick = (e) => {
+            e.stopPropagation();
+            folderDiv.classList.toggle('collapsed');
+        };
+        
+        folderDiv.appendChild(folderHeader);
+        renderTree(folder, folderContent, searchQuery);
+        folderDiv.appendChild(folderContent);
+        container.appendChild(folderDiv);
+    }
+
+    // Render articles in this node sorted alphabetically
+    const sortedArticles = [...node.articles].sort((a, b) => a.title.localeCompare(b.title, 'pl'));
+    sortedArticles.forEach(article => {
+        if (searchQuery) {
+            const query = searchQuery.toLowerCase();
+            const matches = article.title.toLowerCase().includes(query) || 
+                            (article.tags && article.tags.some(t => t.toLowerCase().includes(query)));
+            if (!matches) return;
+        }
+
+        const a = document.createElement('a');
+        a.href = `#${article.id}`;
+        a.className = `nav-item ${article.id === currentArticleId ? 'active' : ''}`;
+        a.textContent = article.title;
+        container.appendChild(a);
+    });
+}
+
 function renderSidebar(searchQuery = '') {
     const sidebar = document.getElementById('article-list');
     sidebar.innerHTML = '';
@@ -80,44 +190,28 @@ function renderSidebar(searchQuery = '') {
         return;
     }
 
-    // Group articles by category
-    const grouped = {};
-    filtered.forEach(article => {
-        const cat = article.category || 'Inne';
-        if (!grouped[cat]) grouped[cat] = [];
-        grouped[cat].push(article);
-    });
+    const tree = buildTree(filtered);
+    renderTree(tree, sidebar, searchQuery);
 
-    // Render category folders
-    for (const [category, items] of Object.entries(grouped)) {
-        const folderDiv = document.createElement('div');
-        folderDiv.className = 'category-folder';
-        
-        // If there's an active search query, we want folders expanded.
-        // Actually, they are expanded by default unless we add 'collapsed' class.
-        
-        const folderHeader = document.createElement('div');
-        folderHeader.className = 'category-header';
-        folderHeader.innerHTML = `<span class="folder-icon">▼</span> ${category}`;
-        folderHeader.onclick = () => {
-            folderDiv.classList.toggle('collapsed');
-        };
-        
-        folderDiv.appendChild(folderHeader);
+    // If we have an active article, expand its parent folders
+    if (currentArticleId) {
+        expandParentFolders(sidebar, currentArticleId);
+    }
+}
 
-        const folderContent = document.createElement('div');
-        folderContent.className = 'category-content';
-
-        items.forEach(article => {
-            const a = document.createElement('a');
-            a.href = `#${article.id}`;
-            a.className = `nav-item ${article.id === currentArticleId ? 'active' : ''}`;
-            a.textContent = article.title;
-            folderContent.appendChild(a);
-        });
-
-        folderDiv.appendChild(folderContent);
-        sidebar.appendChild(folderDiv);
+function expandParentFolders(sidebar, articleId) {
+    const activeItem = sidebar.querySelector(`.nav-item[href="#${articleId}"]`);
+    if (activeItem) {
+        let parent = activeItem.parentElement;
+        while (parent && parent !== sidebar) {
+            if (parent.classList.contains('category-content')) {
+                const folder = parent.parentElement;
+                if (folder && folder.classList.contains('category-folder')) {
+                    folder.classList.remove('collapsed');
+                }
+            }
+            parent = parent.parentElement;
+        }
     }
 }
 
@@ -141,12 +235,23 @@ function loadHome() {
 
     const container = document.getElementById('markdown-container');
     
-    // Group articles by category
+    // Group articles by category path
     const grouped = {};
     articles.forEach(article => {
-        const cat = article.category || 'Inne';
-        if (!grouped[cat]) grouped[cat] = [];
-        grouped[cat].push(article);
+        let pathParts = [];
+        if (article.categoryPath && Array.isArray(article.categoryPath)) {
+            pathParts = article.categoryPath;
+        } else if (article.file && article.file.includes('/')) {
+            const parts = article.file.split('/');
+            parts.pop(); // remove file name
+            pathParts = parts;
+        } else if (article.category) {
+            pathParts = [article.category];
+        }
+        
+        const pathStr = pathParts.length > 0 ? pathParts.join(' → ') : 'Inne';
+        if (!grouped[pathStr]) grouped[pathStr] = [];
+        grouped[pathStr].push(article);
     });
     
     let html = `
@@ -159,7 +264,14 @@ function loadHome() {
     const colors = ['card-purple', 'card-blue', 'card-pink', 'card-emerald', 'card-gold', 'card-red'];
     let colorIndex = 0;
 
-    for (const [category, items] of Object.entries(grouped)) {
+    // Sort categories alphabetically
+    const sortedCategories = Object.keys(grouped).sort((a, b) => a.localeCompare(b, 'pl'));
+
+    for (const category of sortedCategories) {
+        const items = grouped[category];
+        // Sort items in category alphabetically
+        items.sort((a, b) => a.title.localeCompare(b.title, 'pl'));
+
         html += `
             <section class="category" style="margin-bottom: 48px;">
                 <h2 class="category-title" style="cursor: pointer; user-select: none;" onclick="this.nextElementSibling.classList.toggle('collapsed-grid'); this.classList.toggle('collapsed')">
@@ -203,6 +315,9 @@ async function loadArticle(id) {
             el.classList.remove('active');
         }
     });
+
+    const sidebar = document.getElementById('article-list');
+    expandParentFolders(sidebar, id);
 
     const container = document.getElementById('markdown-container');
     container.innerHTML = '<div class="loading" style="color: var(--text-muted); padding: 2rem;">Wczytywanie...</div>';

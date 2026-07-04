@@ -17,8 +17,9 @@ Welcome to my personal project laboratory, algorithm visualizer, and knowledge b
 - **Physics & Experiments**
   - 🔬 Interactive 2D Physics Simulator using `Matter.js`
 - **Personal Wiki / Knowledge Base**
-  - 📚 A fully client-side rendered Markdown Wiki.
-  - Features real-time syntax highlighting (`highlight.js`) and dynamic category folders.
+  - 📚 A fully client-side rendered Markdown Wiki supporting nested categories and subcategories based on folder structure.
+  - Automatically indexed using the script: `node wiki/generate_index.js`.
+  - Features real-time syntax highlighting (`highlight.js`) and collapsible category trees.
   - Implements an advanced "spotlight" mouse-tracking hover effect.
 
 ## 🎨 UI & Design

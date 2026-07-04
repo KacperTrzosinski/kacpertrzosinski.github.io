@@ -7,20 +7,13 @@ To miejsce jest zaprojektowane jako Twoje personalne **Wiki**. Możesz tutaj ła
 Aplikacja renderuje pliki w formacie **Markdown** (`.md`) i używa `marked.js` oraz `highlight.js` do ich pięknego wyświetlania, wliczając w to podświetlanie składni kodu.
 
 Aby dodać nowy artykuł:
-1. Utwórz nowy plik `.md` w folderze `wiki/articles/`.
-2. Otwórz plik `wiki/data/articles.json`.
-3. Dodaj nowy wpis do listy:
-   ```json
-   {
-       "id": "twoj-unikalny-id",
-       "title": "Tytuł artykułu",
-       "file": "twoj_plik.md",
-       "category": "kategoria wyświetlana na stronie",
-       "tags": ["tag1", "tag2"],
-       "description": "Krótki opis widoczny na kafelku na stronie głównej."
-   }
+1. Utwórz plik `.md` w folderze `wiki/articles/`. Jeśli chcesz przypisać go do kategorii, umieść go w odpowiednim folderze (np. `wiki/articles/Frontend WebDev/css_glassmorphism.md`). Podfoldery automatycznie staną się podkategoriami.
+2. Uruchom skrypt generujący indeks za pomocą polecenia:
+   ```bash
+   node wiki/generate_index.js
    ```
-4. Odśwież stronę! Artykuł automatycznie pojawi się w menu bocznym.
+3. Odśwież stronę! Artykuł automatycznie pojawi się w menu bocznym oraz na stronie głównej w odpowiedniej kategorii.
+
 
 ## Funkcjonalności
 * 🚀 **Szybkość:** Brak bazy danych, po prostu statyczne pliki (wymagany serwer http jak GitHub Pages).

@@ -1,0 +1,15 @@
+## 197. Bezpieczny JIT Kompilator Maszyny Wirtualnej eBPF (Memory-Safe eBPF JIT Compiler)
+
+**Szczegółowy opis i cele edukacyjne:**
+Uruchamianie zewnętrznego kodu w piaskownicy (Sandbox) niesie ogromne ryzyko – program eBPF mógłby próbować ominąć zabezpieczenia (np. poprzez arytmetykę wskaźników) i odczytać lub zmodyfikować pamięć procesu nadrzędnego (Host Memory), co mogłoby prowadzić do wycieku danych lub przejęcia kontroli nad aplikacją. Zapewnienie pełnego bezpieczeństwa pamięci (Memory Safety) wymaga statycznej analizy granic (Static Boundary Analysis) przed uruchomieniem kodu oraz wstrzykiwania dynamicznych testów granicznych (Run-time bounds checking) bezpośrednio do kompilowanego kodu IL.
+Projekt polega na rozbudowaniu wirtualnej maszyny eBPF JIT o zaawansowane mechanizmy Memory Safety, weryfikację poprawności wskaźników oraz ochronę przed spekulatywnym wykonywaniem instrukcji (mitygacja luk typu Spectre).
+Cele edukacyjne to zaawansowana inżynieria bezpieczeństwa kompilatorów, statyczna analiza poprawności dostępu do pamięci, wstrzykiwanie instrukcji walidacyjnych do strumienia IL, oraz ochrona przed wyciekami typu Side-channel.
+
+**Wymagane funkcje:**
+- **Statyczny analizator wskaźników (Static Bounds Analyzer):** Przed kompilacją JIT, walidator analizuje instrukcje eBPF i śledzi wartości w rejestrach wskaźnikowych. Jeśli program próbuje wykonać zapis/odczyt pod adres wyznaczony jako przesunięcie od wskaźnika ramki (Frame Pointer), a przesunięcie przekracza dopuszczalny rozmiar stosu (512 bajtów), kompilacja zostaje zablokowana.
+- **Dynamiczne sprawdzanie granic w IL (JIT Bounds Injection):** Przy generowaniu kodu IL dla instrukcji odczytu/zapisu z pamięci pakietu (Packet Memory), kompilator JIT dynamicznie wstrzykuje instrukcje IL sprawdzające, czy wyliczony offset ($Offset + Size$) mieści się w granicach bufora. Jeśli nie, wywoływany jest natychmiastowy skok do sekcji awaryjnej przerywającej program (Panic exit).
+- **Mitygacja ataków Spectre (Spectre Mitigations):** Zaimplementowanie technik maskowania wskaźników (Pointer Masking) w IL. Zamiast zwykłej instrukcji warunkowej, która może być ominięta przez spekulatywne wykonywanie kodu procesora, wskaźnik jest bitowo maskowany (np. logiczny `AND` z rozmiarem bufora), co gwarantuje, że spekulatywne wykonanie nigdy nie wykroczy poza granice pamięci fizycznej.
+
+**Porady implementacyjne i dobre praktyki:**
+Sprawdzanie granic w locie w kodzie IL generuje minimalny narzut. Aby go ograniczyć, użyj instrukcji `Ldelema` lub `Ldind` w połączeniu z wcześniejszym porównaniem. Maskowanie wskaźników (mitygacja Spectre) zaimplementuj wzorem: `safe_offset = offset & (limit - 1)` (działa dla buforów o rozmiarze potęgi dwójki), co sprawia, że nawet jeśli procesor spróbuje spekulatywnie wczytać pamięć spoza tablicy przed wykonaniem instrukcji skoku warunkowego, adres fizyczny i tak zostanie ograniczony do bezpiecznej strefy, eliminując podatności cache-timing.
+Wzorzec projektowy: *Secure Sandbox*, *Compiler Verification*, *Hardware Mitigation*.
